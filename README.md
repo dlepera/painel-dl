@@ -22,7 +22,7 @@ Módulo de administração do website. Possui todas as configurações necessár
 - Dados para contato (Tipos de dados para contatos)
 - Institucional (História, missão, visão e valores)
 - Configurações do Google Analytics
-- 
+
 ## Desenvolvedor
 
 Módulo desenvolvido para facilitar o desenvolvimento de novas funcionalidades.
