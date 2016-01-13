@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 08/01/2015 16:24:44
+ */
+
+if( !isset($params) ){
+    $params = $this->obterParams();
+} // Fim if
+
+?>
+
+[DL3-CONTEUDO]
+<?php if( !$params['incluindo'] ): ?>
+    <p class="log-registro">
+        <?php if (!empty($params['dt-inc'])) {
+            printf(
+                TXT_DIVERSOS_REGISTRO_CRIADO . '<br/>',
+                $params['u-inc'],
+                \Funcoes::formatarDataHora($params['dt-inc'], $_SESSION['formato_data_completo'])
+            );
+        } // Fim if
+
+        if (!empty($params['dt-alt'])) {
+            printf(
+                TXT_DIVERSOS_REGISTRO_ATUALIZADO,
+                $params['u-alt'],
+                \Funcoes::formatarDataHora($params['dt-alt'], $_SESSION['formato_data_completo'])
+            );
+        } // Fim if ?>
+    </p>
+<?php endif; ?>
+[/DL3-CONTEUDO]

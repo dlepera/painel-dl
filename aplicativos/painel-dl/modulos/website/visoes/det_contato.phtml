@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 10/01/2015 18:33:40
+ */
+
+if( !isset($params) ){
+	$params = $this->obterParams();
+} // Fim if
+
+$mod = $params['modelo'];
+$le  = $params['log-email'];
+
+?>
+
+[DL3-CONTEUDO]
+    <p class="log-registro">
+        <?php printf(TXT_DIVERSOS_CONTATO_DT_ENVIO, $mod->mod_lr->getData()); ?>
+    </p>
+
+    <details class="detalhes" open>
+        <summary class="det-titulo"><?php echo TXT_SUMARIO_CONTATO; ?></summary>
+
+        <p class="det-paragr">
+            <span class="det-rotulo"><?php echo TXT_ROTULO_NOME; ?>:</span>
+            <?php echo $mod->nome; ?>
+        </p>
+
+        <p class="det-paragr">
+            <span class="det-rotulo"><?php echo TXT_ROTULO_EMAIL; ?>:</span>
+            <a href="mailto:<?php echo $mod->email; ?>;"><?php echo $mod->email; ?></a>
+        </p>
+
+        <p class="det-paragr">
+            <span class="det-rotulo"><?php echo TXT_ROTULO_TELEFONE; ?>:</span>
+            <?php echo $mod->telefone; ?>
+        </p>
+
+        <?php if( isset($params['assunto-descr']) ): ?>
+        <p class="det-paragr" style="color: <?php echo $params['assunto-cor']; ?>;">
+            <span class="det-rotulo"><?php echo TXT_ROTULO_ASSUNTO; ?>:</span>
+            <?php echo $params['assunto-descr']; ?>
+        </p>
+        <?php endif; ?>
+
+        <p class="det-paragr">
+            <span class="det-rotulo"><?php echo TXT_ROTULO_MENSAGEM; ?>:</span>
+            <?php echo nl2br($mod->mensagem); ?>
+        </p>
+    </details>
+
+    <details class="detalhes" open>
+        <summary class="det-titulo"><?php echo TXT_SUMARIO_ENVIO_EMAIL; ?></summary>
+
+        <p class="det-paragr">
+            <span class="det-rotulo"><?php echo TXT_ROTULO_STATUS; ?>:</span>
+            <?php switch ($le->status) {
+	            case 'E':
+		            echo TXT_DIVERSOS_EMAIL_ENVIADO, '<br/>', '<b>', TXT_ROTULO_DT_ENVIO, ':</b> ', $le->mod_lr->getData();
+		            break;
+	            case 'F':
+		            echo TXT_DIVERSOS_EMAIL_FALHOU, '<br/>', '<b>', TXT_ROTULO_MSG_ERRO, ':</b><br/>', nl2br($le->mensagem);
+		            break;
+
+	            default: echo '<p class="msg-erro">', TXT_DIVERSOS_EMAIL_ERRO_STATUS, '</p>';
+            } // Fim switch ?>
+        </p>
+    </details>
+
+    <details class="detalhes" open>
+        <summary class="det-titulo"><?php echo TXT_SUMARIO_QUEM_LEU; ?></summary>
+
+        <?php if( !count($params['leituras']) ):
+            echo MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO;
+        else: ?>
+        <ol reversed="reversed" class="log-registro leituras">
+            <?php foreach( $params['leituras'] as $l ): ?>
+            <li class="item-leitura">
+                <?php echo \Funcoes::formatarDataHora($l['leitura_contato_data'], $_SESSION['formato_data_completo']) . " {$l['USUARIO']}"; ?>
+            </li>
+            <?php endforeach; ?>
+        </ol>
+        <?php endif; ?>
+    </details>
+[/DL3-CONTEUDO]

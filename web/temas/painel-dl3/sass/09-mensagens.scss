@@ -1,0 +1,55 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: dlepera88@gmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 13/05/2015 22:30:21
+ */
+
+
+
+// Mensagens -------------------------------------------------------------------------------------------------------- //
+$msg: 'sucesso' #080 '\e710',
+    'atencao' #FFA500 '\e707',
+    'info' #069 '\e70c',
+    'erro' #F00 '\e70f';
+
+[class^="msg-"] {
+    // Margens
+    padding: .5em 1em;
+    margin: 1em 0;
+}
+
+[class^="msg-"]::before {
+    // Texto
+    font-family: 'icones';
+    font-size: 1.3em;
+    
+    // Visual
+    display: inline-block;
+    
+    // Margens
+    margin-right: 0.35em;
+    
+    // Alinhamento
+    vertical-align: middle;
+    
+    // Tamanho
+    height: 100%;
+}
+
+@each $classe, $cor, $icone in $msg {
+    .msg-#{$classe} {
+        // Texto
+        color: $cor;
+        
+        // Visual
+        border-top: 1px solid $cor;
+        border-bottom: 1px solid $cor;
+        background: change_color($cor, $alpha: .08);
+    }
+    
+    .msg-#{$classe}::before {
+        /* Texto */
+        content: $icone;
+    }
+}

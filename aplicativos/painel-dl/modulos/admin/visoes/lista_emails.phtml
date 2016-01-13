@@ -1,0 +1,133 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 07/01/2015 16:51:21
+ */
+
+if( !isset($params) ){
+	$params = $this->obterParams();
+} // Fim if
+
+$opcoes = $params['opcoes'];
+$lista = $params['lista'];
+$dir_lista = $params['dir-lista'];
+
+$campos = \Funcoes::removerColuna($lista, [TXT_LISTA_TITULO_ID, 'linha']);
+
+?>
+
+[DL3-CONTEUDO]
+    <nav class="dl3-links">
+        <!-- Inserir um novo registro -->
+        <?php if( $opcoes['inserir?'] ){
+	        echo $this->aux_links->linkHTML('inserir', "{$dir_lista}novo", $params['link-inserir']);
+        } // Fim if ?>
+    </nav>
+
+    <form id="form-editar-lista" method="post" action="<?php echo $params['form-acao']; ?>">
+        <!-- Exibir a lista com os registros selecionados -->
+        <table class="lista-registros">
+	        <?php if( $params['qtde-registros'] > 0 ): ?>
+		        <caption class="tbl-subtitulo"><?php printf(TXT_LISTA_SUBTITULO_MOSTRANDO_X_REGISTROS, count($lista), $params['qtde-registros']); ?></caption>
+	        <?php endif; ?>
+
+            <thead class="tbl-titulos">
+                <tr class="tbl-linha">
+                    <th id="th-chk" class="tbl-celula-chk"><input type="checkbox"/></th>
+                    <?php
+                    if( $params['exibir-id?'] ){
+	                    echo $this->aux_lista->celulaTitulo('th-id', TXT_LISTA_TITULO_ID, ['class' => 'tbl-celula-id']);
+                    } // Fim if( $params['exibir-id?'] )
+
+                    foreach( $campos[0] as $tt => $lt ){
+	                    echo $this->aux_lista->celulaTitulo($this->aux_lista->thID($tt), $tt);
+                    } // Fim foreach
+
+                    echo $this->aux_lista->celulaTitulo('th-opcoes', TXT_LISTA_TITULO_OPCOES, ['class' => 'tbl-celula-opcoes']);
+                    ?>
+                </tr>
+            </thead>
+
+            <tbody class="tbl-conteudo">
+                <?php if( !count($lista) ){
+	                echo '<tr class="tbl-linha sem-registros"><td>', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO, '</td></tr>';
+                } // Fim if
+
+                foreach( $lista as $k => $l ): ?>
+                <tr class="tbl-linha">
+                    <td headers="th-chk" class="tbl-celula-chk"><input type="checkbox" name="id[]" value="<?php echo $l[TXT_LISTA_TITULO_ID]; ?>"/></td>
+                    <?php if( $params['exibir-id?'] ){
+	                    echo $this->aux_lista->celulaComum('th-id', $l[TXT_LISTA_TITULO_ID], ['class' => 'tbl-celula-id']);
+                    } // Fim if
+
+                    foreach( $campos[$k] as $k2 => $c ){
+	                    echo $this->aux_lista->celulaComum($this->aux_lista->thID($k2), $c,
+		                    ['class' => preg_match('~<br\/?>~', $c) ? 'tbl-celula-infos' : null]);
+                    } // Fim foreach ?>
+
+                    <td headers="th-opcoes" class="tbl-celula-opcoes">
+	                    <?php
+	                    # Testar configuração de e-mail
+                        if( $params['perm-testar?'] ){
+	                        echo $this->aux_links->linkHTML('testar-email', 'javascript:', TXT_LINK_TESTAR_CONFIGURACAO, TXT_LINK_TITLE_TESTAR_CONFIGURACAO_EMAIL, false, [
+		                        'data-acao-param-dir' => "{$dir_lista}testar-configuracao/{$l[TXT_LISTA_TITULO_ID]}"
+	                        ]);
+                        } // Fim if
+
+	                    # Publicar ou ocultar esse registro
+	                    if( $opcoes['publicar?'] ){
+		                    echo $l[TXT_LISTA_TITULO_PUBLICADO] === 'Sim'
+			                    ? $this->aux_links->linkHTML('ocultar', 'javascript:', TXT_LINK_OCULTAR, TXT_LINK_TITLE_OCULTAR, false, [
+				                    'data-acao-param-dir' => "{$dir_lista}alternar-publicacao/ocultar"
+			                    ])
+			                    : $this->aux_links->linkHTML('publicar', 'javascript:', TXT_LINK_PUBLICAR, TXT_LINK_TITLE_PUBLICAR, false, [
+				                    'data-acao-param-dir' => "{$dir_lista}alternar-publicacao/publicar"
+			                    ]);
+	                    } // Fim if
+
+	                    # Editar esse registro
+	                    if( $opcoes['editar?'] ){
+		                    echo $this->aux_links->linkHTML('editar', "{$dir_lista}editar/{$l[TXT_LISTA_TITULO_ID]}", TXT_LINK_EDITAR, TXT_LINK_TITLE_EDITAR, false);
+	                    } // Fim if
+
+	                    # Remover esse registro
+	                    if( $opcoes['remover?'] ){
+		                    echo $this->aux_links->linkHTML('remover', 'javascript:', TXT_LINK_REMOVER, TXT_LINK_TITLE_REMOVER, false);
+	                    } // Fim if ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+
+            <tfoot class="tbl-rodape">
+                <?php if( count($lista) ): ?>
+                <tr class="tbl-linha com-marcados">
+                    <td>
+	                    <?php
+	                    # Publicar e ocultar registros
+	                    if( $opcoes['publicar?'] ){
+		                    echo $this->aux_links->linkHTML('publicar', 'javascript:', TXT_LINK_PUBLICAR, TXT_LINK_TITLE_PUBLICAR_SELECIONADOS, false, [
+			                    'data-acao-param-dir' => "{$dir_lista}alternar-publicacao/publicar"
+		                    ]);
+
+		                    echo $this->aux_links->linkHTML('ocultar', 'javascript:', TXT_LINK_OCULTAR, TXT_LINK_TITLE_OCULTAR_SELECIONADOS, false, [
+			                    'data-acao-param-dir' => "{$dir_lista}alternar-publicacao/ocultar"
+		                    ]);
+	                    } // Fim if
+
+	                    # Remover registros
+	                    if( $opcoes['remover?'] ){
+		                    echo $this->aux_links->linkHTML('remover', 'javascript:', TXT_LINK_REMOVER, TXT_LINK_TITLE_REMOVER_SELECIONADOS, false);
+	                    } // Fim if ?>
+                    </td>
+                </tr>
+                <?php endif; ?>
+            </tfoot>
+        </table>
+    </form>
+
+    <div id="paginacao"></div>
+[/DL3-CONTEUDO]

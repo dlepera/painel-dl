@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /_auto/
+Disallow: /_padroes/
+Disallow: /web/idiomas/
+Disallow: /web/rotas/
+Disallow: /biblioteca/
+Disallow: /config/
+Disallow: /painel-dl/

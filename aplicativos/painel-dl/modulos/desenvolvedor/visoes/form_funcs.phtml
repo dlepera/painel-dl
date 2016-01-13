@@ -1,0 +1,144 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 07/01/2015 18:34:49
+ */
+
+if( !isset($params) ){
+	$params = $this->obterParams();
+} // Fim if
+
+$mod = $params['modelo'];
+
+?>
+
+[DL3-HEAD]
+<style>
+	#metodos .form-controle-texto{
+		/* Tamanho */
+		width: 50%;
+	}
+</style>
+[/DL3-HEAD]
+
+[DL3-CONTEUDO]
+	<form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
+        <?php if( !$params['incluindo'] ): ?>
+        <input type="hidden" name="id" value="<?php echo $mod->id; ?>"/>
+        <?php else : ?>
+		<input type="hidden" name="func_modulo" value="<?php echo $params['modulo']; ?>"/>
+		<?php endif; ?>
+
+        <div class="flex-grade">
+            <fieldset class="form-grupo flex-item seis-col">
+                <legend class="form-legenda"><?php echo TXT_LEGENDA_FUNCIONALIDADE; ?></legend>
+
+                <p class="form-paragr">
+                    <?php echo $this->aux_form->campoGeral('texto', 'descr', 'descr', $mod->descr, TXT_ROTULO_DESCRICAO, null, ['required' => 'required']); ?>
+                </p>
+
+                <p class="form-paragr">
+                    <?php echo $this->aux_form->campoGeral('texto', 'classe', 'classe', $params['incluindo'] ? $params['modulo-classe'] : $mod->classe, TXT_ROTULO_CLASSE, null, ['required' => 'required']); ?>
+                </p>
+
+	            <div id="metodos">
+	                <span class="form-rotulo"><?php echo TXT_ROTULO_METODOS; ?>:</span><br/>
+
+                    <!-- Lista de métodos da classe -->
+                    <datalist id="lista-metodos">
+                        <?php foreach ($params['lista-metodos'] as $metodo): ?>
+                            <option><?php echo $metodo; ?></option>
+                        <?php endforeach; ?>
+                    </datalist>
+
+		            <p id="novo-metodo" class="form-paragr"<?php echo !$params['incluindo'] ? ' style="display: none;"' : ''; ?>>
+			            <?php echo $this->aux_form->campoGeral('texto', 'metodos[]', '', null, null, null, [
+                            'list' => 'lista-metodos',
+                            'autocomplete' => 'off',
+				            'placeholder' => TXT_ROTULO_METODO,
+                            'required' => 'required'
+			            ]); ?>
+		            </p>
+
+		            <?php foreach( $mod->metodos as $k => $m ): ?>
+                        <p class="form-paragr">
+                            <?php echo $this->aux_form->campoGeral('texto', 'metodos[]', "metodo-{$k}", $m, null, null, [
+                                'list' => 'lista-metodos',
+                                'autocomplete' => 'off',
+                                'placeholder' => TXT_ROTULO_METODO,
+                                'required' => 'required'
+                            ]);
+
+                            // CORRIGIR: Corrigir esse link para remover métodos
+                            echo $this->aux_links->linkHTML('remover', 'javascript:', TXT_LINK_REMOVER, TXT_LINK_TITLE_REMOVER, false); ?>
+                        </p>
+		            <?php endforeach; ?>
+	            </div>
+
+                <a href="javascript:" onclick="novoMetodo();" class="com-icone ico-inserir">
+                    <?php printf(TXT_LINK_NOVO, TXT_MODELO_METODO); ?>
+                </a>
+            </fieldset>
+
+            <fieldset class="form-grupo flex-item seis-col">
+                <legend class="form-legenda"><?php echo TXT_LEGENDA_GRUPOS; ?></legend>
+
+                <p class="msg-info"><?php echo TXT_DIVERSOS_INFORMAR_GRUPOS; ?></p>
+
+                <div class="form-paragr">
+                    <span class="form-rotulo"><?php echo TXT_ROTULO_GRUPOS; ?>:</span><br/>
+
+	                <div class="flex-grade">
+	                    <?php foreach( $params['grupos'] as $g ): ?>
+	                        <label for="grp-<?php echo $g['VALOR']; ?>" class="flex-item quatro-col">
+	                            <input type="checkbox" name="grupos[]" id="grp-<?php echo $g['VALOR']; ?>" value="<?php echo $g['VALOR']; ?>"<?php echo in_array($g['VALOR'], $mod->grupos) ? ' CHECKED' : ''; ?>/>
+	                            <?php echo $g['TEXTO']; ?>
+	                        </label>
+	                    <?php endforeach; ?>
+	                </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <p class="form-botoes">
+	        <?php
+	        echo $this->aux_form->botao('salvar', TXT_BOTAO_SALVAR);
+	        echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
+	        ?>
+        </p>
+    </form>
+[/DL3-CONTEUDO]
+
+[DL3-SCRIPTS]
+<script>
+    //<![CDATA[
+	// Remover um campo Método
+	$('#metodos .ico-remover').on('click', function(){
+		$(this).parents('.form-paragr').fadeOut('fast', function(){
+			$(this).remove();
+		});
+	});
+
+    /**
+     * Incluir um novo campo Método
+     * @constructor
+     */
+    function novoMetodo(){
+        var $mtd = $('#metodos');
+        var $itm = $('#novo-metodo').clone().removeAttr('id').removeAttr('style').appendTo($mtd);
+            $itm.find('input').val('').removeAttr('tabindex').trigger('focus');
+
+        // Criar botão para remover
+        $(document.createElement('a')).html('x').attr('href', 'javascript:')
+	        .addClass('so-icone ico-remover').on('click', function(){
+		        $(this).parents('.form-paragr').fadeOut('fast', function(){
+			        $(this).remove();
+		        });
+        }).appendTo($itm);
+    } // Fim function novoMetodo
+    //]]>
+</script>
+[/DL3-SCRIPTS]

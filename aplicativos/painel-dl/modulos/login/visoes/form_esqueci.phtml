@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 07/01/2015 18:34:49
+ */
+
+if (!isset($params)) {
+    $params = $this->obterParams();
+} // Fim if
+
+$mod = $params['modelo'];
+
+?>
+
+[DL3-CONTEUDO]
+    <form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
+        <p class="form-paragr">
+	        <?php echo $this->aux_form->campoGeral('texto', 'login', 'login', $mod->login, TXT_ROTULO_LOGIN_OU_EMAIL, null, ['required' => 'required']); ?>
+        </p>
+
+        <p class="form-botoes">
+            <?php
+            echo $this->aux_form->botao('enviar-email', TXT_BOTAO_ENVIAR);
+            echo $this->aux_links->linkHTML('voltar', 'javascript:', TXT_LINK_VOLTAR, null, true, [
+	            'onclick' => 'history.back()'
+            ]);
+            ?>
+        </p>
+    </form>
+[/DL3-CONTEUDO]

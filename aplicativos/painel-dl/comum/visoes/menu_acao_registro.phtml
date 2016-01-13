@@ -1,0 +1,27 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: dlepera
+ * Date: 12/11/15
+ * Time: 20:14
+ */
+
+if (!isset($params)) {
+    $params = $this->obterParams();
+} // Fim if
+
+?>
+
+[DL3-CONTEUDO]
+<nav class="menu-acao-registro">
+    <?php
+    echo $this->aux_links->linkHTML('voltar', 'javascript:', TXT_LINK_VOLTAR, null, false, [
+        'onclick' => 'history.back();'
+    ]);
+
+    echo $this->aux_links->linkHTML('remover', 'javascript:', TXT_LINK_REMOVER, TXT_LINK_TITLE_REMOVER, false, [
+        'data-acao' => 'excluir-registro'/* , 'data-acao-param-form' => "#{$params['form-id']}" */
+    ]);
+    ?>
+</nav>
+[/DL3-CONTEUDO]

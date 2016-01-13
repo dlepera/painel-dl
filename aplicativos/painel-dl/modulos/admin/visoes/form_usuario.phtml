@@ -1,0 +1,206 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 07/01/2015 18:34:49
+ */
+
+if( !isset($params) ){
+	$params = $this->obterParams();
+} // Fim if
+
+$mod = $params['modelo'];
+
+?>
+
+[DL3-CONTEUDO]
+    <?php if( $params['msg-usuario-bloq?'] ): ?>
+    <p class="msg-atencao"><?php echo MSG_USUARIO_BLOQUEADO; ?></p>
+    <?php endif;
+
+    /*
+     * TAREFA: Carregar a foto sem precisar recarregar a página
+     */
+    if( !$params['incluindo'] ): ?>
+	<form id="form-foto-perfil" action="admin/usuarios/salvar-foto" enctype="multipart/form-data" class="usr-alterar-foto">
+		<input type="hidden" name="id" value="<?php echo $mod->id; ?>"/>
+
+		<?php if( $params['usuario-logado?'] ): ?>
+			<input type="file" name="perfil_foto" id="perfil-foto" class="form-controle"/>
+			<label for="perfil-foto">
+				<?php echo $mod->mostrarFoto(\DL3::$dir_relativo, 'g'); ?>
+				<span class="msg-alterar-foto"><?php echo MSG_USUARIO_ALTERAR_FOTO; ?></span>
+			</label>
+		<?php else:
+			echo $mod->mostrarFoto(\DL3::$dir_relativo, 'g');
+		endif; ?>
+	</form>
+	<?php endif; ?>
+
+    <form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
+        <?php if( !$params['incluindo'] ): ?>
+        <input type="hidden" name="id" value="<?php echo $mod->id; ?>"/>
+        <?php endif; ?>
+
+        <fieldset class="form-grupo">
+            <legend class="form-legenda"><?php echo TXT_LEGENDA_DADOS_PESSOAIS; ?></legend>
+
+            <p class="form-paragr">
+                <?php echo $this->aux_form->campoGeral('texto', 'info_nome', 'info-nome', $mod->info_nome, TXT_ROTULO_NOME, null, ['required' => 'required']); ?>
+            </p>
+
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->campoGeral('email', 'info_email', 'info-email', $mod->info_email, TXT_ROTULO_EMAIL, null, ['required' => 'required']); ?>
+            </p>
+
+            <p class="form-paragr">
+				<?php echo $this->aux_form->campoTelefone('info_telefone', 'info-telefone', $mod->info_telefone, TXT_ROTULO_TELEFONE, null, ['pattern' => \Funcoes::expregForm(EXPREG_TELEFONE_GERAL)]); ?>
+            </p>
+
+            <p class="form-paragr">
+                <span class="form-rotulo"><?php echo TXT_ROTULO_SEXO; ?>:</span><br/>
+                <input type="radio" name="info_sexo" id="info-sexo-m" value="M"<?php echo $mod->info_sexo === 'M' ? ' CHECKED' : ''; ?>/>
+                <label for="info-sexo-m"><?php echo TXT_OPCAO_MASCULINO; ?></label>
+
+                <input type="radio" name="info_sexo" id="info-sexo-f" value="F"<?php echo $mod->info_sexo === 'F' ? ' CHECKED' : ''; ?>/>
+                <label for="info-sexo-f"><?php echo TXT_OPCAO_FEMININO; ?></label>
+            </p>
+        </fieldset>
+
+        <fieldset class="form-grupo">
+            <legend class="form-legenda"><?php echo TXT_LEGENDA_PREFERENCIAS; ?></legend>
+
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->comboSelect('pref_idioma', 'pref-idioma', $mod->pref_idioma, TXT_ROTULO_IDIOMA, null, ['required' => 'required'], $params['idiomas']);
+
+	            if( $params['novo-idioma?'] ):
+		            echo $this->aux_links->linkHTML('inserir', 'javascript:', sprintf(TXT_LINK_NOVO, TXT_MODELO_IDIOMA), null, true, [
+			            'data-ajax' => true,
+			            'data-ajax-msg' => TXT_AJAX_CARREGANDO_CONTEUDO,
+			            'data-acao' => 'carregar-form',
+			            'data-acao-param-html' => 'desenvolvedor/idiomas/novo',
+			            'data-acao-param-func' => "carregarSelect($('#sel-pref-idioma'), 'desenvolvedor/idiomas/carregar-select')"
+		            ]);
+	            endif; ?>
+            </p>
+
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->comboSelect('pref_tema', 'pref-tema', $mod->pref_tema, TXT_ROTULO_TEMA, null, ['required' => 'required'], $params['temas']);
+
+                if( $params['novo-tema?'] ):
+	                echo $this->aux_links->linkHTML('inserir', 'javascript:', sprintf(TXT_LINK_NOVO, TXT_MODELO_TEMA), null, true, [
+		                'data-ajax' => true,
+		                'data-ajax-msg' => TXT_AJAX_CARREGANDO_CONTEUDO,
+		                'data-acao' => 'carregar-form',
+		                'data-acao-param-html' => 'desenvolvedor/temas/novo',
+		                'data-acao-param-func' => "carregarSelect($('#sel-pref-tema'), 'desenvolvedor/temas/carregar-select')"
+	                ]);
+                endif; ?>
+            </p>
+
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->comboSelect('pref_formato_data', 'pref-formato-data', $mod->pref_formato_data, TXT_ROTULO_FORMATO_DATA, null, ['required' => 'required'], $params['formatos-data']); ?>
+            </p>
+
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->campoGeral('numero', 'pref_num_registros', 'pref-num-registros', $mod->pref_num_registros, TXT_ROTULO_NUM_REGISTROS, TXT_DICA_USUARIO_NUM_REGISTROS, [
+		            'min' => 5, 'max' => 99, 'required' => 'required'
+	            ]); ?>
+            </p>
+
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->chkSimNao('pref_exibir_id', 'chk-exibir-id', TXT_ROTULO_EXIBIR_ID, TXT_DICA_EXIBIR_ID, $mod->pref_exibir_id ? ' CHECKED' : ''); ?>
+            </p>
+
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->chkSimNao('pref_filtro_menu', 'chk-filtro-menu', TXT_ROTULO_FILTRO_MENU, TXT_DICA_FILTRO_MENU, $mod->pref_filtro_menu ? ' CHECKED' : ''); ?>
+            </p>
+        </fieldset>
+
+        <fieldset class="form-grupo">
+            <legend class="form-legenda"><?php echo TXT_LEGENDA_ACESSO_SISTEMA; ?></legend>
+
+            <?php if( $params['incluindo'] || !$params['usuario-logado?'] ): ?>
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->comboSelect('info_grupo', 'info-grupo', $mod->info_grupo, TXT_ROTULO_GRUPO, null, ['required' => 'required'], $params['grupos-usuarios']);
+
+                if( $params['novo-grupo?'] ):
+	                echo $this->aux_links->linkHTML('inserir', 'javascript:', sprintf(TXT_LINK_NOVO, TXT_MODELO_GRUPOUSUARIO), null, true, [
+		                'data-ajax' => true,
+		                'data-ajax-msg' => TXT_AJAX_CARREGANDO_CONTEUDO,
+		                'data-acao' => 'carregar-form',
+		                'data-acao-param-html' => 'admin/grupos-de-usuarios/novo',
+		                'data-acao-param-func' => "carregarSelect($('#sel-info-grupo'), 'admin/grupos-de-usuarios/carregar-select')"
+	                ]);
+                endif; ?>
+            </p>
+            <?php elseif( $params['usuario-logado?'] ): ?>
+            <p class="form-paragr">
+                <?php echo TXT_ROTULO_GRUPO, ':<br/>', $params['grupo-descr']; ?>
+                <input type="hidden" name="info_grupo" value="<?php echo $mod->info_grupo; ?>"/>
+            </p>
+            <?php endif;
+
+            if( $params['incluindo'] ): ?>
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->campoGeral('texto', 'info_login', 'info-login', '', TXT_ROTULO_LOGIN, null, ['required' => 'required']); ?>
+            </p>
+
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->campoGeral('senha', 'info_senha', 'info-senha', '', TXT_ROTULO_SENHA, null, ['required' => 'required']); ?>
+            </p>
+
+            <p class="form-paragr">
+	            <?php echo $this->aux_form->campoGeral('senha', 'info_senha_conf', 'conf-senha', '', TXT_ROTULO_CONF_SENHA, null, ['required' => 'required']); ?>
+            </p>
+            <?php else: ?>
+                <span class="form-rotulo"><?php echo TXT_ROTULO_LOGIN; ?>:</span><br/>
+                <?php echo $mod->info_login; ?>
+	        <?php endif;
+
+            if( !$params['usuario-logado?'] ): ?>
+	            <p class="form-paragr">
+	                <input type="checkbox" name="conf_reset" id="conf-reset"<?php echo $mod->conf_reset ? ' CHECKED' : ''; ?>/>
+	                <label for="conf-reset"><?php echo TXT_ROTULO_RESET; ?></label><br/>
+	                <span class="form-dica"><?php echo TXT_DICA_USUARIO_RESET; ?></span>
+	            </p>
+
+	            <p class="form-paragr">
+	                <input type="checkbox" name="conf_bloq" id="conf-bloq"<?php echo $mod->conf_bloq ? ' CHECKED' : ''; ?>/>
+	                <label for="conf-bloq"><?php echo TXT_ROTULO_BLOQ; ?></label><br/>
+	                <span class="form-dica"><?php echo TXT_DICA_USUARIO_BLOQ; ?></span>
+	            </p>
+            <?php endif; ?>
+        </fieldset>
+
+        <p class="form-botoes">
+            <?php
+            echo $this->aux_form->botao('salvar', TXT_BOTAO_SALVAR);
+            echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
+            ?>
+        </p>
+    </form>
+[/DL3-CONTEUDO]
+
+[DL3-SCRIPTS]
+<script>
+    //<![CDATA[
+    $('#tel-info-telefone').mascara('<?php echo strlen($mod->info_fone) <= 14 || $params['incluindo'] ? MASK_TELEFONE_CELULAR_8 : MASK_TELEFONE_CELULAR_9; ?>');
+
+    $('.alt-mask-fone').on('change',
+	    { msk8: '<?php echo MASK_TELEFONE_CELULAR_8; ?>', msk9: '<?php echo MASK_TELEFONE_CELULAR_9; ?>' },
+	    alternarMaskFone
+    );
+
+    $('#form-foto-perfil').formulario({
+	    depois: function(){ window.location.reload(); },
+	    aparencia: { tema: '<?php echo \DL3::$plugin_formulario_tema; ?>', estilo: null }
+    }).find(':file').on('change', function(){ $(this).parents('form').submit(); });
+    //]]>
+</script>
+[/DL3-SCRIPTS]
+
+[DL3-HEAD]
+[/DL3-HEAD]

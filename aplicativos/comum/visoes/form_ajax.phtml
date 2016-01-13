@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 14/01/2015 10:13:48
+ */
+
+if( !isset($params) ){
+    $params = $this->obterParams();
+} // Fim if
+
+?>
+
+[DL3-SCRIPTS]
+<script>
+    //<![CDATA[
+    $sf = $('#form-<?php echo $params['form-id']; ?>').formulario({
+        depois: function(){
+            var url = '<?php echo $params['url-depois']; ?>';
+
+            if( !/^\//.test(url) ) url = $('base').attr('href') + url;
+
+            window.location = url;
+        },
+        aparencia: { tema: '<?php echo \DL3::$plugin_formulario_tema; ?>', estilo: null }
+    }).on('reset', function(){ history.back(); });
+    //]]>
+</script>
+[/DL3-SCRIPTS]
