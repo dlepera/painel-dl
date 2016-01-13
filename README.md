@@ -1,6 +1,6 @@
 # Painel-DL
 
-Painel de administração de conteúdo de sites. Feito para ser acoplado como um aplicativo do Framework-DL.
+Painel de administração de conteúdo de sites. Feito para ser acoplado como um aplicativo do [Framework-DL](https://github.com/dlepera/framework-dl).
 
 # Módulos do Painel-DL
 ## Admin
