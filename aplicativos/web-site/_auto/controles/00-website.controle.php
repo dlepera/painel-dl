@@ -25,10 +25,10 @@ class WebSite extends Principal{
         $mdc = new ContatoM\DadoContato();
 
         # Listar as redes sociais
-        $lrs = $mdc->listar('dado_contato_publicar AND tipo_dado_rede_social', 'tipo_dado_descr', 'tipo_dado_descr, tipo_dado_icone, dado_contato_descr');
+        $lrs = $mdc->listar('dado_contato_publicar = 1 AND tipo_dado_rede_social = 1', 'tipo_dado_exibicao', 'tipo_dado_exibicao, tipo_dado_icone, dado_contato_descr');
 
         # Listar dados para contato
-        $ldc = $mdc->listar('dado_contato_publicar AND NOT tipo_dado_rede_social', 'tipo_dado_descr', 'tipo_dado_descr, tipo_dado_icone, dado_contato_descr');
+        $ldc = $mdc->listar('dado_contato_publicar = 1 AND tipo_dado_rede_social = 0', 'tipo_dado_exibicao', 'tipo_dado_exibicao, tipo_dado_icone, dado_contato_descr');
 
         # Selecionar as configurações para o website
         $mcf = new GeralM\ConfiguracaoSite();
