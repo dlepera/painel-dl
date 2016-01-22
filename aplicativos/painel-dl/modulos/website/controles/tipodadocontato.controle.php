@@ -28,12 +28,10 @@ class TipoDadoContato extends GeralC\PainelDL{
     } // Fim do método __construct
 
 
-
-
-	/**
-	 * Mostrar a lista de registros
-	 */
-    protected function mostrarLista(){
+    /**
+     * Mostrar a lista de registros
+     */
+    protected function mostrarLista() {
         $this->listaPadrao('tipo_dado_id AS ' . TXT_LISTA_TITULO_ID . ','
 	        . " CONCAT('<img src=\"" . \DL3::$dir_relativo . "', tipo_dado_icone, '\" class=\"tbl-imagem\" alt/>') AS " . TXT_LISTA_TITULO_ICONE . ','
             . " CONCAT(tipo_dado_nome, '<br/>', tipo_dado_exibicao) AS '" . TXT_LISTA_TITULO_DESCR . "',"
@@ -55,15 +53,13 @@ class TipoDadoContato extends GeralC\PainelDL{
     } // Fim do método mostrarLista
 
 
-
-
-	/**
-	 * Mostrar formulário de inclusão e edição do registro
-	 *
-	 * @param int    $pk  PK do registro a ser selecionado
-	 * @param string $mst Nome da página mestra a ser carregada
-	 */
-    protected function mostrarForm($pk = null, $mst = null){
+    /**
+     * Mostrar formulário de inclusão e edição do registro
+     *
+     * @param int    $pk  PK do registro a ser selecionado
+     * @param string $mst Nome da página mestra a ser carregada
+     */
+    protected function mostrarForm($pk = null, $mst = null) {
         $this->formPadrao('tipo-dado', 'tipos-de-dados/salvar', 'tipos-de-dados/salvar', 'website/tipos-de-dados', $pk);
 
         # Visão
@@ -72,12 +68,10 @@ class TipoDadoContato extends GeralC\PainelDL{
     } // Fim do método mostrarForm
 
 
-
-
-	/**
-	 * Obter as opções avançadas desse tipo de dado
-	 */
-    public function opcoesAvancadas(){
+    /**
+     * Obter as opções avançadas desse tipo de dado
+     */
+    public function opcoesAvancadas() {
         $this->modelo->selecionarPK(filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT));
 
         echo json_encode([
@@ -86,4 +80,15 @@ class TipoDadoContato extends GeralC\PainelDL{
             'exemplo' => (string)$this->modelo->exemplo
         ]);
     } // Fim do método opcoesAvancadas
+
+
+    /**
+     * Selecionar dados para carregar um campo select
+     *
+     * @param string $f Filtro a ser aplicado
+     * @param bool   $e Define se o resultado da consulta será escrito ou retornado pela função
+     */
+    public function carregarSelect($f = null, $e = true) {
+        return $this->modelo->carregarSelect($f, $e, 'id', 'nome');
+    } // Fim do método carregarSelect
 } // Fim do Controle TipoDadoContato
