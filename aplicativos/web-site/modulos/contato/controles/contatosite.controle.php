@@ -45,6 +45,7 @@ class ContatoSite extends GeralC\WebSite{
         # Parâmetros
         $this->visao->adParam('mostrar-assunto?', (bool)$la);
         $this->visao->adParam('assuntos', $la);
+        $this->visao->adParam('usar-recaptcha?', !empty(\DL3::$recaptcha_chave_site) && !empty(\DL3::$recaptcha_chave_secreta));
     } // Fim do método mostrarForm
 
 

@@ -14,7 +14,7 @@
  * @returns {*}
  */
 function executarConfirm(msg, acao, titulo){
-	$('body')._msgconfirmacao({
+	$('body').msgConfirmacao({
 		titulo: titulo || 'Confirmação',
 		mensagem: msg,
 		botao_sim: { texto: 'Sim', classe: 'btn-sim', funcao: function(){ return acao(); } },

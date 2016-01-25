@@ -7,11 +7,15 @@
  * @Data	: 05/01/2015 17:31:20
  */
 
-if( !isset($params) ){
-	$params = $this->obterParams();
+if (!isset($params)) {
+    $params = $this->obterParams();
 } // Fim if
 
-?>
+if ($params['usar-recaptcha?']): ?>
+    [DL3-HEAD]
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    [/DL3-HEAD]
+<?php endif; ?>
 
 [DL3-CONTEUDO]
     <form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
@@ -28,16 +32,21 @@ if( !isset($params) ){
         </p>
 
         <?php if( $params['mostrar-assunto?'] && count($params['assuntos']) > 0 ): ?>
-        <p class="form-paragr">
-	        <?php echo $this->aux_form->comboSelect('assunto', 'assunto', null, TXT_ROTULO_ASSUNTO, null, ['required' => 'required'],
-		        array_merge([['VALOR' => '', 'TEXTO' => TXT_OPCAO_SELECIONE_UMA_OPCAO]], $params['assuntos'])
-	        ); ?>
-        </p>
+            <p class="form-paragr">
+                <?php echo $this->aux_form->comboSelect('assunto', 'assunto', null, TXT_ROTULO_ASSUNTO, null, ['required' => 'required'],
+                    array_merge([['VALOR' => '', 'TEXTO' => TXT_OPCAO_SELECIONE_UMA_OPCAO]], $params['assuntos'])
+                ); ?>
+            </p>
         <?php endif; ?>
 
         <p class="form-paragr">
             <?php echo $this->aux_form->caixaTexto('mensagem', 'mensagem', '', TXT_ROTULO_MENSAGEM, null, ['required' => 'required']); ?>
         </p>
+
+
+        <?php if ($params['usar-recaptcha?']): ?>
+            <div class="g-recaptcha" data-sitekey="<?php echo \DL3::$recaptcha_chave_site; ?>"></div>
+        <?php endif; ?>
 
         <p class="form-botoes">
 	        <?php
