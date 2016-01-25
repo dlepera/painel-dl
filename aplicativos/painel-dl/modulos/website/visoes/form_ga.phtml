@@ -22,7 +22,7 @@ $mod = $params['modelo'];
         <?php endif; ?>
 
         <p class="form-paragr">
-            <?php echo $this->aux_form->campoGeral('texto', 'apelido', 'apelido', $mod->apelido, TXT_ROTULO_APELIDO, null, ['required' => 'required']); ?>
+            <?php echo $this->aux_form->campoGeral('texto', 'apelido', 'apelido', $mod->apelido, TXT_ROTULO_APELIDO, null); ?>
         </p>
 
         <fieldset class="form-grupo">
@@ -42,7 +42,7 @@ $mod = $params['modelo'];
                 ], 'p12'); ?>
 	            <br/><span class="form-dica"><?php echo TXT_DICA_P12; ?></span>
 
-	            <?php if( $mod->p12 !== '' ): ?>
+	            <?php if (strlen($mod->p12) > 0): ?>
 	                <br/>
 		            <a href="<?php echo \DL3::$dir_relativo . $mod->p12; ?>" target="_blank" class="com-icone ico-detalhes">
 			            <?php echo TXT_LINK_DOWNLOAD_ARQUIVO_ATUAL; ?>
