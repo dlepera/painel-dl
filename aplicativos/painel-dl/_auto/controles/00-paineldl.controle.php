@@ -51,6 +51,7 @@ class PainelDL extends Principal{
         $this->visao->aux_links->novoLink('incluir-funcionalidades-padrao',
             ['class' => 'com-icone ico-nova-pasta', 'data-acao' => 'criar-funcionalidades']
         );
+        $this->visao->aux_links->novoLink('configuracoes', ['class' => 'com-icone ico-configuracoes']);
 
         # Dados do usuário
         $mus = new AdminM\Usuario($_SESSION['usuario_id']);
