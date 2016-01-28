@@ -23,6 +23,12 @@ $params = $this->obterParams();
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?php echo \DL3::$dir_relativo . \DL3::$dir_imgs . \DL3::$favicon; ?>"/>
 
+    <!-- Aplicar o tema da página -->
+    <?php echo \DL3::carregarTema($_SESSION['tema_diretorio']); ?>
+
+    <!-- CSS personalizados -->
+    [DL3-CSS/]
+
     <!-- <head> Conteúdo personalizado </head> -->
     [DL3-HEAD/]
 </head>
@@ -172,12 +178,6 @@ $params = $this->obterParams();
 <div id="dl3-carregando"></div>
 </body>
 </html>
-
-<!-- Aplicar o tema da página -->
-<?php echo \DL3::carregarTema($_SESSION['tema_diretorio']); ?>
-
-<!-- CSS personalizados -->
-[DL3-CSS/]
 
 <!-- Javascripts -->
 <script
