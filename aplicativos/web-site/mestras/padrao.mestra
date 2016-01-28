@@ -35,6 +35,12 @@ $params = $this->obterParams();
 	<!-- Compatibilidade IE -->
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" >
 
+    <!-- Aplicar o tema CSS da página -->
+    <?php echo \DL3::carregarTema($params['conf-site']['tema_diretorio']); ?>
+
+    <!-- CSS`s customizados -->
+    [DL3-CSS/]
+
 	<!-- Conteúdo personalizado -->
 	[DL3-HEAD/]
 </head>
@@ -105,11 +111,6 @@ $params = $this->obterParams();
 </body>
 </html>
 
-<!-- Aplicar o tema CSS da página -->
-<?php echo \DL3::carregarTema($params['conf-site']['tema_diretorio']); ?>
-
-<!-- CSS`s customizados -->
-[DL3-CSS/]
 
 <!-- Javascripts -->
 <script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>jquery-<?php echo \DL3::$versao_jquery; ?>-min.js"></script>
