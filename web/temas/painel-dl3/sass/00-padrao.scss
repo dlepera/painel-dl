@@ -14,23 +14,7 @@
 
 // CSS Reset -------------------------------------------------------------------------------------------------------- //
 *, *::before, *::after {
-    /* Margens */
-    margin: 0;
-    padding: 0;
-    
-    // Visual
-    list-style: none;
-    outline: 0;
-    
-    /* Texto */
-    font-weight: inherit;
-    font-style: inherit;
-    font-size: 13px;
-    font-family: inherit;
-    text-decoration: none;
-    
-    /* Tamanho */
-    @include _box-sizing();
+    @include _css-reset;
 }
 
 
