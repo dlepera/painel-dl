@@ -8,14 +8,13 @@
 
 
 @import '../../_ajuda/compatibilidade';
+@import '../../_ajuda/css_reset';
 @import '../_ajuda/flexivel';
 
 
 
 // CSS Reset -------------------------------------------------------------------------------------------------------- //
-*, *::before, *::after {
-    @include _css-reset;
-}
+@include _css-reset-yahoo;
 
 
 
@@ -37,7 +36,7 @@ body {
     background-color: $layout-html-fundo;
     
     // Texto
-    font-family: 'geral', sans-serif;
+    font: 1.3rem 'geral', sans-serif;
     
     // Margens
     padding-top: 4rem;
