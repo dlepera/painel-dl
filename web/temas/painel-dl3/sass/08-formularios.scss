@@ -160,6 +160,11 @@ form {
 		&-controle {
 			$tm: 4rem;
 
+            &:focus {
+                // Visual
+                outline: none;
+            }
+
 			// Controles alfanuméricos
 			@include _campos-alfanum {
 				// Visual
