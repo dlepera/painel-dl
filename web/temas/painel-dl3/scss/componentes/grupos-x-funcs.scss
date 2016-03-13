@@ -1,0 +1,112 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'grupos-x-funcs';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    > .modulo {
+        // Margens
+        margin: 1.5rem 0;
+
+        > .nomemod {
+            $cor-txt: #900;
+
+            // Texto
+            color: $cor-txt;
+            font-weight: bold;
+
+            // Margens
+            padding: .75rem 0;
+            margin-bottom: .75rem;
+
+            // Visual
+            // border-bottom: $layout-borda-padrao;
+
+            &::after {
+                // Formas geométricas
+                @include _triangulo-baixo($cor-txt, 5px, 5px);
+
+                // Texto
+                content: '';
+
+                // Alinhamento
+                vertical-align: middle;
+
+                // Visual
+                display: inline-block;
+
+                // Margens
+                margin-left: 1rem;
+            }
+        }
+
+        > .nomesub {
+            // Visual
+            border-bottom: $layout-borda-padrao;
+
+            // Texto
+            font-style: italic;
+            font-weight: bold;
+
+            // Margens
+            padding: .75rem 0;
+            margin-bottom: .75rem;
+        }
+
+        > .submodulo {
+            // Margens
+            padding: .75rem 0;
+
+            // Visual
+            background: #EFEFEF;
+
+            > .func {
+                // Visual
+                display: inline-block;
+
+                // Margens
+                margin: .5rem 0;
+            }
+        }
+
+        > .selectodos {
+            // Visual
+            display: inline-block;
+
+            // Margens
+            margin: .5rem 0;
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        
+    }
+}

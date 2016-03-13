@@ -59,10 +59,12 @@ define('TXT_ROTULO_MENU', 'Include on menu?');
 define('TXT_ROTULO_GRUPOS', 'Groups');
 define('TXT_ROTULO_METODOS', 'Methods');
 define('TXT_ROTULO_CRIAR_FUNCIONALIDADES_PADRAO', 'Create default functions on insert this module');
+define('TXT_ROTULO_PAGINA_MESTRA', 'Master page');
 
 # -> Dicas
 define('TXT_DICA_MODULO_MENU', 'Include this module on the default system menu?');
 define('TXT_DICA_TEMA_PADRAO', 'Define this skin as default.<br/>It will be used when the user not set another as preference.');
+define('TXT_DICA_TEMA_PAGINA_MESTRA', 'Name of the master page used to apply this theme.');
 
 # -> Exemplos
 define('TXT_EXEMPLO_SIGLA', 'Ex.: pt_BR');
@@ -72,3 +74,4 @@ define('TXT_EXEMPLO_SIGLA', 'Ex.: pt_BR');
 
 // Diversos --------------------------------------------------------------------------------------------------------- //
 define('TXT_DIVERSOS_INFORMAR_GRUPOS', 'You can tell which groups are allowed to perform this functionality. If you prefer, you can set this later in <b>Admin > User Groups</b>.');
+define('TXT_DIVERSOS_DIRETORIO_TEMA_INVALIDO', '<b>Warning!</b> The skin directory is invalid. Please, check if:<br/><br/><ul><li>- the directory <b>%s</b> found</li><li>- the directory <b>css/</b> is found inside skin\'s directory</li><li>- the directory <b>css/</b> is not empty</li></ul>');

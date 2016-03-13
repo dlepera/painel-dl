@@ -13,13 +13,13 @@ if( !isset($params) ){
 ?>
 
 [DL3-CONTEUDO]
-	<div class="sobre flex-grade">
-		<figure class="sobre-logotipo mostrar-imagem flex-item seis-col">
-			<img src="<?php echo \DL3::$dir_relativo . \DL3::$dir_temas . $_SESSION['tema_diretorio']; ?>/css/imagens/logotipo.png" alt=""/>
+	<div class="sobre grade-flexivel">
+		<figure class="sobre-logotipo mostrar-imagem flexitem seis-col">
+			<img src="<?php echo \DL3::$dir_relativo . \DL3::$dir_temas . $_SESSION['tema_diretorio']; ?>/css/imagens/logotipo.png" class="imagem" alt=""/>
 		</figure>
 
-		<div class="sobre-infos flex-item seis-col">
-			<details class="detalhes" open>
+		<div class="sobre-infos flexitem seis-col">
+			<details class="mostrar-detalhes" open>
 				<summary class="det-titulo"><?php echo TXT_SUMARIO_PAINELDL; ?></summary>
 
 				<p class="det-paragr">
@@ -43,7 +43,7 @@ if( !isset($params) ){
 				</p>
 			</details>
 
-			<details class="detalhes" open>
+			<details class="mostrar-detalhes" open>
 				<summary class="det-titulo"><?php echo \DL3::FWORK_NOME; ?></summary>
 
 				<p class="det-paragr">

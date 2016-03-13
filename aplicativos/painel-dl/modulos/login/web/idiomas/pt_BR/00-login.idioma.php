@@ -60,7 +60,7 @@ define('TXT_EMAIL_CORPO_RECUPERAR_SENHA', '<h1>Olá %s!</h1>'
 
 
 // Diversos --------------------------------------------------------------------------------------------------------- //
-define('TXT_DIVERSOS_AVISO_USUARIO_RESET_SENHA', '<b>Atenção!</b> Se você não for <b>%s</b> <span style="text-transform:uppercase;text-decoration:underline;font-weight:bold;">não</span> continue esse procedimento!');
+define('TXT_DIVERSOS_AVISO_USUARIO_RESET_SENHA', '<b>Atenção!</b> Se você não é <b>%s</b> <span style="text-transform:uppercase;text-decoration:underline;font-weight:bold;">não</span> continue esse procedimento!');
 
 
 // Classes ---------------------------------------------------------------------------------------------------------- //
@@ -81,3 +81,4 @@ define('ERRO_LOGIN_FAZERLOGIN', '<b>Erro desconhecido!</b><p>Não foi possível 
 define('ERRO_LOGIN_FAZERLOGOUT', '<b>Erro desconhecido!</b><p>Não foi possível sair do sistema.</p>');
 define('ERRO_LOGIN_MOSTRARRESETSENHA', '<b>Erro!</b><p>Hash de recuperação inválida.</p>');
 define('ERRO_LOGIN_RECUPERARSENHA_USUARIO_NAO_LOCALIZADO', 'Login ou e-mail informado não foi localizado!');
+define('ERRO_LOGIN_RECUPERARSENHA_CLASSE_ENVIO_EMAIL_NAO_LOCALIZADA', 'Erro!<br>A classe de envio de e-mail não foi localizada. Dessa forma não é possível encaminhar o link de recuperação de senha.<br><br>Por favor, procure o admoinistrador do sistema.');

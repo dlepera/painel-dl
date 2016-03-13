@@ -41,7 +41,7 @@ $this->rotas['^assuntos-contato/novo(/[a-z]+)?$'] = [
     'controle'  =>  'AssuntoContato',
     'acao'      =>  'mostrarForm',
     'id'        =>  null,
-    'params'    =>  '/-/-/:mst'
+    'params'    =>  '/-/-/:pg_mestra'
 ];
 
 $this->rotas['^assuntos-contato/(editar|alterar)/\d+$'] = [
@@ -78,7 +78,7 @@ $this->rotas['^tipos-de-dados/novo(/[a-z]+)?$'] = [
     'controle'  =>  'TipoDadoContato',
     'acao'      =>  'mostrarForm',
     'id'        =>  null,
-    'params'    =>  '/-/-/:mst'
+    'params'    =>  '/-/-/:pg_mestra'
 ];
 
 $this->rotas['^tipos-de-dados/(editar|alterar)/\d+'] = [
@@ -124,7 +124,7 @@ $this->rotas['^google-analytics/novo(/[a-z]+)?$'] = [
     'controle'  =>  'GoogleAnalytics',
     'acao'      =>  'mostrarForm',
     'id'        =>  null,
-    'params'    =>  '/-/-/:mst'
+    'params'    =>  '/-/-/:pg_mestra'
 ];
 
 $this->rotas['^google-analytics/(editar|alterar)/\d+'] = [
@@ -160,7 +160,7 @@ $this->rotas['^dados-para-contato/novo(/[a-z]+)?$'] = [
     'controle'  =>  'DadoContato',
     'acao'      =>  'mostrarForm',
     'id'        =>  null,
-    'params'    =>  '/-/-/:mst'
+    'params'    =>  '/-/-/:pg_mestra'
 ];
 
 $this->rotas['^dados-para-contato/(editar|alterar)/\d+$'] = [
@@ -196,7 +196,7 @@ $this->rotas['^albuns-de-fotos/novo(/[a-z]+)?$'] = [
     'controle'  =>  'Album',
     'acao'      =>  'mostrarForm',
     'id'        =>  null,
-    'params'    =>  '/-/-/:mst'
+    'params'    =>  '/-/-/:pg_mestra'
 ];
 
 $this->rotas['^albuns-de-fotos/(editar|alterar)/\d+$'] = [
@@ -234,12 +234,27 @@ $this->rotas['^albuns-de-fotos/salvar-foto$'] = [
 $this->rotas['^albuns-de-fotos/editar-foto/\d+(/[a-z]+)?$'] = [
     'controle'  =>  'FotoAlbum',
     'acao'      =>  'mostrarForm',
-    'params'    =>  '/-/-/:pk/:mst'
+    'params'    =>  '/-/-/:pk/:pg_mestra'
 ];
 
 $this->rotas['^albuns-de-fotos/excluir-fotos$'] = [
     'controle'  =>  'FotoAlbum',
     'acao'      =>  'remover'
+];
+
+/*
+ * A rota 'salvar' deve ficar antes da rota 'mostrarForm' para não acontecer confusão na funcionalidade, uma vez que o a
+ * expressão regular para o formulário também serve para salvar o registro.
+ */
+$this->rotas['^albuns-de-fotos/editar-configuracoes/salvar'] = [
+    'controle' => 'AlbumConfig',
+    'acao'     => 'salvar'
+];
+
+$this->rotas['^albuns-de-fotos/editar-configuracoes(/[a-z]+)?$'] = [
+    'controle' => 'AlbumConfig',
+    'acao'     => 'mostrarForm',
+    'params'   => '/-/-/:pg_mestra'
 ];
 
 

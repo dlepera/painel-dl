@@ -1,0 +1,23 @@
+@import '../../../../../../temas/painel-dl3/_ajuda/config';
+@import '../../../../../../temas/_ajuda/compatibilidade';
+@import '../_ajuda/*';
+
+.__jQuery-galeriaFotos.galeria3 {
+    // Posicionamento
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    // Visual
+    background: rgba(black, .8);
+
+    // Tamanho
+    width: 100%;
+    height: 100%;
+
+    // Margens
+    padding: 5vh 10vw;
+}
+
+@import 'componentes/*';

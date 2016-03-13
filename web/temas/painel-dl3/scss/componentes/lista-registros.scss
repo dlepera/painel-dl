@@ -1,0 +1,227 @@
+/**
+ * .subtitulo = <caption>
+ * .registro = linha <tr>
+ * .dado = célula <th> ou <td>
+ */
+
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'lista-registros';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Tamanho
+    width: 100%;
+
+    // Visual
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    > .subtitulo {
+        // Texto
+        color: #777;
+        text-align: center;
+
+        // Margens
+        margin-bottom: 1rem;
+    }
+
+    > .bloco-titulos {
+        // Visual
+        border-bottom: 1px solid #EEE;
+
+        > .registro {
+            // Texto
+            color: #888;
+        }
+    }
+
+    > .bloco-registros {
+
+    }
+
+    > .bloco-rodape {
+        // Visual
+        border-top: 1px solid #EEE;
+    }
+
+    .registro {
+        // Tamanho
+        height: 4rem;
+
+        > .dado {
+            // Margens
+            padding: .2rem .35rem;
+
+            // Variantes
+            &.-chk, &.-id {
+                // Tamanho
+                width: 30px;
+
+                // Texto
+                text-align: center;
+            }
+
+            &.-id {
+                // Visual
+                border-right: 1px solid #EEE;
+
+                & + * {
+                    // Margens
+                    padding-left: .75rem;
+                }
+            }
+
+            &.-infos {
+                // Texto
+                color: #888;
+
+                &:first-line {
+                    // Texto
+                    color: #000;
+                }
+            }
+        }
+
+        &:nth-of-type(odd) {
+            // Visual
+            background: #FFF;
+        }
+
+        &:nth-of-type(even) {
+            // Visual
+            background: #EFEFEF;
+        }
+
+        // Variantes
+        &.-acoes {
+            > .dado {
+                // Margens
+                padding-left: calc(30px + .5rem);
+                
+                // Visual
+                background: url('imagens/icone-acoes.png') no-repeat;
+            }
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+        > .bloco-titulos {
+            // Visual
+            visibility: hidden;
+
+            // Posicionamento
+            position: fixed;
+            top: -100%;
+            left: -100%;
+        }
+
+        > .bloco-registros {
+            > .registro {
+                // Visual
+                display: block;
+
+                // Tamanho
+                height: auto;
+
+                // Margens
+                padding-top: .5rem;
+                padding-bottom: .5rem;
+
+                // Posicionamento
+                position: relative;
+
+                > .dado {
+                    $tm-dado: 70%;
+                    $tm-th: ((100% - $tm-dado) / $tm-dado) * 100%;
+
+                    // Visual
+                    display: block;
+
+                    // Tamanho
+                    width: $tm-dado;
+
+                    // Margens
+                    padding-top: .75rem;
+                    padding-bottom: .75rem;
+
+                    // Posicionamento
+                    position: relative;
+                    left: 100% - $tm-dado;
+
+                    &::before {
+                        // Conteúdo
+                        content: attr(data-th);
+
+                        // Texto
+                        color: #888;
+
+                        // Visual
+                        display: inline-block;
+
+                        // Tamanho
+                        width: $tm-th;
+
+                        // Posicionamento
+                        position: absolute;
+                        left: 0;
+
+                        // Transformar
+                        @include _transform(translateX(-100%));
+
+                        // Margens
+                        padding-left: .35rem;
+                    }
+                }
+            }
+        }
+
+        .registro {
+            > .dado {
+                // Variantes
+                &.-chk, &.-id {
+                    // Texto
+                    text-align: left;
+                }
+
+                &.-id {
+                    // Visual
+                    border-right: none;
+
+                    & + * {
+                        // Margens
+                        padding-left: .35rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        
+    }
+}

@@ -1,0 +1,158 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: '-confirmacao';
+$tema: 'painel-dl';
+$botoes: 'sim' green,
+    'nao' red;
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.__jQuery-mostrarMsg {
+    &.#{$tema}.#{$comp-nome} {
+        > .paragr {
+            // Posicionamento
+            left: 50%;
+
+            // Transformar
+            @include _transform(translate(-50%, -50%));
+
+            // Visual
+            border-radius: 1rem;
+
+            // Animação
+            @include _animation(para-baixo .5s);
+
+            // Margens
+            padding: 1.25rem;
+
+            > .texto {
+                // Tamanho
+                width: 100%;
+
+                > .titulo {
+                    // Texto
+                    font-variant: small-caps;
+                    font-size: 1.75rem;
+                    font-weight: normal;
+                    color: #6a8397;
+
+                    // Margens
+                    margin-bottom: 1.25rem;
+                    padding-bottom: .5rem;
+
+                    // Visual
+                    display: block;
+                    border-bottom: 1px solid #EEE;
+                }
+            }
+
+            > .botoes {
+                // Texto
+                text-align: center;
+
+                > .botao {
+                    // Visual
+                    border-radius: .5rem;
+
+                    // Texto
+                    font-size: 1.3rem;
+                    color: #FFF;
+
+                    // Margens
+                    padding: .75rem 1.5rem;
+
+                    &:not(:first-child) {
+                        // Margens
+                        margin-left: 2rem;
+                    }
+
+                    &:focus {
+                        // Visual
+                        outline: none;
+                    }
+
+                    // Variantes
+                    @each $nome, $cor in $botoes {
+                        &.-#{$nome} {
+                            // Visual
+                            background: $cor;
+                        }
+                    }
+                }
+            }
+        }
+
+        > .tempo {
+            // Visual
+            display: none;
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .__jQuery-mostrarMsg {
+        &.#{$tema}.#{$comp-nome} {
+            > .paragr {
+                > .texto {
+                    &::before {
+                        // Visual
+                        display: block;
+
+                        // Margens
+                        margin-bottom: 2rem;
+                    }
+                }
+
+                > .botoes {
+                    > .botao {
+                        &:not(:first-child) {
+                            // Margens
+                            margin-left: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .__jQuery-mostrarMsg {
+        &.#{$tema}.#{$comp-nome} {
+            > .paragr {
+                // Tamanho
+                width: 90%;
+            }
+        }
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .__jQuery-mostrarMsg {
+        &.#{$tema}.#{$comp-nome} {
+            > .paragr {
+                // Tamanho
+                width: 60%;
+            }
+        }
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .__jQuery-mostrarMsg{
+        &.#{$tema}.#{$comp-nome} {
+            > .paragr {
+                // Tamanho
+                max-width: 70%;
+                min-width: 40%;
+            }
+        }
+    }
+}

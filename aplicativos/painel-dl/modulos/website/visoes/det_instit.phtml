@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 04/03/2015 19:39:25
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 04/03/2015 19:39:25
  */
 
-if( !isset($params) ){
-	$params = $this->obterParams();
+if (!isset($params)) {
+    $params = $this->obterParams();
 } // Fim if
 
 $mod = $params['modelo'];
@@ -16,27 +16,27 @@ $mod = $params['modelo'];
 ?>
 
 [DL3-CONTEUDO]
-    <nav class="dl3-links">
-        <?php echo $this->aux_links->linkHTML('editar', 'website/institucional/editar', TXT_LINK_EDITAR_INFOS_INSTITUCIONAIS); ?>
-    </nav>
+<nav class="dl3-links">
+    <?php echo $this->aux_links->linkHTML('editar', 'website/institucional/editar', TXT_LINK_EDITAR_INFOS_INSTITUCIONAIS); ?>
+</nav>
 
-    <details class="detalhes" open>
-        <summary class="det-titulo"><?php echo TXT_PAGINA_TITULO_HISTORIA; ?></summary>
-        <p><?php echo nl2br($mod->historia); ?></p>
-    </details>
+<details class="mostrar-detalhes" open>
+    <summary class="det-titulo"><?php echo TXT_PAGINA_TITULO_HISTORIA; ?></summary>
+    <p><?php echo nl2br($mod->historia); ?></p>
+</details>
 
-    <details class="detalhes" open>
-        <summary class="det-titulo"><?php echo TXT_PAGINA_TITULO_MISSAO; ?></summary>
-        <p><?php echo nl2br($mod->missao); ?></p>
-    </details>
+<details class="mostrar-detalhes" open>
+    <summary class="det-titulo"><?php echo TXT_PAGINA_TITULO_MISSAO; ?></summary>
+    <p><?php echo nl2br($mod->missao); ?></p>
+</details>
 
-    <details class="detalhes" open>
-        <summary class="det-titulo"><?php echo TXT_PAGINA_TITULO_VISAO; ?></summary>
-        <p><?php echo nl2br($mod->visao); ?></p>
-    </details>
+<details class="mostrar-detalhes" open>
+    <summary class="det-titulo"><?php echo TXT_PAGINA_TITULO_VISAO; ?></summary>
+    <p><?php echo nl2br($mod->visao); ?></p>
+</details>
 
-    <details class="detalhes" open>
-        <summary class="det-titulo"><?php echo TXT_PAGINA_TITULO_VALORES; ?></summary>
-        <p><?php echo nl2br($mod->valores); ?></p>
-    </details>
+<details class="mostrar-detalhes" open>
+    <summary class="det-titulo"><?php echo TXT_PAGINA_TITULO_VALORES; ?></summary>
+    <p><?php echo nl2br($mod->valores); ?></p>
+</details>
 [/DL3-CONTEUDO]

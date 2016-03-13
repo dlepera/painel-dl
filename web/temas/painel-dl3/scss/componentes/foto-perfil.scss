@@ -1,0 +1,51 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'foto-perfil';
+$tamanhos: 'p' 4rem, 'm' 7rem, 'g' 10rem;
+
+// Foto de perfil --------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Visual
+    display: inline-block;
+    border-radius: 50%;
+    border: solid #FFF;
+    background: #FFF;
+    overflow: hidden;
+
+    // Alinhamento
+    vertical-align: middle;
+
+    // Posicionamento
+    position: relative;
+
+    > .foto {
+        // Tamanho
+        width: auto;
+        max-width: 100vw;
+
+        // Posicionamento
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        // Transformar
+        @include _transform(translate(-50%, -50%));
+    }
+
+    // Variantes de tamanho
+    @each $letra, $tamanho in $tamanhos {
+        &.-tam-#{$letra} {
+            // Tamanho
+            width: $tamanho;
+            height: $tamanho;
+
+            // Visual
+            border-width: $tamanho / 20;
+            box-shadow: 0 0 1px #AAA;
+
+            > .foto {
+                // Tamanho
+                max-height: $tamanho;
+            }
+        }
+    }
+}

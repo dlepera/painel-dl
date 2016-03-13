@@ -11,7 +11,7 @@ namespace WebSite\Modelo;
 
 use \Geral\Modelo as GeralM;
 
-class TipoDadoContato extends GeralM\EdicaoRegistro{
+class TipoDadoContato extends GeralM\EdicaoRegistro {
     protected $id;
     protected $nome;
     protected $exibicao;
@@ -25,154 +25,122 @@ class TipoDadoContato extends GeralM\EdicaoRegistro{
     public $conf_extensoes_icone = ['png', 'jpg', 'gif', 'bmp'];
 
 
-
-
     /**
      * @return string
      */
-    public function getNome(){
+    public function getNome() {
         return $this->nome;
     }
-
-
 
 
     /**
      * @param string $descr
      */
-    public function setNome($descr){
+    public function setNome($descr) {
         $this->nome = filter_var($descr, FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
     }
-
-
 
 
     /**
      * @return string
      */
-    public function getExibicao(){
+    public function getExibicao() {
         return $this->exibicao;
     }
-
-
 
 
     /**
      * @param string $exibicao
      */
-    public function setExibicao($exibicao){
+    public function setExibicao($exibicao) {
         $this->exibicao = filter_var($exibicao, FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
     }
-
-
 
 
     /**
      * @return mixed
      */
-    public function getIcone(){
+    public function getIcone() {
         return $this->icone;
     }
-
-
 
 
     /**
      * @param mixed $icone
      */
-    public function setIcone($icone){
+    public function setIcone($icone) {
         $this->icone = filter_var($icone, FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
     }
-
-
 
 
     /**
      * @return boolean
      */
-    public function isRedeSocial(){
+    public function isRedeSocial() {
         return (bool)$this->rede_social;
     }
-
-
 
 
     /**
      * @param boolean $rede_social
      */
-    public function setRedeSocial($rede_social){
+    public function setRedeSocial($rede_social) {
         $this->rede_social = filter_var($rede_social, FILTER_VALIDATE_BOOLEAN, ['options' => ['default' => false]]);
     }
-
-
 
 
     /**
      * @return mixed
      */
-    public function getMascara(){
+    public function getMascara() {
         return $this->mascara;
     }
-
-
 
 
     /**
      * @param string $mascara
      */
-    public function setMascara($mascara){
+    public function setMascara($mascara) {
         $this->mascara = filter_var($mascara);
     }
-
-
 
 
     /**
      * @return mixed
      */
-    public function getExpreg(){
+    public function getExpreg() {
         return $this->expreg;
     }
-
-
 
 
     /**
      * @param string $expreg
      */
-    public function setExpreg($expreg){
+    public function setExpreg($expreg) {
         $this->expreg = filter_var($expreg);
     }
-
-
 
 
     /**
      * @return string
      */
-    public function getExemplo(){
+    public function getExemplo() {
         return $this->exemplo;
     }
-
-
 
 
     /**
      * @param string $exemplo
      */
-    public function setExemplo($exemplo){
+    public function setExemplo($exemplo) {
         $this->exemplo = filter_var($exemplo, FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
     }
 
 
-
-
-    public function __construct($pk = null){
+    public function __construct($pk = null) {
         parent::__construct('dl_site_dados_contato_tipos', 'tipo_dado_');
         $this->selecionarPK($pk);
     } // Fim do método __construct
-
-
 
 
     /**
@@ -186,7 +154,7 @@ class TipoDadoContato extends GeralM\EdicaoRegistro{
      * @return mixed
      * @throws \DL3Exception
      */
-    protected function salvar($s = true, array $ci = null, array $ce = null, $ipk = false){
+    protected function salvar($s = true, array $ci = null, array $ce = null, $ipk = false) {
         # Fazer upload da imagem
         $oup = new \Upload('web/uploads/contatos', 'icone');
         $oup->setExtensoes($this->conf_extensoes_icone);
@@ -203,12 +171,10 @@ class TipoDadoContato extends GeralM\EdicaoRegistro{
     } // Fim do método salvar
 
 
-
-
     /**
      * Remover registro do banco de dados
      */
-    protected function remover(){
+    protected function remover() {
         # Remover o ícone
         if (!empty($this->icone)) {
             unlink(".{$this->icone}");

@@ -1,0 +1,106 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'com-icone';
+$_ln: 2.2em;
+$icones: 'inserir' #65bb0e '\ea0a',
+    'editar' orange '\e906',
+    'remover' red '\e9ac',
+    'detalhes' #1291b5 '\e922',
+    'email' #aabbff '\ea85',
+    'bloquear' #9f2626 '\e98f',
+    'desbloquear' #65bb0e '\e990',
+    'voltar' #900 '\e967',
+    'duvida' #069 '\ea09',
+    'publicar' #65bb0e '\e961',
+    'nao-publicar' #BBB '\e960',
+    'lista' #DB4437 '\e9bb',
+    'nova-pasta' #65bb0e '\e931',
+    'configuracoes' #999 '\e994',
+    'menu' #FFF '\e9bd',
+    'minha-conta' #FFF '\e971',
+    'senha' #FFF '\e98d',
+    'logout' #FFF '\ea14',
+
+    // Links de menu
+    'home' #3C90A1 '\e900',
+    'menu-website' #3C90A1 '\e91b',
+    'menu-admin' #3C90A1 '\e976',
+    'menu-desenvolvedor' #3C90A1 '\e978';
+
+// Com ícone -------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Visual
+    display: inline-block;
+
+    &::before {
+        // Visual
+        display: inline-block;
+        border-radius: 50%;
+
+        // Texto
+        font-family: 'icones';
+        text-align: center;
+        line-height: $_ln + .15em;
+        font-size: 1em;
+
+        // Alinhamento
+        vertical-align: middle;
+
+        // Tamanho
+        width: $_ln;
+        height: $_ln;
+
+        // Margens
+        margin-right: .35em;
+
+        // Transição
+        @include _transition(background-color .5s);
+    }
+
+    // Construir os ícones ---------------------------------------------------------------------------------------------- //
+    @each $classe, $cor, $icone in $icones {
+        &.-#{$classe} {
+            // Texto
+            color: $cor;
+        }
+
+        &.-#{$classe}::before {
+            // Texto
+            content: $icone;
+            color: $cor !important;
+            text-indent: 0;
+
+            // Visual
+            background-color: lighten($cor, 45%);
+        }
+
+        &.-#{$classe}:hover::before {
+            // Visual
+            background-color: lighten($cor, 37.5%);
+        }
+    }
+
+    &.-so-icone {
+        // Texto
+        color: transparent !important;
+        text-indent: -9999px;
+        word-break: break-all;
+
+        // Tamanho
+        width: $_ln + ($_ln * .5);
+        height: $_ln;
+
+        // Posicionamento
+        position: relative;
+
+        // Visual
+        display: inline-block;
+
+        &::before {
+            @extend .com-icone::before;
+
+            // Posicionamento
+            position: absolute;
+            left: 0;
+        }
+    }
+}

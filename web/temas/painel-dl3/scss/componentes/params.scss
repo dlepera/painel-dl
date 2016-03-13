@@ -1,0 +1,56 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+
+
+
+// Params ----------------------------------------------------------------------------------------------------------- //
+.-nao-clicavel {
+    // Texto
+    color: #AAA !important;
+}
+
+.-executando {
+    &::after {
+        // Conteúdo
+        content: '\e982';
+
+        // Texto
+        color: darkorange;
+        font: 1.3rem 'icones';
+
+        // Visual
+        display: inline-block;
+
+        // Alinhamento
+        vertical-align: middle;
+
+        // Margens
+        margin-left: .5rem;
+
+        // Animação
+        @include _animation(rotacao 1s infinite linear);
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+
+}

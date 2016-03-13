@@ -1,0 +1,99 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$plugin-nome: '__jQuery-galeriaFotos';
+$plugin-tema: 'galeria3';
+$comp-nome: 'grade-minis';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$plugin-nome}.#{$plugin-tema} {
+    .#{$comp-nome} {
+        $tm-h: 10rem;
+
+        // Tamanho
+        max-width: 100%;
+
+        // Texto
+        white-space: nowrap;
+
+        // Visual
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        > .foto {
+            // Visual
+            display: inline-block;
+
+            // Margens
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+
+            &:not(:first-child) {
+                // Margens
+                margin-left: 1rem;
+            }
+
+            > .imagem {
+                // Visual
+                border: 3px solid #FFF;
+
+                // Tamanho
+                width: auto;
+                height: $tm-h;
+
+                // Transições
+                @include _transition();
+
+                &:hover {
+                    // Visual
+                    cursor: pointer;
+                }
+
+                // Variantes
+                &.-atual {
+                    // Visual
+                    box-shadow: 0 0 1rem rgba(white, .6);
+                }
+            }
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$plugin-nome}.#{$plugin-tema} {
+        .#{$comp-nome} {
+
+        }
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$plugin-nome}.#{$plugin-tema} {
+        .#{$comp-nome} {
+
+        }
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$plugin-nome}.#{$plugin-tema} {
+        .#{$comp-nome} {
+
+        }
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$plugin-nome}.#{$plugin-tema} {
+        .#{$comp-nome} {
+
+        }
+    }
+}

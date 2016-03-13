@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 05/01/2015 17:31:20
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 05/01/2015 17:31:20
  */
 
 if (!isset($params)) {
@@ -18,51 +18,51 @@ if ($params['usar-recaptcha?']): ?>
 <?php endif; ?>
 
 [DL3-CONTEUDO]
-    <form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
+<form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
+    <p class="form-paragr">
+        <?php echo $this->aux_form->campoGeral('texto', 'nome', 'nome', '', TXT_ROTULO_NOME, null, ['required' => 'required']); ?>
+    </p>
+
+    <p class="form-paragr">
+        <?php echo $this->aux_form->campoGeral('email', 'email', 'email', '', TXT_ROTULO_EMAIL, null, ['required' => 'required']); ?>
+    </p>
+
+    <p class="form-paragr">
+        <?php echo $this->aux_form->campoTelefone('telefone', 'fone', null, TXT_ROTULO_FONE, null); ?>
+    </p>
+
+    <?php if ($params['mostrar-assunto?'] && count($params['assuntos']) > 0): ?>
         <p class="form-paragr">
-            <?php echo $this->aux_form->campoGeral('texto', 'nome', 'nome', '', TXT_ROTULO_NOME, null, ['required' => 'required']); ?>
+            <?php echo $this->aux_form->comboSelect('assunto', 'assunto', null, TXT_ROTULO_ASSUNTO, null, ['required' => 'required'],
+                array_merge([['VALOR' => '', 'TEXTO' => TXT_OPCAO_SELECIONE_UMA_OPCAO]], $params['assuntos'])
+            ); ?>
         </p>
+    <?php endif; ?>
 
-        <p class="form-paragr">
-	        <?php echo $this->aux_form->campoGeral('email', 'email', 'email', '', TXT_ROTULO_EMAIL, null, ['required' => 'required']); ?>
-        </p>
-
-        <p class="form-paragr">
-	        <?php echo $this->aux_form->campoTelefone('telefone', 'fone', null, TXT_ROTULO_FONE, null); ?>
-        </p>
-
-        <?php if( $params['mostrar-assunto?'] && count($params['assuntos']) > 0 ): ?>
-            <p class="form-paragr">
-                <?php echo $this->aux_form->comboSelect('assunto', 'assunto', null, TXT_ROTULO_ASSUNTO, null, ['required' => 'required'],
-                    array_merge([['VALOR' => '', 'TEXTO' => TXT_OPCAO_SELECIONE_UMA_OPCAO]], $params['assuntos'])
-                ); ?>
-            </p>
-        <?php endif; ?>
-
-        <p class="form-paragr">
-            <?php echo $this->aux_form->caixaTexto('mensagem', 'mensagem', '', TXT_ROTULO_MENSAGEM, null, ['required' => 'required']); ?>
-        </p>
+    <p class="form-paragr">
+        <?php echo $this->aux_form->caixaTexto('mensagem', 'mensagem', '', TXT_ROTULO_MENSAGEM, null, ['required' => 'required']); ?>
+    </p>
 
 
-        <?php if ($params['usar-recaptcha?']): ?>
-            <div class="g-recaptcha" data-sitekey="<?php echo \DL3::$recaptcha_chave_site; ?>"></div>
-        <?php endif; ?>
+    <?php if ($params['usar-recaptcha?']): ?>
+        <div class="g-recaptcha" data-sitekey="<?php echo \DL3::$recaptcha_chave_site; ?>"></div>
+    <?php endif; ?>
 
-        <p class="form-botoes">
-	        <?php
-	        echo $this->aux_form->botao('enviar-email', TXT_BOTAO_ENVIAR);
-	        echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
-	        ?>
-        </p>
-    </form>
+    <p class="form-botoes">
+        <?php
+        echo $this->aux_form->botao('enviar-email', TXT_BOTAO_ENVIAR);
+        echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
+        ?>
+    </p>
+</form>
 [/DL3-CONTEUDO]
 
 [DL3-SCRIPTS]
 <script>
     //<![CDATA[
-    (function($){
+    (function ($) {
         $('.alt-mask-fone').on('change',
-            { msk8: '<?php echo MASK_TELEFONE_CELULAR_8; ?>', msk9: '<?php echo MASK_TELEFONE_CELULAR_9; ?>' },
+            {msk8: '<?php echo MASK_TELEFONE_CELULAR_8; ?>', msk9: '<?php echo MASK_TELEFONE_CELULAR_9; ?>'},
             alternarMaskFone
         ).trigger('change');
 

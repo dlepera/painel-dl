@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 11/01/2015 15:14:07
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 11/01/2015 15:14:07
  */
 
 namespace WebSite\Controle;
@@ -12,8 +12,8 @@ namespace WebSite\Controle;
 use \Geral\Controle as GeralC;
 use \WebSite\Modelo as WebM;
 
-class TipoDadoContato extends GeralC\PainelDL{
-    public function __construct(){
+class TipoDadoContato extends GeralC\PainelDL {
+    public function __construct() {
         parent::__construct(new WebM\TipoDadoContato(), 'website', TXT_MODELO_TIPODADOCONTATO);
         $this->carregarPost([
             'id'          => FILTER_VALIDATE_INT,
@@ -32,11 +32,12 @@ class TipoDadoContato extends GeralC\PainelDL{
      * Mostrar a lista de registros
      */
     protected function mostrarLista() {
-        $this->listaPadrao('tipo_dado_id AS ' . TXT_LISTA_TITULO_ID . ','
-	        . " CONCAT('<img src=\"" . \DL3::$dir_relativo . "', tipo_dado_icone, '\" class=\"tbl-imagem\" alt/>') AS " . TXT_LISTA_TITULO_ICONE . ','
-            . " CONCAT(tipo_dado_nome, '<br/>', tipo_dado_exibicao) AS '" . TXT_LISTA_TITULO_DESCR . "',"
-            . " ( CASE tipo_dado_rede_social WHEN 0 THEN 'Não' WHEN 1 THEN 'Sim' END ) '" . TXT_LISTA_TITULO_REDE_SOCIAL . "',"
-            . " ( CASE tipo_dado_publicar WHEN 0 THEN 'Não' WHEN 1 THEN 'Sim' END ) AS '" . TXT_LISTA_TITULO_PUBLICADO . "'",
+        $this->listaPadrao(
+            sprintf(static::SQL_CAMPO_COM_ALIAS, 'tipo_dado_id', TXT_LISTA_TITULO_ID) . ',' .
+            sprintf(static::SQL_IMAGEM_HTML, \DL3::$dir_relativo, 'tipo_dado_icone', TXT_LISTA_TITULO_ICONE) . ',' .
+            sprintf(static::SQL_CAMPO_COM_ALIAS, "CONCAT(tipo_dado_nome, '<br/>', tipo_dado_exibicao)", TXT_LISTA_TITULO_DESCR) . ',' .
+            sprintf(static::SQL_CASE_SIM_NAO, 'tipo_dado_rede_social', TXT_LISTA_TITULO_REDE_SOCIAL) . ',' .
+            sprintf(static::SQL_CASE_SIM_NAO, 'tipo_dado_publicar', TXT_LISTA_TITULO_PUBLICADO),
             'tipo_dado_rede_social, tipo_dado_nome', null);
 
         # Visão
@@ -50,21 +51,31 @@ class TipoDadoContato extends GeralC\PainelDL{
         $this->visao->adParam('campos', [
             ['valor' => 'tipo_dado_nome', 'texto' => TXT_ROTULO_DESCR]
         ]);
+        $this->visao->adParam('outros-links', [
+            [
+                'tipo'           => 'lista',
+                'link'           => 'website/dados-para-contato',
+                'texto'          => TXT_LINK_DADOS_PARA_CONTATO,
+                'title'          => null,
+                'mostrar-texto?' => true,
+                'atributos'      => []
+            ]
+        ]);
     } // Fim do método mostrarLista
 
 
     /**
      * Mostrar formulário de inclusão e edição do registro
      *
-     * @param int    $pk  PK do registro a ser selecionado
-     * @param string $mst Nome da página mestra a ser carregada
+     * @param int    $pk        PK do registro a ser selecionado
+     * @param string $pg_mestra Nome da página mestra a ser carregada
      */
-    protected function mostrarForm($pk = null, $mst = null) {
+    protected function mostrarForm($pk = null, $pg_mestra = null) {
         $this->formPadrao('tipo-dado', 'tipos-de-dados/salvar', 'tipos-de-dados/salvar', 'website/tipos-de-dados', $pk);
 
         # Visão
         $this->carregarHTML('comum/visoes/titulo_h2');
-        $this->carregarHTML('form_tipo_dado', $mst);
+        $this->carregarHTML('form_tipo_dado', $pg_mestra);
     } // Fim do método mostrarForm
 
 

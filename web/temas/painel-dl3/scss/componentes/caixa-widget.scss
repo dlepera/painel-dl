@@ -1,0 +1,80 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'caixa-widget';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Visual
+    border: 1px solid lighten($mnnv-cor-fundo, 45%);
+
+    // Posicionamento
+    position: relative;
+
+    // Margens
+    padding: 0 !important;
+
+    > .titulo {
+        // Tamanho
+        width: 100%;
+
+        // Visual
+        background: lighten($mnnv-cor-fundo, 50%);
+
+        // Texto
+        color: lighten($mnnv-cor-fundo, 10%);
+        font-weight: normal;
+        line-height: 2.2em;
+        font-size: 1.1em;
+        text-indent: .7em;
+
+        // Margens
+        margin: 0;
+        padding: 0;
+    }
+
+    > .conteudo {
+        // Tamanho
+        width: 100%;
+
+        // Margens
+        margin: 1rem 0;
+        padding: 0 1rem;
+
+        > .link {
+            // Margens
+            margin-top: 1rem;
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        
+    }
+}

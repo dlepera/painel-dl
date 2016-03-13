@@ -1,0 +1,111 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'form-fotoperfil';
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    $tm: 10rem;
+
+    // Posicionamento
+    position: absolute;
+
+    // Visual
+    display: inline-block;
+
+    // Tamanho
+    width: $tm;
+    height: $tm;
+
+    // Variantes
+    &.-form-usuario {
+        // Posicionamento
+        position: absolute;
+        right: 3rem;
+    }
+
+    > .form-controle {
+        // Posicionamento
+        position: fixed;
+        top: -100%;
+        left: -100%;
+
+        // Visual
+        visibility: hidden;
+    }
+
+    > [for="perfil-foto"] {
+        // Visual
+        display: inline-block;
+
+        &:hover {
+            // Visual
+            cursor: pointer;
+
+            > .mensagem {
+                // Visual
+                opacity: 1;
+            }
+        }
+
+        > .mensagem {
+            // Posicionamento
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+
+            // Visual
+            display: inline-block;
+            opacity: 0;
+
+            // Texto
+            color: #FFF;
+            text-align: center;
+            text-transform: uppercase;
+
+            // Alinhamento
+            vertical-align: middle;
+
+            // Margens
+            padding: 3.5rem .35rem;
+
+            // Visual
+            background: rgba(black, .5);
+            border-radius: 50%;
+
+            // Tamanho
+            width: $tm;
+            height: $tm;
+
+            // Transições
+            @include _transition(all .5s);
+        }
+    }
+}
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+
+    }
+}
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+
+    }
+}
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+
+    }
+}

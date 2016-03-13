@@ -10,7 +10,7 @@
  *  -------
  *  Transformar uma caixa em uma caixa flexivel
  */
-@mixin _flex-box(){
+@mixin flexBox(){
     display: -webkit-flex;
     /* display: -o-flex;
     display: -moz-flex;
@@ -33,7 +33,7 @@
  *  -------
  *  Definir o comportamento dos itens flexiveis
  */
-@mixin _flex-flow($v){
+@mixin flexFlow($v){
     -webkit-flex-flow: $v;
     flex-flow: $v;
 }
@@ -44,7 +44,7 @@
  *  Configurar como o tamanho de um elemento
  *  deve ser configurado
  */
-@mixin _box-sizing($v:border-box){
+@mixin boxSizing($v:border-box){
     -webkit-box-sizing: $v;
     -moz-box-sizing: $v;
     box-sizing: $v;

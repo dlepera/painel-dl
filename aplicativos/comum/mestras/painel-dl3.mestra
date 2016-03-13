@@ -1,0 +1,216 @@
+<?php
+
+# Parâmetros passados para a página
+$params = $this->obterParams();
+
+?>
+
+<!DOCTYPE html>
+<html lang="<?php echo $params['seo:idioma']; ?>">
+<head>
+    <title><?php echo "{$params['titulo']} :: " . \DL3::$titulo; ?></title>
+    <meta charset="<?php echo \DL3::$charset; ?>">
+
+    <!-- Setar a base do HTML -->
+    <base href="<?php echo \DL3::$base_html; ?>"/>
+
+    <!-- Tamanho do dispositivo -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!-- Compatibilidade IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?php echo \DL3::$dir_relativo . \DL3::$dir_imgs . \DL3::$favicon; ?>"/>
+
+    <?php echo \DL3::metaTagsOG($params['titulo'], $params['og:descr']); ?>
+
+    <!-- Aplicar o tema da página -->
+    <?php echo \DL3::carregarTema($params['conf-site']['tema_pagina_mestra']); ?>
+
+    <!-- CSS personalizados -->
+    [DL3-CSS/]
+
+    <!-- <head> Conteúdo personalizado </head> -->
+    [DL3-HEAD/]
+</head>
+<body>
+<!-- Carregando Conteúdo -->
+<div id="dl3-carregando-conteudo" style="
+        position: fixed; top: 0; left: 0; z-index: 3;
+        width: 100%; height: 100%;
+        background: #F4F7FB;
+        text-align: center; font-family: sans-serif;
+        ">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translateY(-75%) translateX(-50%); -webkit-transform: translateY(-75%) translateX(-50%); width: auto;">
+        <img
+            src="<?php echo \DL3::$dir_relativo . \DL3::$dir_temas . $params['conf-site']['tema_diretorio']; ?>/css/imagens/logotipo.png"
+            style="max-height: 60px; margin-bottom: .5rem; background: #FFF; border-radius: 50%; padding: .35rem; border: 1px solid #EEE;"/>
+
+        <p style="color: #6A8397; font-size: large;">
+            Carregando o conteúdo!<br/>
+            Por favor, aguarde...
+        </p>
+
+        <progress id="barra-de-progresso" max="100">Carregando...</progress>
+    </div>
+</div>
+
+<!-- Verificar JavaScript -->
+<noscript class="mostrar-msg -erro"><?php echo TXT_DIVERSOS_JS_DESATIVADO; ?></noscript>
+
+<!-- Verificar versão do IE -->
+<p class="mostrar-msg -erro" id="ie-incompativel" style="display: none;"><?php echo TXT_DIVERSOS_IE_INCOMPATIVEL; ?></p>
+
+<div id="dl3-grid">
+    <nav class="dl3-menu">
+        <a href="javascript:" class="mostrar-menu com-icone -menu -so-icone v-smart v-tablet"></a>
+
+        [DL3-MENU/]
+
+        <?php if ($params['mostrar-filtro-menu?']): ?>
+        <form id="form-filtro-modulos" class="filtro-modulos">
+            <p class="form-paragr">
+                <?php echo $this->aux_form->campoGeral('busca', 'bm', 'bm', '', null /* TXT_ROTULO_BUSCAR_MODULO */, null, ['placeholder' => TXT_ROTULO_BUSCAR_MODULO]); ?>
+            </p>
+
+            <ul id="menu-filtro" class="menu-filtro" style="display:none;">
+                <?php foreach ($params['menu-modulos'] as $mm):
+                    # Obter os sub-módulos
+                    $sm_k = array_keys(preg_grep("~^{$mm['modulo_id']}$~", array_column($params['menu-submodulos'], 'modulo_pai')));
+                    if (count($sm_k) > 0): ?>
+                        <li class="item" style="display:none;">
+                            <ul class="sub-menu">
+                                <?php foreach ($sm_k as $k):
+                                    $sm = $params['menu-submodulos'][$k]; ?>
+                                    <li class="item" style="display:none;">
+                                        <a href="<?php echo $sm['modulo_link']; ?>" class="link com-icone -submodulo">
+                                            <?php echo "{$mm['modulo_nome']} > {$sm['modulo_nome']}"; ?>
+                                        </a>
+
+                                        <?php if (!empty($sm['modulo_descr'])): ?>
+                                            <span class="   descr">
+                                        <?php echo nl2br($sm['modulo_descr']); ?>
+                                    </span>
+                                        <?php endif; ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+                    <?php endif;
+                endforeach; ?>
+            </ul>
+            <?php endif; ?>
+        </form>
+    </nav>
+
+    <header class="dl3-topo">
+        <a href="" class="logotipo"><?php echo \DL3::$titulo; ?></a>
+
+        <ul class="menu-usuario">
+            <li class="item">
+                <a href="javascript:" class="link">
+                    <?php echo $_SESSION['usuario_info_nome'], $params['usr-foto']; ?>
+                </a>
+
+                <ul class="sub-menu">
+                    <?php if ($params['perm-usr-conta?']): ?>
+                        <li class="item">
+                            <a href="admin/usuarios/minha-conta" class="link com-icone -minha-conta">
+                                <?php echo TXT_LINK_MINHA_CONTA; ?>
+                            </a>
+                        </li>
+                    <?php endif;
+
+                    if ($params['perm-usr-senha?']): ?>
+                        <li class="item">
+                            <a href="admin/usuarios/alterar-minha-senha" class="link com-icone -senha">
+                                <?php echo TXT_LINK_ALTERAR_MINHA_SENHA; ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+
+                    <li class="item">
+                        <a href="javascript:" data-ajax="1" data-ajax-msg="<?php echo TXT_AJAX_ENCERRANDO_SESSAO; ?>" data-acao="fazer-logout" class="link com-icone -logout">
+                            <?php echo TXT_LINK_LOGOUT; ?>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+
+    <section class="dl3-conteudo">
+        <h1 class="titulo-h1"><?php echo $params['titulo']; ?></h1>
+
+        [DL3-CONTEUDO/]
+    </section>
+
+    <footer class="dl3-rodape">
+        <?php echo \DL3::$titulo . ' v' . \DL3::$versao . ' &copy; ' . date('Y'); ?>
+        |
+        <a href="home/sobre-o-sistema" class="lk-sobre-sistema"><?php echo TXT_LINK_SOBRE_SISTEMA; ?></a>
+        [DL3-RODAPE/]
+    </footer>
+</div>
+
+<!-- Carregando -->
+<div id="status-ajax" class="status-ajax"></div>
+
+<!-- Javascripts -->
+<script
+    src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>jquery-<?php echo \DL3::$versao_jquery; ?>-min.js"></script>
+<script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>dl-formulario/dl-formulario-2.2.plugin-min.js"></script>
+<script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>dl-framework-min.js"></script>
+<script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>painel-dl-min.js"></script>
+
+<script>
+    //<![CDATA[
+    (function ($) {
+        // Identificar navegador e versão
+        var nav = navegador();
+
+        if (nav.nome === 'Internet Explorer' && parseInt(nav.versao) < 11) {
+            $('#ie-incompativel').removeAttr('style');
+        } // Fim if
+
+        <?php if ($params['mostrar-filtro-menu?']): ?>
+        $('#form-filtro-modulos #bus-bm').on('input', function () {
+            var $th = $(this);
+            var $mf = $('#menu-filtro');
+            var vlr = $th.val();
+
+            if (!(vlr === '' || vlr === false)) {
+                $mf.slideDown('fast');
+            } else {
+                $mf.slideUp('fast');
+            } // Fim if
+
+            $mf.find('> *, .item').css({display: 'none'});
+            $mf.find('.item:contains(' + vlr + ')').css({display: 'block'}).parents('.item').css({display: 'block'});
+        }).on('blur', function () {
+            var $mf = $('#menu-filtro');
+            $mf.slideUp('slow');
+        });
+        <?php endif; ?>
+    })(jQuery);
+
+    $(window).on('load', function () {
+        var $cont = $('#dl3-carregando-conteudo');
+        var $paragr = $cont.find('> div');
+
+        // Pra cima
+        $paragr.animate({top: '+=10%'}, 500, function () {
+            $paragr.animate({top: '-100%'}, 650, function () {
+                $cont.fadeOut(100, function () {
+                    $(this).remove();
+                });
+            });
+        });
+    });
+    //]]>
+</script>
+
+[DL3-SCRIPTS/]
+</body>
+</html>

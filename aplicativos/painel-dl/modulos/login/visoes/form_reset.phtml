@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 07/01/2015 18:34:49
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 07/01/2015 18:34:49
  */
 
-if( !isset($params) ){
-	$params = $this->obterParams();
+if (!isset($params)) {
+    $params = $this->obterParams();
 } // Fim if
 
 $mod = $params['modelo'];
@@ -16,24 +16,24 @@ $mod = $params['modelo'];
 ?>
 
 [DL3-CONTEUDO]
-    <form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
-        <input type="hidden" name="id" value="<?php echo $params['id']; ?>"/>
+<form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
+    <input type="hidden" name="id" value="<?php echo $params['id']; ?>"/>
 
-	    <p class="msg-atencao"><?php printf(TXT_DIVERSOS_AVISO_USUARIO_RESET_SENHA, $params['nome-usuario']); ?></p>
+    <p class="mostrar-msg -atencao"><?php printf(TXT_DIVERSOS_AVISO_USUARIO_RESET_SENHA, $params['nome-usuario']); ?></p>
 
-        <p class="form-paragr">
-            <?php echo $this->aux_form->campoGeral('senha', 'senha_nova', 'senha-nova', null, TXT_ROTULO_SENHA_NOVA, null, ['required' => 'required']); ?>
-        </p>
+    <p class="form-paragr">
+        <?php echo $this->aux_form->campoGeral('senha', 'senha_nova', 'senha-nova', null, TXT_ROTULO_SENHA_NOVA, null, ['required' => 'required']); ?>
+    </p>
 
-        <p class="form-paragr">
-	        <?php echo $this->aux_form->campoGeral('senha', 'senha_nova_conf', 'senha-conf', null, TXT_ROTULO_SENHA_CONF, null, ['required' => 'required']); ?>
-        </p>
+    <p class="form-paragr">
+        <?php echo $this->aux_form->campoGeral('senha', 'senha_nova_conf', 'senha-conf', null, TXT_ROTULO_SENHA_CONF, null, ['required' => 'required']); ?>
+    </p>
 
-        <p class="form-botoes">
-	        <?php
-	        echo $this->aux_form->botao('salvar', TXT_BOTAO_SALVAR);
-	        echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
-	        ?>
-        </p>
-    </form>
+    <p class="form-botoes">
+        <?php
+        echo $this->aux_form->botao('salvar', TXT_BOTAO_SALVAR);
+        echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
+        ?>
+    </p>
+</form>
 [/DL3-CONTEUDO]

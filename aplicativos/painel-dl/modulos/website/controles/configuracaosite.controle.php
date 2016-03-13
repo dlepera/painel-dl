@@ -21,7 +21,12 @@ class ConfiguracaoSite extends GeralC\PainelDL{
             'id'           => FILTER_VALIDATE_INT,
             'tema'         => FILTER_VALIDATE_INT,
             'formato_data' => FILTER_VALIDATE_INT,
-            'email'        => FILTER_VALIDATE_INT
+            'email'        => FILTER_VALIDATE_INT,
+            'album_tema'   => FILTER_SANITIZE_STRING,
+            'album_fotow'  => FILTER_SANITIZE_NUMBER_INT,
+            'album_fotoh'  => FILTER_SANITIZE_NUMBER_INT,
+            'album_miniw'  => FILTER_SANITIZE_NUMBER_INT,
+            'album_minih'  => FILTER_SANITIZE_NUMBER_INT
         ]);
     } // Fim do método __construct
 
@@ -51,9 +56,13 @@ class ConfiguracaoSite extends GeralC\PainelDL{
         $mce = new AdminM\ConfigEmail();
         $lce = $mce->carregarSelect(null, false, 'id', 'titulo');
 
+        # Verificar se o módulo de fotos está ativo
+        $mmd = new DevM\Modulo(7);
+
         # Parâmetros
         $this->visao->adParam('temas', $ltm);
         $this->visao->adParam('formatos-data', $lfd);
         $this->visao->adParam('confs-email', $lce);
+        $this->visao->adParam('albuns-de-fotos?', $mmd->getPublicar());
     } // Fim do método mostrarForm
 } // Fim do Controle ConfiguracaoSite

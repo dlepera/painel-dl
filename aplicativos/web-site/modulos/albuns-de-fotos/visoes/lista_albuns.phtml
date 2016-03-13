@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 03/02/2015 11:35:30
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 03/02/2015 11:35:30
  */
 
 if (!isset($params)) {
@@ -16,23 +16,31 @@ $lista = $params['lista'];
 ?>
 
 [DL3-CONTEUDO]
-    <div class="albuns">
-        <?php
-        if (!count($lista) || $lista === false){
-            echo '<span class="sem-registros">', TXT_DIVERSOS_NENHUM_ALBUM_ENCONTRADO, '</span>';
-        } // Fim if
+<div class="albuns">
+    <?php
+    if (!count($lista) || $lista === false) {
+        echo '<span class="sem-registros">', TXT_DIVERSOS_NENHUM_ALBUM_ENCONTRADO, '</span>';
+    } // Fim if
 
-        foreach ($lista as $l): ?>
-	        <a href="albuns-de-fotos/fotos/<?php echo $l['album_id']; ?>">
-	            <figure class="album-info">
-	                <img src="./<?php echo $l['foto_album_imagem']; ?>" alt="<?php echo $l['album_nome']; ?>" class="album-capa"/>
+    foreach ($lista as $f): ?>
+        <a href="javascript:" data-acao="album-modal"
+            data-acao-param-html="albuns-de-fotos/fotos/<?php echo $f['album_id']; ?>"
+            data-acao-param-pgmestra="vazio">
+            <figure class="album">
+                <?php if (!empty($f['foto_album_mini'])): ?>
+                    <img src="<?php echo \DL3::$dir_relativo . $f['foto_album_mini']; ?>"
+                         alt="<?php echo $f['album_nome']; ?>"
+                         class="capa"/>
+                <?php endif; ?>
 
-	                <figcaption>
-	                    <span class="album-titulo"><?php echo $l['album_nome']; ?></span><br/>
-	                    <span class="album-data"><?php echo \Funcoes::formatarDataHora($l['log_registro_data_criacao'], $params['conf-site']['formato_data_completo']); ?></span>
-	                </figcaption>
-	            </figure>
-	        </a>
-        <?php endforeach; ?>
-    </div>
+                <figcaption class="infos">
+                    <span class="titulo"><?php echo $f['album_nome']; ?></span><br/>
+                    <span class="data">
+                        <?php echo \Funcoes::formatarDataHora($f['log_registro_data'], $params['conf-site']['formato_data_completo']); ?>
+                    </span>
+                </figcaption>
+            </figure>
+        </a>
+    <?php endforeach; ?>
+</div>
 [/DL3-CONTEUDO]

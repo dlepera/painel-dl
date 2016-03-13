@@ -7,7 +7,7 @@
  * @Data       : 14/01/2015 10:13:48
  */
 
-if( !isset($params) ){
+if (!isset($params)) {
     $params = $this->obterParams();
 } // Fim if
 
@@ -17,17 +17,19 @@ if( !isset($params) ){
 <script>
     //<![CDATA[
     $sf = $('#form-<?php echo $params['form-id']; ?>').formulario({
-        depois: function(){
+        depois: function () {
             var url = '<?php echo $params['url-depois']; ?>';
 
-            if (!/^\//.test(url)){
+            if (!/^\//.test(url)) {
                 url = $('base').attr('href') + url;
             } // Fim if
 
             window.location = url;
         },
-        aparencia: { tema: '<?php echo \DL3::$plugin_formulario_tema; ?>', estilo: null }
-    }).on('reset', function(){ history.back(); });
+        aparencia: {tema: '<?php echo \DL3::$plugin_formulario_tema; ?>', estilo: null}
+    }).on('reset', function () {
+        history.back();
+    });
     //]]>
 </script>
 [/DL3-SCRIPTS]

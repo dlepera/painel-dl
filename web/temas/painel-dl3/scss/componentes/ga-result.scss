@@ -1,0 +1,71 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'ga-result';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Visual
+    @include flexBox;
+    @include flexFlow(row wrap);
+
+    > .valor {
+        $tm-flex: 33.33%;
+
+        // Flex
+        @include _flex($tm-flex);
+
+        // Tamanho
+        max-width: $tm-flex;
+
+        // Texto
+        text-align: center;
+
+        > .mes {
+            // Texto
+            color: darkorange;
+            font-size: medium;
+            font-variant: small-caps;
+
+            // Margens
+            margin-bottom: .75rem;
+        }
+
+        > .visitas {
+            // Texto
+            font-size: xx-large;
+            color: #999;
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        
+    }
+}

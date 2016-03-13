@@ -97,3 +97,9 @@ define('TXT_DIVERSOS_CONFIRMAR_ALTERAR_SENHA', 'Você está prestes a alterar a 
 define('TXT_AJAX_BLOQUEANDO_USUARIOS', 'Bloqueando usuário(s)... Por favor, aguarde!');
 define('TXT_AJAX_DESBLOQUEANDO_USUARIOS', 'Desbloqueando usuário(s)... Por favor, aguarde!');
 define('TXT_AJAX_CARREGANDO_CONTEUDO', 'Carregando conteúdo... Por favor, aguarde!');
+
+
+// Módulos ---------------------------------------------------------------------------------------------------------- //
+# -> Usuário
+# -> Erros
+define('ERRO_USUARIO_ALTERSENHA_SENHAS_NAO_COINCIDEM', 'As senhas informadas nos campos <b>Nova senha</b> e <b>Confirmação da nova senha</b> devem ser iguais!');

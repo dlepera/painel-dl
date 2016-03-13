@@ -37,12 +37,15 @@ define('TXT_PAGINA_TITULO_VALORES', 'Valores');
 define('TXT_PAGINA_TITULO_INFOS_INSTITUCIONAIS', 'Informações institucionais');
 define('TXT_PAGINA_TITULO_EDITAR_INSTITUCIONAL', 'Editar informações institucionais');
 define('TXT_PAGINA_TITULO_CONFIGURACAOSITE', 'Configurações do website');
+define('TXT_PAGINA_TITULO_CONFIGURACOES_ALBUNS_DE_FOTOS', 'Configurações dos álbuns de fotos');
 
 
 // Links ------------------------------------------------------------------------------------------------------------ //
 define('TXT_LINK_EDITAR_INFOS_INSTITUCIONAIS', 'Editar as informações institucionais');
 define('TXT_LINK_TIPOS_DADOS', 'Tipos de dados');
 define('TXT_LINK_DOWNLOAD_ARQUIVO_ATUAL', 'Fazer download do arquivo atual');
+define('TXT_LINK_CONFIGURACOES', 'Configurações');
+define('TXT_LINK_DADOS_PARA_CONTATO', 'Dados para contato');
 
 
 // Listas ----------------------------------------------------------------------------------------------------------- //
@@ -74,6 +77,8 @@ define('TXT_LEGENDA_HISTORIA', 'História');
 define('TXT_LEGENDA_MISSAO', 'Missão');
 define('TXT_LEGENDA_VISAO', 'Visão');
 define('TXT_LEGENDA_VALORES', 'Valores');
+define('TXT_LEGENDA_GERAL', 'Geral');
+define('TXT_LEGENDA_ALBUNS_DE_FOTOS', 'Álbuns de Fotos');
 
 # -> Rótulos
 define('TXT_ROTULO_NOME', 'Nome');
@@ -106,6 +111,8 @@ define('TXT_ROTULO_P12', 'Arquivo do OAuth');
 define('TXT_ROTULO_CONFIGURACAO_EMAIL', 'Configuração de e-mail');
 define('TXT_ROTULO_EXEMPLO_PREENCHIMENTO', 'Exemplo de preenchimento');
 define('TXT_ROTULO_EXIBICAO_SITE', 'Exibição no site');
+define('TXT_ROTULO_TAMANHO_FOTOS', 'Tamanho das fotos');
+define('TXT_ROTULO_TAMANHO_MINI', 'Tamanho das miniaturas');
 
 # -> Dicas
 define('MSG_DICA_ALBUMFOTO_CAPA', 'Definir essa foto como a capa do álbum.');
@@ -118,6 +125,8 @@ define('TXT_DICA_WEBSITE_CONFIGURACAO_EMAIL', 'Configuração de e-mail utilizad
 define('TXT_DICA_WEBSITE_FORMATO_DATA', 'O website mostrará todas as datas no formato especificado abaixo.');
 define('TXT_DICA_TIPODADO_EXEMPLO_PREENCHIMENTO', 'Exemplo de preenchimento para esse tipo de dado. Será exibido dentro do campo <b>"Descrição"</b> do dado para contato.');
 define('TXT_DICA_TIPODADO_EXIBICAO_SITE', 'Nome para exibição no site');
+define('TXT_DICA_TAMANHO_FOTOS', 'Representa o tamanho máximo das fotos, em pixels (largura x altura).');
+define('TXT_DICA_TAMANHO_MINI', 'Representa o tamanho máximo das miniaturas, em pixels (largura x altura).');
 
 # -> Exemplos
 
@@ -125,6 +134,7 @@ define('TXT_DICA_TIPODADO_EXIBICAO_SITE', 'Nome para exibição no site');
 
 # -> Botões
 define('TXT_BOTAO_SALVAR_FOTOS', 'Salvar fotos');
+define('TXT_BOTAO_EXCLUIR_FOTO', 'Excluir foto');
 
 
 // Detalhes --------------------------------------------------------------------------------------------------------- //
@@ -141,10 +151,12 @@ define('TXT_DIVERSOS_EMAIL_FALHOU', 'O envio do e-mail falhou');
 define('TXT_DIVERSOS_EMAIL_ERRO_STATUS', 'Erro ao recuperar o status do envio de e-mail.');
 define('TXT_DIVERSOS_CAPA', 'Capa');
 define('TXT_DIVERSOS_GA_ALERTA_UTILIZACAO_MUITOS', '<b>Atenção!</b> A utilização de muitas contas do Google Analytics pode prejudicar o desempenho do site.');
-define('TXT_DIVERSOS_NENHUMA_FOTO', 'Nenhuma foto');
-define('TXT_DIVERSOS_UMA_FOTO', '1 foto');
-define('TXT_DIVERSOS_QTDE_FOTOS', '%d fotos');
+define('TXT_DIVERSOS_QTDE_FOTOS', ' fotos');
 define('TXT_DIVERSOS_CONFIGURACAO_WEBSITE', 'Essas configurações são aplicadas <b>apenas</b> para o website.');
+define('TXT_DIVERSOS_FOTO_SEM_TITULO', 'Foto sem título');
+define('TXT_DIVERSOS_FOTO_SEM_DESCR', 'Foto sem descrição');
+define('TXT_DIVERSOS_MAIS_OPCOES', '+ opções');
+define('TXT_DIVERSOS_NENHUMA_FOTO', 'Nenhuma foto');
 
 
 // Classes ---------------------------------------------------------------------------------------------------------- //

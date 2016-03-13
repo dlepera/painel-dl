@@ -1,0 +1,53 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: dlepera
+ * Date: 11/02/16
+ * Time: 17:53
+ */
+
+if (!isset($params)) {
+    $params = $this->obterParams();
+} // Fim if
+
+?>
+
+[DL3-MENU]
+<ul id="menu-navegacao" class="menu-principal">
+    <li class="item">
+        <a href="" class="link com-icone -home">
+            <?php echo TXT_LINK_HOME; ?>
+        </a>
+    </li>
+
+    <?php foreach ($params['menu-modulos'] as $mm):
+        # Obter os sub-módulos
+        $sm_k = array_keys(preg_grep("~^{$mm['modulo_id']}$~", array_column($params['menu-submodulos'], 'modulo_pai')));
+        if (count($sm_k) > 0): ?>
+            <li class="item">
+                <a href="javascript:"
+                   class="link com-icone -menu-<?php echo strtolower($mm['modulo_nome']); ?>">
+                    <?php echo $mm['modulo_nome']; ?>
+                </a>
+
+                <ul class="sub-menu">
+                    <?php foreach ($sm_k as $k):
+                        $sm = $params['menu-submodulos'][$k]; ?>
+                        <li class="item">
+                            <a href="<?php echo $sm['modulo_link']; ?>" class="link com-icone -submodulo">
+                                <?php echo $sm['modulo_nome']; ?>
+                            </a>
+
+                            <?php if (!empty($sm['modulo_descr'])): ?>
+                                <span class="descr">
+                                            <?php echo nl2br($sm['modulo_descr']); ?>
+                                        </span>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </li>
+        <?php endif;
+    endforeach; ?>
+</ul>
+[/DL3-MENU]

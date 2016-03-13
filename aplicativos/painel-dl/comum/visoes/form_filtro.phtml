@@ -7,7 +7,7 @@
  * @Data       : 07/01/2015 23:32:01
  */
 
-if( !isset($params) ){
+if (!isset($params)) {
     $params = $this->obterParams();
 } // Fim if
 
@@ -15,40 +15,39 @@ if( !isset($params) ){
 
 [DL3-CONTEUDO]
 <form id="form-filtro" method="get" class="form-filtro">
-    <div class="flex-grade">
-        <p class="form-paragr flex-item tres-col">
+    <div class="grade-flexivel">
+        <p class="form-paragr flexitem tres-col">
             <?php echo $this->aux_form->campoGeral('busca', 't', 't', $params['get-t'], TXT_ROTULO_BUSCAR_POR, null, [
                 'placeholder' => TXT_DICA_FORM_FILTRO,
-                'required' => 'required'
+                'required'    => 'required'
             ]); ?>
         </p>
 
         <?php $qc = count($params['campos']);
 
-        if( $qc === 1 ): ?>
+        if ($qc === 1): ?>
             <input type="hidden" name="c" value="<?php echo $params['campos'][0]['valor']; ?>"/>
             <input type="hidden" name="o" value="<?php echo $params['campos'][0]['valor']; ?>"/>
-        <?php elseif( $qc > 1 ): ?>
-            <p class="form-paragr flex-item tres-col">
+        <?php elseif ($qc > 1): ?>
+            <p class="form-paragr flexitem tres-col">
                 <?php echo $this->aux_form->comboSelect('c', 'c', $params['get-c'], TXT_ROTULO_NO_CAMPO, null, [], $params['campos']); ?>
             </p>
 
-            <p class="form-paragr flex-item tres-col">
+            <p class="form-paragr flexitem tres-col">
                 <?php echo $this->aux_form->comboSelect('o', 'o', $params['get-o'], TXT_ROTULO_ORDENAR_POR, null, [], $params['campos']); ?>
             </p>
         <?php endif; ?>
 
-        <p class="form-botoes flex-item tres-col" style="text-align: left;">
-            <br/>
-            <?php if( $params['filtro?'] ): ?>
+        <p class="form-botoes flexitem tres-col">
+            <?php if ($params['filtro?']): ?>
                 <a href="javascript:"
                    onclick="self.location = '<?php echo filter_input(INPUT_SERVER, 'REDIRECT_URL'); ?>';"
-                   class="a-limpar-filtro">
+                   class="limpar">
                     <?php echo TXT_LINK_LIMPAR_FILTRO; ?>
                 </a>
             <?php endif; ?>
 
-            <button type="submit" class="btn-filtrar"><?php echo TXT_BOTAO_FILTRAR; ?></button>
+            <button type="submit" class="botao -filtrar"><?php echo TXT_BOTAO_FILTRAR; ?></button>
         </p>
     </div>
 </form>

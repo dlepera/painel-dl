@@ -1,0 +1,188 @@
+// KeyFrames -------------------------------------------------------------------------------------------------------- //
+@mixin keyFrames($animacao) {
+    @keyframes #{$animacao} {
+        @content;
+    }
+
+    @-webkit-keyframes #{$animacao} {
+        @content;
+    }
+
+    @-moz-keyframes #{$animacao} {
+        @content;
+    }
+
+    @-ms-keyframes #{$animacao} {
+        @content;
+    }
+
+    @-o-keyframes #{$animacao} {
+        @content;
+    }
+
+    @-khtml-keyframes #{$animacao} {
+        @content;
+    }
+}
+
+// Rotação ---------------------------------------------------------------------------------------------------------- //
+@mixin rotacionar {
+    from {
+        // Visual
+        opacity: .3;
+
+        // Transformar
+        @include _transform(scale(0) rotate(0deg));
+    }
+
+    to {
+        // Visual
+        opacity: 1;
+
+        // Transformar
+        @include _transform(scale(1) rotate(-360deg));
+    }
+}
+
+@include keyFrames('rotacionar') {
+    @include rotacionar;
+};
+
+
+// Crescimento ------------------------------------------------------------------------------------------------------ //
+@mixin crescimento {
+    0% {
+        // Transformar
+        @include _transform(scale(0));
+    }
+
+    75% {
+        // Transformar
+        @include _transform(scale(1.2));
+    }
+
+    100% {
+        // Transformar
+        @include _transform(scale(1));
+    }
+}
+
+@include keyFrames('crescimento') {
+    @include crescimento;
+};
+
+
+// Da esquerda para a direita --------------------------------------------------------------------------------------- //
+@mixin esquerdaParaDireita {
+    0% {
+        // Visual
+        opacity: .3;
+
+        // Transformar
+        @include _transform(translateX(-100%));
+    }
+
+    75% {
+        // Visual
+        opacity: 1;
+
+        // Transformar
+        @include _transform(translateX(10%));
+    }
+
+    100% {
+        // Transformar
+        @include _transform(translateX(0));
+    }
+}
+
+@include keyFrames('esquerda-para-direita') {
+    @include esquerdaParaDireita;
+};
+
+
+// Da direita para a esquerda --------------------------------------------------------------------------------------- //
+@mixin direitaParaEsquerda {
+    0% {
+        // Visual
+        opacity: .3;
+
+        // Transformar
+        @include _transform(translateX(100%));
+    }
+
+    75% {
+        // Visual
+        opacity: 1;
+
+        // Transformar
+        @include _transform(translateX(-10%));
+    }
+
+    100% {
+        // Transformar
+        @include _transform(translateX(0));
+    }
+}
+
+@include keyFrames('direita-para-esquerda') {
+    @include direitaParaEsquerda;
+};
+
+
+// De cima para a baixo --------------------------------------------------------------------------------------------- //
+@mixin cimaParaBaixo {
+    0% {
+        // Visual
+        opacity: .3;
+
+        // Transformar
+        @include _transform(translateY(-100%));
+    }
+
+    75% {
+        // Visual
+        opacity: 1;
+
+        // Transformar
+        @include _transform(translateY(10%));
+    }
+
+    100% {
+        // Transformar
+        @include _transform(translateY(0));
+    }
+}
+
+@include keyFrames('cima-para-baixo') {
+    @include cimaParaBaixo;
+};
+
+
+// De baixo para a cima --------------------------------------------------------------------------------------------- //
+@mixin baixoParaCima {
+    0% {
+        // Visual
+        opacity: .3;
+
+        // Transformar
+        @include _transform(translateY(100%));
+    }
+
+    75% {
+        // Visual
+        opacity: 1;
+
+        // Transformar
+        @include _transform(translateY(-10%));
+    }
+
+    100% {
+        // Transformar
+        @include _transform(translateY(0));
+    }
+}
+
+@include keyFrames('baixo-para-cima') {
+    @include baixoParaCima;
+};

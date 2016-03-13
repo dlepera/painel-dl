@@ -12,38 +12,39 @@ namespace Admin\Controle;
 use \Geral\Controle as GeralC;
 use \Admin\Modelo as AdminM;
 
-class ConfigEmail extends GeralC\PainelDL{
-    public function __construct(){
+class ConfigEmail extends GeralC\PainelDL {
+    public function __construct() {
         parent::__construct(new AdminM\ConfigEmail(), 'admin', TXT_MODELO_CONFIGEMAIL);
         $this->carregarPost([
-            'id' => FILTER_VALIDATE_INT,
-            'titulo' => FILTER_SANITIZE_STRING,
-            'host' => FILTER_SANITIZE_STRING,
-            'porta' => FILTER_SANITIZE_NUMBER_INT,
-            'autent' => FILTER_VALIDATE_BOOLEAN,
-            'cripto' => FILTER_SANITIZE_STRING,
-            'conta' => FILTER_SANITIZE_STRING,
-            'senha' => FILTER_SANITIZE_STRING,
-            'de_email' => FILTER_VALIDATE_EMAIL,
-            'de_nome' => FILTER_SANITIZE_STRING,
+            'id'             => FILTER_VALIDATE_INT,
+            'titulo'         => FILTER_SANITIZE_STRING,
+            'host'           => FILTER_SANITIZE_STRING,
+            'porta'          => FILTER_SANITIZE_NUMBER_INT,
+            'autent'         => FILTER_VALIDATE_BOOLEAN,
+            'cripto'         => FILTER_SANITIZE_STRING,
+            'conta'          => FILTER_SANITIZE_STRING,
+            'senha'          => FILTER_SANITIZE_STRING,
+            'de_email'       => FILTER_VALIDATE_EMAIL,
+            'de_nome'        => FILTER_SANITIZE_STRING,
             'responder_para' => FILTER_VALIDATE_EMAIL,
-            'html' => FILTER_VALIDATE_BOOLEAN,
-            'principal' => FILTER_VALIDATE_BOOLEAN,
-            'debug' => FILTER_VALIDATE_BOOLEAN
+            'html'           => FILTER_VALIDATE_BOOLEAN,
+            'principal'      => FILTER_VALIDATE_BOOLEAN,
+            'debug'          => FILTER_VALIDATE_BOOLEAN
         ]);
     } // Fim do método __construct
-
-
 
 
     /**
      * Mostrar a lista de registros
      */
-    protected function mostrarLista(){
-        $this->listaPadrao('config_email_id AS ' . TXT_LISTA_TITULO_ID . ', config_email_titulo AS ' . TXT_LISTA_TITULO . ','
-            . ' config_email_host AS ' . TXT_LISTA_TITULO_HOST . ','
-            . " ( CASE config_email_principal WHEN 0 THEN 'Não' WHEN 1 THEN 'Sim ' END ) AS '" . TXT_LISTA_TITULO_PRINCIPAL . "'",
-            'config_email_titulo', null);
+    protected function mostrarLista() {
+        $this->listaPadrao(
+            sprintf(static::SQL_CAMPO_COM_ALIAS, 'config_email_id', TXT_LISTA_TITULO_ID) . ',' .
+            sprintf(static::SQL_CAMPO_COM_ALIAS, 'config_email_titulo', TXT_LISTA_TITULO) . ',' .
+            sprintf(static::SQL_CAMPO_COM_ALIAS, 'config_email_host', TXT_LISTA_TITULO_HOST) . ',' .
+            sprintf(static::SQL_CASE_SIM_NAO, 'config_email_principal', TXT_LISTA_TITULO_PRINCIPAL),
+            'config_email_titulo', null
+        );
 
         # Visão
         $this->carregarHTML('comum/visoes/form_filtro');
@@ -62,14 +63,12 @@ class ConfigEmail extends GeralC\PainelDL{
     } // Fim do método mostrarLista
 
 
-
-
     /**
      * Mostrar formulário de inclusão e edição do registro
      *
      * @param int $pk PK do registro a ser selecionado
      */
-    protected function mostrarForm($pk = null){
+    protected function mostrarForm($pk = null) {
         $inc = $this->formPadrao('email', 'envio-de-emails/salvar', 'envio-de-emails/salvar', 'admin/envio-de-emails', $pk);
 
         # Visão
@@ -84,8 +83,6 @@ class ConfigEmail extends GeralC\PainelDL{
     } // Fim do método mostrarForm
 
 
-
-
     /**
      * Testar uma determinada configuração de envio de e-mail]
      *
@@ -94,8 +91,8 @@ class ConfigEmail extends GeralC\PainelDL{
      * @return mixed
      * @throws \DL3Exception
      */
-    protected function testar($pk){
-        if( !class_exists('Email') ){
+    protected function testar($pk) {
+        if (!class_exists('Email')) {
             throw new \DL3Exception(sprintf(ERRO_PADRAO_CLASSE_NAO_ENCONTRADA, 'Email'), 1500);
         } // Fim if
 
@@ -110,10 +107,10 @@ class ConfigEmail extends GeralC\PainelDL{
 
         $oe->gravarLog(__CLASS__, $this->modelo->bd_tabela, $this->modelo->id);
 
-        if( !$te ){
+        if (!$te) {
             throw new \DL3Exception(sprintf(ERRO_CONFIGEMAIL_TESTAR, $oe->exibirLog()), 1500);
         } // Fim if
 
-        \Funcoes::mostrarMsg(SUCESSO_CONFIGEMAIL_TESTAR, '__msg-sucesso');
+        \Funcoes::mostrarMsg(SUCESSO_CONFIGEMAIL_TESTAR, '-sucesso');
     } // Fim do método testar
 } // Fim do Controle ConfigEmail

@@ -1,0 +1,157 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'album-de-fotos';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    > .foto {
+        // Visual
+        border: $layout-borda-padrao;
+        border-radius: .8rem;
+
+        // Margens
+        $mg: 1rem;
+        margin: $mg auto;
+        padding: $mg 0;
+
+        // Posicionamento
+        position: relative;
+
+        // Variantes
+        &.-capa {
+            &::before {
+                // Conteúdo
+                content: 'capa';
+
+                // Visual
+                display: inline-block;
+                background: darkorange;
+                border-radius: .7rem;
+
+                // Texto
+                color: #FFF;
+                font-size: 1.5rem;
+
+                // Margens
+                padding: .35rem .75rem;
+
+                // Posicionamento
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+
+        > .infos {
+            // Margens
+            padding: .75rem 1rem;
+
+            [contenteditable] {
+                // Posicionamento
+                position: relative;
+
+                &:focus, &:active {
+                    // Visual
+                    outline: none;
+
+                    &::before, &::after {
+                        // Visual
+                        display: inline-block;
+
+                        // Posicionamento
+                        position: absolute;
+                        top: 50%;
+
+                        // Transformar
+                        @include _transform(translateY(-50%));
+
+                        // Texto
+                        color: #999;
+                        font-size: 1rem;
+                    }
+
+                    &::before {
+                        // Conteúdo
+                        content: '...';
+
+                        // Posicionamento
+                        right: 1rem;
+                    }
+
+                    &::after {
+                        // Conteúdo
+                        content: '\e905';
+
+                        // Texto
+                        font-family: 'icones';
+
+                        // Posicionamento
+                        right: 0;
+                    }
+                }
+            }
+
+            > .titulo {
+                // Visual
+                display: block;
+
+                // Texto
+                font-size: medium;
+                color: $mnnv-cor-fundo;
+
+                // Margens
+                padding: .35rem 0;
+            }
+
+            > .descr {
+                // Visual
+                display: block;
+
+                // Margens
+                padding: .35rem 0;
+            }
+
+            > .lista-opcoes {
+                // Tamanho
+                width: 50%;
+            }
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+        > .foto {
+            > .form-botoes {
+                // Tamanho
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        
+    }
+}

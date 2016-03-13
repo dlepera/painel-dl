@@ -1,72 +1,60 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 08/01/2015 18:14:07
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 08/01/2015 18:14:07
  */
 
 namespace Desenvolvedor\Modelo;
 
 use \Geral\Modelo as GeralM;
 
-class Idioma extends GeralM\EdicaoRegistro{
+class Idioma extends GeralM\EdicaoRegistro {
     protected $id;
-	protected $descr;
-	protected $sigla;
-	protected $publicar = true;
-	protected $delete = false;
-
-
+    protected $descr;
+    protected $sigla;
+    protected $publicar = true;
+    protected $delete = false;
 
 
     /**
      * @return string|null
      */
-    public function getDescr(){
+    public function getDescr() {
         return $this->descr;
     }
-
-
 
 
     /**
      * @param string $descr
      */
-    public function setDescr($descr){
+    public function setDescr($descr) {
         $this->descr = filter_var($descr, FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
     }
-
-
 
 
     /**
      * @return string|null
      */
-    public function getSigla(){
+    public function getSigla() {
         return $this->sigla;
     }
-
-
 
 
     /**
      * @param string $sigla
      */
-    public function setSigla($sigla){
+    public function setSigla($sigla) {
         $this->sigla = filter_var($sigla, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => EXPREG_SIGLA_IDIOMA], 'flags' => FILTER_NULL_ON_FAILURE]);
     }
 
 
-
-
-    public function __construct($pk = null){
+    public function __construct($pk = null) {
         parent::__construct('dl_painel_idiomas', 'idioma_');
         $this->selecionarPK($pk);
     } // Fim do método __construct
-
-
 
 
     /**
@@ -80,7 +68,7 @@ class Idioma extends GeralM\EdicaoRegistro{
      * @return mixed
      * @throws \DL3Exception
      */
-    protected function salvar($s = true, array $ci = null, array $ce = null, $ipk = false){
+    protected function salvar($s = true, array $ci = null, array $ce = null, $ipk = false) {
         /*
          * Não será permitido incluir mais de 1 idioma com a mesma sigla
          */
@@ -89,5 +77,5 @@ class Idioma extends GeralM\EdicaoRegistro{
         } // Fim if
 
         return parent::salvar($s, $ci, $ce, $ipk);
-    }
+    } // Fim do método salvar
 } // Fim do Modelo Idioma

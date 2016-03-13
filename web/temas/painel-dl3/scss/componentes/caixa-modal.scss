@@ -1,0 +1,109 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'caixa-modal';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Posicionamento
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    // Tamanho
+    width: 100%;
+    height: 100%;
+
+    // Visual
+    background: rgba(black, .5);
+
+    > .conteudo {
+        // Posicionamento
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        // Transformar
+        @include _transform(translate(-50%, -50%));
+
+        // Visual
+        overflow-y: auto;
+    }
+
+    > .botaofechar {
+        // Posicionamento
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        // Texto
+        color: #FFF;
+        text-transform: uppercase;
+        font-size: 1.3rem;
+
+        // Visual
+        background: rgba(black, .6);
+        border: none;
+        opacity: .7;
+
+        // Margens
+        padding: .75rem 1.75rem;
+
+        // Transições
+        @include _transition(all .5s);
+
+        &::after {
+            // Texto
+            content: 'X';
+
+            // Visual
+            display: inline-block;
+
+            // Margens
+            margin-left: .5rem;
+        }
+
+        &:hover, &:active, &:focus {
+            // Visual
+            outline: none;
+            cursor: pointer;
+            opacity: 1;
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        > .conteudo {
+            // Tamanho
+            max-width: 80%;
+            max-height: 80%;
+        }
+    }
+}

@@ -45,6 +45,10 @@ Options -Indexes
         AddOutputFilterByType DEFLATE image/gif
         AddOutputFilterByType DEFLATE image/bmp
         AddOutputFilterByType DEFLATE image/x-windows-bmp
+
+        # Ícones
+        AddOutputFilterByType DEFLATE image/icon
+        AddOutputFilterByType DEFLATE image/x-icon
     </filesMatch>
 
     # Correção de BUGs em alguns navegadores

@@ -7,14 +7,14 @@
  * @Data       : 08/01/2015 16:24:44
  */
 
-if( !isset($params) ){
+if (!isset($params)) {
     $params = $this->obterParams();
 } // Fim if
 
 ?>
 
 [DL3-CONTEUDO]
-<?php if( !$params['incluindo'] ): ?>
+<?php if (!$params['incluindo']): ?>
     <p class="log-registro">
         <?php if (!empty($params['dt-inc'])) {
             printf(

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 07/01/2015 14:18:37
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 07/01/2015 14:18:37
  */
 
-if( !isset($params) ){
-	$params = $this->obterParams();
+if (!isset($params)) {
+    $params = $this->obterParams();
 } // Fim if
 
 $mod = $params['modelo'];
@@ -16,31 +16,31 @@ $mod = $params['modelo'];
 ?>
 
 [DL3-CONTEUDO]
-    <?php if( $mod->historia != '' ): ?>
-        <div class="sobre-historia">
-            <h2 class="titulo-h2"><?php echo TXT_PAGINA_TITULO_HISTORIA; ?></h2>
-            <p class="instit-historia"><?php echo nl2br($mod->historia); ?></p>
-        </div>
-    <?php endif;
+<?php if ($mod->historia != ''): ?>
+    <div class="sobre-historia">
+        <h2 class="titulo-h2"><?php echo TXT_PAGINA_TITULO_HISTORIA; ?></h2>
+        <p class="instit-historia"><?php echo nl2br($mod->historia); ?></p>
+    </div>
+<?php endif;
 
-    if( $mod->missao != '' ): ?>
-        <div class="sobre-missao">
-            <h2 class="titulo-h2"><?php echo TXT_PAGINA_TITULO_MISSAO; ?></h2>
-            <p class="instit-missao"><?php echo nl2br($mod->missao); ?></p>
-        </div>
-    <?php endif;
+if ($mod->missao != ''): ?>
+    <div class="sobre-missao">
+        <h2 class="titulo-h2"><?php echo TXT_PAGINA_TITULO_MISSAO; ?></h2>
+        <p class="instit-missao"><?php echo nl2br($mod->missao); ?></p>
+    </div>
+<?php endif;
 
-    if( $mod->visao != '' ): ?>
-        <div class="sobre-visao">
-		    <h2 class="titulo-h2"><?php echo TXT_PAGINA_TITULO_VISAO; ?></h2>
-	        <p class="instit-visao"><?php echo nl2br($mod->visao); ?></p>
-        </div>
-    <?php endif;
+if ($mod->visao != ''): ?>
+    <div class="sobre-visao">
+        <h2 class="titulo-h2"><?php echo TXT_PAGINA_TITULO_VISAO; ?></h2>
+        <p class="instit-visao"><?php echo nl2br($mod->visao); ?></p>
+    </div>
+<?php endif;
 
-    if( $mod->valores != '' ): ?>
-	    <div class="sobre-valores">
-		    <h2 class="titulo-h2"><?php echo TXT_PAGINA_TITULO_VALORES; ?></h2>
-		    <p class="instit-valores"><?php echo nl2br($mod->valores); ?></p>
-	    </div>
-    <?php endif; ?>
+if ($mod->valores != ''): ?>
+    <div class="sobre-valores">
+        <h2 class="titulo-h2"><?php echo TXT_PAGINA_TITULO_VALORES; ?></h2>
+        <p class="instit-valores"><?php echo nl2br($mod->valores); ?></p>
+    </div>
+<?php endif; ?>
 [/DL3-CONTEUDO]

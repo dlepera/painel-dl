@@ -17,41 +17,43 @@ use \Geral\Controle as GeralC;
 use \Admin\Modelo as AdminM;
 use \Desenvolvedor\Modelo as DevM;
 
-class Usuario extends GeralC\PainelDL{
-    public function __construct(){
+class Usuario extends GeralC\PainelDL {
+    public function __construct() {
         parent::__construct(new AdminM\Usuario(), 'admin', TXT_MODELO_USUARIO);
         $this->carregarPost([
-            'id' => FILTER_VALIDATE_INT,
-            'info_grupo' => FILTER_VALIDATE_INT,
-            'info_nome' => FILTER_SANITIZE_STRING,
-            'info_email' => FILTER_VALIDATE_EMAIL,
-            'info_telefone' => FILTER_SANITIZE_STRING,
-            'info_sexo' => FILTER_SANITIZE_STRING,
-            'info_login' => FILTER_SANITIZE_STRING,
-            'info_senha' => FILTER_DEFAULT,
-            'info_senha_conf' => FILTER_DEFAULT,
-            'pref_idioma' => FILTER_VALIDATE_INT,
-            'pref_tema' => FILTER_VALIDATE_INT,
-            'pref_formato_data' => FILTER_VALIDATE_INT,
+            'id'                 => FILTER_VALIDATE_INT,
+            'info_grupo'         => FILTER_VALIDATE_INT,
+            'info_nome'          => FILTER_SANITIZE_STRING,
+            'info_email'         => FILTER_VALIDATE_EMAIL,
+            'info_telefone'      => FILTER_SANITIZE_STRING,
+            'info_sexo'          => FILTER_SANITIZE_STRING,
+            'info_login'         => FILTER_SANITIZE_STRING,
+            'info_senha'         => FILTER_DEFAULT,
+            'info_senha_conf'    => FILTER_DEFAULT,
+            'pref_idioma'        => FILTER_VALIDATE_INT,
+            'pref_tema'          => FILTER_VALIDATE_INT,
+            'pref_formato_data'  => FILTER_VALIDATE_INT,
             'pref_num_registros' => FILTER_VALIDATE_INT,
-            'pref_exibir_id' => FILTER_VALIDATE_BOOLEAN,
-            'pref_filtro_menu' => FILTER_VALIDATE_BOOLEAN,
-            'conf_reset' => FILTER_VALIDATE_BOOLEAN,
-            'conf_bloq' => FILTER_VALIDATE_BOOLEAN
+            'pref_exibir_id'     => FILTER_VALIDATE_BOOLEAN,
+            'pref_filtro_menu'   => FILTER_VALIDATE_BOOLEAN,
+            'conf_reset'         => FILTER_VALIDATE_BOOLEAN,
+            'conf_bloq'          => FILTER_VALIDATE_BOOLEAN
         ]);
     } // Fim do método __construct
-
-
 
 
     /**
      * Mostrar a lista de registros
      */
-    protected function mostrarLista(){
-        $this->listaPadrao('usuario_id AS ' . TXT_LISTA_TITULO_ID . ', usuario_info_nome AS ' . TXT_LISTA_TITULO_NOME . ',' .
-            " usuario_info_email AS '" . TXT_LISTA_TITULO_EMAIL . "', grupo_usuario_descr AS '" . TXT_LISTA_TITULO_GRUPO . "',"
-            . " ( CASE usuario_conf_bloq WHEN 0 THEN 'Não' WHEN 1 THEN 'Sim' END ) AS '" . TXT_LISTA_TITULO_BLOQUEADO . "'",
-            'usuario_info_nome, usuario_info_sexo', null);
+    protected function mostrarLista() {
+        $this->listaPadrao(
+            sprintf(static::SQL_CAMPO_COM_ALIAS, 'usuario_id', TXT_LISTA_TITULO_ID) . ',' .
+            sprintf(static::SQL_CAMPO_COM_ALIAS, 'usuario_info_nome', TXT_LISTA_TITULO_NOME) . ',' .
+            sprintf(static::SQL_CAMPO_COM_ALIAS, 'usuario_info_email', TXT_LISTA_TITULO_EMAIL) . ',' .
+            sprintf(static::SQL_CAMPO_COM_ALIAS, 'grupo_usuario_descr', TXT_LISTA_TITULO_GRUPO) . ',' .
+            sprintf(static::SQL_CASE_SIM_NAO, 'usuario_conf_bloq', TXT_LISTA_TITULO_BLOQUEADO),
+            'usuario_info_nome, usuario_info_sexo', null
+        );
 
         # Visão
         $this->carregarHTML('comum/visoes/form_filtro');
@@ -70,18 +72,14 @@ class Usuario extends GeralC\PainelDL{
     } // Fim do método mostrarLista
 
 
-
-
     /**
      * Minha conta
      *
      * Mostrar as informações do usuário logado
      */
-    protected function minhaConta(){
+    protected function minhaConta() {
         $this->mostrarForm($_SESSION['usuario_id'], '');
     } // Fim do método mostrarForm
-
-
 
 
     /**
@@ -90,7 +88,7 @@ class Usuario extends GeralC\PainelDL{
      * @param int    $pk PK do registro a ser selecionado
      * @param string $rd URL para onde será redirecionado depois do salvamento do registro
      */
-    protected function mostrarForm($pk = null, $rd = 'admin/usuarios'){
+    protected function mostrarForm($pk = null, $rd = 'admin/usuarios') {
         $inc = $this->formPadrao('usuario', 'usuarios/salvar', 'usuarios/salvar', empty($rd) ? 'admin/usuarios' : $rd, $pk);
 
         # Visão
@@ -112,7 +110,7 @@ class Usuario extends GeralC\PainelDL{
         if (!$inc) {
             # Grupo de usuário
             $mgu = new AdminM\GrupoUsuario($this->modelo->info_grupo);
-            $this->visao->adParam('grupo-descr', $mgu->descr);
+            $this->visao->adParam('grupo-descr', $mgu->getDescr());
         } // Fim if( !$inc )
 
         # Parâmetros
@@ -128,12 +126,10 @@ class Usuario extends GeralC\PainelDL{
     } // Fim do método minhaConta
 
 
-
-
     /**
      * Mostrar o formulário para alteração de senhas desse usuário
      */
-    protected function formAlterarSenha(){
+    protected function formAlterarSenha() {
         $this->formPadrao('senha', null, 'usuarios/alterar-senha-usuario', 'admin/usuarios/minha-conta', $_SESSION['usuario_id']);
 
         # Visão
@@ -145,12 +141,10 @@ class Usuario extends GeralC\PainelDL{
     } // Fim do método formAlterarSenha
 
 
-
-
     /**
      * Executar a ação de alterar a senha do usuário
      */
-    protected function alterarSenha(){
+    protected function alterarSenha() {
         # Obter as senhas informadas
         $sn = filter_input(INPUT_POST, 'senha_nova');
         $sc = filter_input(INPUT_POST, 'senha_nova_conf');
@@ -162,10 +156,8 @@ class Usuario extends GeralC\PainelDL{
         $this->modelo->selecionarPK($_SESSION['usuario_id']);
         $this->modelo->alterarSenha($sn, $sc, $sa);
 
-        \Funcoes::mostrarMsg(SUCESSO_USUARIO_ALTERARSENHA, '__msg-sucesso');
+        \Funcoes::mostrarMsg(SUCESSO_USUARIO_ALTERARSENHA, '-sucesso');
     } // Fim do método alterarSenha
-
-
 
 
     /**
@@ -175,33 +167,42 @@ class Usuario extends GeralC\PainelDL{
      *
      * @throws \DL3Exception
      */
-    protected function bloquear($vlr){
+    protected function bloquear($vlr) {
         $tid = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY);
 
-        if( !isset($tid) ){
+        if (!isset($tid)) {
             throw new \DL3Exception(MSG_PADRAO_NENHUM_REGISTRO_SELECIONADO, 1404);
-        } // Fim if( !isset($tid) )
+        } // Fim if
 
         # Quantidade total de registros e quantidade excluída
         $qt = count($tid);
         $qe = 0;
 
-        foreach( $tid as $id ){
+        foreach ($tid as $id) {
             $this->modelo->selecionarPK($id);
             $this->modelo->conf_bloq = $vlr;
-            $qe = $this->modelo->salvar();
+            $qe = $this->modelo->salvar(true, ['usuario_id', 'usuario_conf_bloq']);
         } // Fim foreach
 
         $vlr == 1
-            ? \Funcoes::mostrarMsg(!$qe? ERRO_USUARIO_BLOQUEAR : sprintf($qe == 1 ? SUCESSO_USUARIO_BLOQUEAR_UM : SUCESSO_USUARIO_BLOQUEAR_VARIOS, $qe, $qt), !$qe ? '__msg-erro' : '__msg-sucesso')
-            : \Funcoes::mostrarMsg(!$qe ? ERRO_USUARIO_DESBLOQUEAR : sprintf($qe == 1 ? SUCESSO_USUARIO_DESBLOQUEAR_UM : SUCESSO_USUARIO_DESBLOQUEAR_VARIOS, $qe, $qt), !$qe ? '__msg-erro' : '__msg-sucesso');
+            ? \Funcoes::mostrarMsg(!$qe ? ERRO_USUARIO_BLOQUEAR : sprintf($qe == 1 ? SUCESSO_USUARIO_BLOQUEAR_UM : SUCESSO_USUARIO_BLOQUEAR_VARIOS, $qe, $qt), !$qe ? '-erro' : '-sucesso')
+            : \Funcoes::mostrarMsg(!$qe ? ERRO_USUARIO_DESBLOQUEAR : sprintf($qe == 1 ? SUCESSO_USUARIO_DESBLOQUEAR_UM : SUCESSO_USUARIO_DESBLOQUEAR_VARIOS, $qe, $qt), !$qe ? '-erro' : '-sucesso');
     } // Fim do método bloquear
 
 
-
-
-    protected function salvarFoto(){
+    protected function salvarFoto() {
         $this->modelo->salvarFoto();
-        \Funcoes::mostrarMsg(SUCESSO_USUARIOS_SALVAR_FOTO, '__msg-sucesso');
+        \Funcoes::mostrarMsg(SUCESSO_USUARIOS_SALVAR_FOTO, '-sucesso');
     } // Fim do método salvarFoto
+
+
+    /**
+     * Obter o caminho da fotos de perfil
+     *
+     * @param int $id ID do usuário
+     */
+    public function caminhoFoto($id) {
+        $this->modelo->selecionarPK(filter_var($id, FILTER_VALIDATE_INT));
+        echo json_encode(['foto' => \DL3::$dir_relativo . $this->modelo->perfil_foto]);
+    } // Fim do método caminhoFoto
 } // Fim do Controle Usuario

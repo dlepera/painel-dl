@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 07/01/2015 18:34:49
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 07/01/2015 18:34:49
  */
 
-if( !isset($params) ){
-	$params = $this->obterParams();
+if (!isset($params)) {
+    $params = $this->obterParams();
 } // Fim if
 
 $mod = $params['modelo'];
@@ -16,67 +16,68 @@ $mod = $params['modelo'];
 ?>
 
 [DL3-CONTEUDO]
-    <form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>" enctype="multipart/form-data">
-        <?php if( !$params['incluindo'] ): ?>
+<form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>"
+      enctype="multipart/form-data">
+    <?php if (!$params['incluindo']): ?>
         <input type="hidden" name="id" value="<?php echo $mod->id; ?>"/>
-        <?php endif; ?>
+    <?php endif; ?>
 
-        <fieldset class="form-grupo">
-            <legend class="form-legenda"><?php echo TXT_LEGENDA_TIPO_DADO; ?></legend>
-
-            <p class="form-paragr">
-                <?php echo $this->aux_form->campoGeral('texto', 'nome', 'nome', $mod->nome, TXT_ROTULO_NOME, null, [
-                    'maxlength' => 30,
-                    'required' => 'required'
-                ]); ?>
-            </p>
-
-            <p class="form-paragr">
-                <?php echo $this->aux_form->campoGeral('texto', 'exibicao', 'exibicao', $mod->exibicao, TXT_ROTULO_EXIBICAO_SITE, TXT_DICA_TIPODADO_EXIBICAO_SITE, [
-                    'maxlength' => 30
-                ]); ?>
-            </p>
-
-            <p class="form-paragr">
-	            <?php echo $this->aux_form->arquivoUpload('icone', 'icone', TXT_ROTULO_ICONE, [], implode(', ', $mod->conf_extensoes_icone)); ?>
-
-                <?php if( $mod->icone != '' ): ?>
-                    <figure class="mostrar-icone">
-                        <img src="..<?php echo $mod->icone; ?>" alt=""/>
-                    </figure>
-                <?php endif; ?>
-            </p>
-
-            <p class="form-paragr">
-	            <?php echo $this->aux_form->chkSimNao('rede_social', 'rede-social', TXT_ROTULO_REDE_SOCIAL, null, $mod->rede_social ? ' CHECKED' : ''); ?>
-            </p>
-        </fieldset>
-
-        <fieldset class="form-grupo">
-            <legend class="form-legenda"><?php echo TXT_LEGENDA_OPCOES_AVANCADAS; ?></legend>
-
-            <p class="form-paragr">
-	            <?php echo $this->aux_form->campoGeral('texto', 'mascara', 'mascara', $mod->mascara, TXT_ROTULO_MASCARA, TXT_DICA_TIPODADO_MASCARA); ?>
-            </p>
-
-            <p class="form-paragr">
-	            <?php echo $this->aux_form->campoGeral('texto', 'expreg', 'expreg', $mod->expreg, TXT_ROTULO_EXPREG, TXT_DICA_TIPODADO_EXPREG); ?>
-            </p>
-
-            <p class="form-paragr">
-                <?php echo $this->aux_form->campoGeral('texto', 'exemplo', 'exemplo', $mod->exemplo, TXT_ROTULO_EXEMPLO_PREENCHIMENTO, TXT_DICA_TIPODADO_EXEMPLO_PREENCHIMENTO); ?>
-            </p>
-        </fieldset>
+    <fieldset class="form-grupo">
+        <legend class="form-legenda"><?php echo TXT_LEGENDA_TIPO_DADO; ?></legend>
 
         <p class="form-paragr">
-	        <?php echo $this->aux_form->chkSimNao('publicar', 'publicar', TXT_ROTULO_PUBLICAR, null, $mod->publicar ? ' CHECKED' : ''); ?>
+            <?php echo $this->aux_form->campoGeral('texto', 'nome', 'nome', $mod->nome, TXT_ROTULO_NOME, null, [
+                'maxlength' => 30,
+                'required'  => 'required'
+            ]); ?>
         </p>
 
-        <p class="form-botoes">
-            <?php
-            echo $this->aux_form->botao('salvar', TXT_BOTAO_SALVAR);
-            echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
-            ?>
+        <p class="form-paragr">
+            <?php echo $this->aux_form->campoGeral('texto', 'exibicao', 'exibicao', $mod->exibicao, TXT_ROTULO_EXIBICAO_SITE, TXT_DICA_TIPODADO_EXIBICAO_SITE, [
+                'maxlength' => 30
+            ]); ?>
         </p>
-    </form>
+
+        <p class="form-paragr">
+            <?php echo $this->aux_form->arquivoUpload('icone', 'icone', TXT_ROTULO_ICONE, [], implode(', ', $mod->conf_extensoes_icone)); ?>
+
+            <?php if ($mod->icone != ''): ?>
+                <figure class="mostrar-imagem -grande">
+                    <img src="<?php echo \DL3::$dir_relativo . $mod->icone; ?>" class="imagem" alt=""/>
+                </figure>
+            <?php endif; ?>
+        </p>
+
+        <p class="form-paragr">
+            <?php echo $this->aux_form->chkSimNao('rede_social', 'rede-social', TXT_ROTULO_REDE_SOCIAL, null, $mod->rede_social ? ' CHECKED' : ''); ?>
+        </p>
+    </fieldset>
+
+    <fieldset class="form-grupo">
+        <legend class="form-legenda"><?php echo TXT_LEGENDA_OPCOES_AVANCADAS; ?></legend>
+
+        <p class="form-paragr">
+            <?php echo $this->aux_form->campoGeral('texto', 'mascara', 'mascara', $mod->mascara, TXT_ROTULO_MASCARA, TXT_DICA_TIPODADO_MASCARA); ?>
+        </p>
+
+        <p class="form-paragr">
+            <?php echo $this->aux_form->campoGeral('texto', 'expreg', 'expreg', $mod->expreg, TXT_ROTULO_EXPREG, TXT_DICA_TIPODADO_EXPREG); ?>
+        </p>
+
+        <p class="form-paragr">
+            <?php echo $this->aux_form->campoGeral('texto', 'exemplo', 'exemplo', $mod->exemplo, TXT_ROTULO_EXEMPLO_PREENCHIMENTO, TXT_DICA_TIPODADO_EXEMPLO_PREENCHIMENTO); ?>
+        </p>
+    </fieldset>
+
+    <p class="form-paragr">
+        <?php echo $this->aux_form->chkSimNao('publicar', 'publicar', TXT_ROTULO_PUBLICAR, null, $mod->publicar ? ' CHECKED' : ''); ?>
+    </p>
+
+    <p class="form-botoes">
+        <?php
+        echo $this->aux_form->botao('salvar', TXT_BOTAO_SALVAR);
+        echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
+        ?>
+    </p>
+</form>
 [/DL3-CONTEUDO]

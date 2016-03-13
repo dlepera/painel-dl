@@ -1,0 +1,135 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'dl3-menu';
+
+
+// Menu ------------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Posicionamento
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    // Flex
+    @include flexBox;
+
+    // Tamanho
+    width: 100%;
+
+    // Visual
+    background: $mnnv-cor-fundo;
+    box-shadow: 0 0 1rem rgba(black, .3);
+}
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+        $tm-mostrar-menu: 30%;
+        $tm-filtro-modulos: 100% - $tm-mostrar-menu;
+
+        > .mostrar-menu {
+            // Flex
+            @include _flex($tm-mostrar-menu);
+
+            // Tamanho
+            width: $tm-mostrar-menu;
+        }
+
+        > .filtro-modulos {
+            // Flex
+            @include _flex($tm-filtro-modulos);
+
+            // Tamanho
+            max-width: $tm-filtro-modulos;
+        }
+    }
+}
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+        $tm-mostrar-menu: 50%;
+        $tm-filtro-modulos: 100% - $tm-mostrar-menu;
+
+        > .mostrar-menu {
+            // Flex
+            @include _flex($tm-mostrar-menu);
+
+            // Tamanho
+            width: $tm-mostrar-menu;
+        }
+
+        > .filtro-modulos {
+            // Flex
+            @include _flex($tm-filtro-modulos);
+
+            // Tamanho
+            max-width: $tm-filtro-modulos;
+        }
+    }
+}
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+        $tm-linha: 5rem;
+
+        // Tamanho
+        height: $tm-linha;
+
+        > .menu-principal {
+            // Posicionamento
+            z-index: 2;
+        }
+
+        > .mostrar-menu {
+            height: $tm-linha !important;
+            
+            // Visual
+            display: inline-block;
+
+            // Texto
+            line-height: $tm-linha;
+
+            &::before {
+                // Visual
+                background: none !important;
+
+                // Texto
+                line-height: $tm-linha !important;
+                font-size: 2rem !important;
+            }
+
+            &:hover {
+                & + .menu-principal {
+                    // Posicionamento
+                    left: 0;
+                }
+            }
+        }
+    }
+}
+
+// Desktops --------------------------------------------------------------------------------------------------------- //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        $tm-menu-principal: 80%;
+        $tm-filtro-modulos: 100% - $tm-menu-principal;
+
+        // Tamanho
+        height: 4rem;
+
+        > .menu-principal {
+            // Flex
+            @include _flex($tm-menu-principal);
+        }
+
+        > .filtro-modulos {
+            // Flex
+            @include _flex($tm-filtro-modulos);
+
+            // Tamanho
+            max-width: $tm-filtro-modulos;
+        }
+    }
+}

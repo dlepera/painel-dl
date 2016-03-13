@@ -114,6 +114,12 @@ $this->rotas['^usuarios/desbloquear-usuarios$'] = [
     'vlr'       =>  0
 ];
 
+$this->rotas['^usuarios/foto/\d+$'] = [
+    'controle' => 'Usuario',
+    'acao'     => 'caminhoFoto',
+    'params'   => '/-/-/:id'
+];
+
 
 
 // Configuração de envio de e-mails --------------------------------------------------------------------------------- //

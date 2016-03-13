@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 07/01/2015 18:34:49
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 07/01/2015 18:34:49
  */
 
-if( !isset($params) ){
-	$params = $this->obterParams();
+if (!isset($params)) {
+    $params = $this->obterParams();
 } // Fim if
 
 $mod = $params['modelo'];
@@ -16,32 +16,32 @@ $mod = $params['modelo'];
 ?>
 
 [DL3-CONTEUDO]
-    <form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
-        <?php if( !$params['incluindo'] ): ?>
+<form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
+    <?php if (!$params['incluindo']): ?>
         <input type="hidden" name="id" value="<?php echo $mod->id; ?>"/>
-        <?php endif; ?>
+    <?php endif; ?>
 
-        <p class="form-paragr">
-	        <?php echo $this->aux_form->campoGeral('texto', 'descr', 'descr', $mod->descr, TXT_ROTULO_DESCRICAO, null, ['required' => 'required']); ?>
-        </p>
+    <p class="form-paragr">
+        <?php echo $this->aux_form->campoGeral('texto', 'descr', 'descr', $mod->descr, TXT_ROTULO_DESCRICAO, null, ['required' => 'required']); ?>
+    </p>
 
-        <p class="form-paragr">
-	        <?php echo $this->aux_form->campoGeral('texto', 'sigla', 'sigla', $mod->sigla, TXT_ROTULO_SIGLA, null, [
-		        'pattern' => \Funcoes::expregForm(EXPREG_SIGLA_IDIOMA),
-                'placeholder' => TXT_EXEMPLO_SIGLA,
-                'required' => 'required'
-	        ]); ?>
-        </p>
+    <p class="form-paragr">
+        <?php echo $this->aux_form->campoGeral('texto', 'sigla', 'sigla', $mod->sigla, TXT_ROTULO_SIGLA, null, [
+            'pattern'     => \Funcoes::expregForm(EXPREG_SIGLA_IDIOMA),
+            'placeholder' => TXT_EXEMPLO_SIGLA,
+            'required'    => 'required'
+        ]); ?>
+    </p>
 
-        <p class="form-paragr">
-	        <?php echo $this->aux_form->chkSimNao('publicar', 'publicar', TXT_ROTULO_PUBLICAR, null, $mod->publicar ? ' CHECKED' : ''); ?>
-        </p>
+    <p class="form-paragr">
+        <?php echo $this->aux_form->chkSimNao('publicar', 'publicar', TXT_ROTULO_PUBLICAR, null, $mod->publicar ? ' CHECKED' : ''); ?>
+    </p>
 
-        <p class="form-botoes">
-            <?php
-            echo $this->aux_form->botao('salvar', TXT_BOTAO_SALVAR);
-            echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
-            ?>
-        </p>
-    </form>
+    <p class="form-botoes">
+        <?php
+        echo $this->aux_form->botao('salvar', TXT_BOTAO_SALVAR);
+        echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
+        ?>
+    </p>
+</form>
 [/DL3-CONTEUDO]

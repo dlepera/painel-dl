@@ -1,0 +1,87 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: dlepera
+ * Date: 11/02/16
+ * Time: 17:53
+ */
+
+if (!isset($params)) {
+    $params = $this->obterParams();
+} // Fim if
+
+?>
+
+[DL3-CONTEUDO]
+<div class="album-de-fotos grade-flexivel">
+    <?php if (!$params['qtde-fotos']) {
+        echo '<span class="mostrar-msg -info">', TXT_DIVERSOS_NENHUMA_FOTO, '</span>';
+    } // Fim if
+
+    foreach ($params['fotos'] as $foto): ?>
+        <form id="editar-foto-<?php echo $foto['foto_album_id']; ?>" method="post" action="website/albuns-de-fotos/salvar-foto" class="form-foto foto<?php echo $foto['foto_album_capa'] == 1 ? ' -capa' : ''; ?> flexitem seis-col grade-flexivel">
+            <input type="hidden" name="id" value="<?php echo $foto['foto_album_id']; ?>"/>
+            <input type="hidden" name="titulo" value="<?php echo $foto['foto_album_titulo']; ?>"/>
+            <input type="hidden" name="descr" value="<?php echo $foto['foto_album_descr']; ?>"/>
+
+            <div class="mostrar-imagem flexitem seis-col">
+                <img src="<?php echo \DL3::$dir_relativo . $foto['foto_album_mini']; ?>" class="imagem" alt=""/>
+            </div>
+
+            <div class="infos flexitem seis-col">
+                <span class="titulo" contenteditable="true"><?php echo $foto['TITULO']; ?></span>
+                <span class="descr" contenteditable="true"><?php echo nl2br($foto['DESCR']); ?></span>
+
+                <div class="lista-opcoes">
+                    <span class="rotulo"><?php echo TXT_DIVERSOS_MAIS_OPCOES; ?></span>
+
+                    <ul class="opcoes">
+                        <li class="item">
+                            <input type="checkbox" id="chk-capa-<?php echo $foto['foto_album_id']; ?>" name="capa" class="opcao"<?php echo $foto['foto_album_capa'] ? ' CHECKED' : ''; ?>/>
+                            <label for="chk-capa-<?php echo $foto['foto_album_id']; ?>"><?php echo TXT_ROTULO_CAPA; ?></label>
+                        </li>
+
+                        <li class="item">
+                            <input type="checkbox" id="chk-publicar-<?php echo $foto['foto_album_id']; ?>" name="publicar" class="opcao"<?php echo $foto['foto_album_publicar'] ? ' CHECKED' : ''; ?>/>
+                            <label for="chk-publicar-<?php echo $foto['foto_album_id']; ?>"><?php echo TXT_ROTULO_PUBLICAR; ?></label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-botoes flexitem doze-col">
+                <?php echo $this->aux_form->botao('excluir-registro', TXT_BOTAO_EXCLUIR_FOTO, [
+                    'data-acao-param-form' => "#editar-foto-{$foto['foto_album_id']}",
+                    'data-acao-param-executar' => "website/albuns-de-fotos/excluir-fotos"
+                ]); ?>
+                <?php echo $this->aux_form->botao('salvar', TXT_BOTAO_SALVAR); ?>
+            </div>
+        </form>
+    <?php endforeach; ?>
+</div>
+[/DL3-CONTEUDO]
+
+[DL3-SCRIPTS]
+<script>
+    //<![CDATA[
+    (function ($) {
+        $('.form-foto').formulario({
+            aparencia: { tema: '<?php echo \DL3::$plugin_formulario_tema; ?>', estilo: null }
+        });
+
+        $('[contenteditable]')
+            .on('input.__pagina', function () {
+                var $this = $(this);
+                var $campo = $(':input[name="' + $this.attr('class') + '"]');
+                var desconsiderar = ['<?php echo TXT_DIVERSOS_FOTO_SEM_TITULO; ?>', '<?php echo TXT_DIVERSOS_FOTO_SEM_DESCR; ?>'];
+
+                $campo.val(
+                    $.inArray($this.text(), desconsiderar) === -1
+                        ? $this.html()
+                        : ''
+                );
+            });
+    })(jQuery);
+    //]]>
+</script>
+[/DL3-SCRIPTS]

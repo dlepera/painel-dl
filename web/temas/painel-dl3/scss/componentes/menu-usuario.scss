@@ -1,0 +1,110 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'menu-usuario';
+$sm-fundo-cor: rgba(black, .75);
+
+// Menu de usuário -------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Posicionamento
+    position: relative;
+
+    > .item {
+        > .link {
+            // Visual
+            display: inline-block;
+
+            // Texto
+            line-height: 2.5rem;
+            color: #069;
+
+            // Margens
+            margin-bottom: .5rem;
+
+            > .foto-perfil {
+                // Margens
+                margin-left: .5rem;
+            }
+        }
+
+        &:hover > .sub-menu {
+            // Visual
+            display: block;
+        }
+
+        > .sub-menu {
+            // Visual
+            background: $sm-fundo-cor;
+            border-radius: 8px;
+            display: none;
+
+            // Margens
+            padding: 1rem;
+
+            // Posicionamento
+            position: absolute;
+            right: 0;
+
+            &::before {
+                @include _triangulo-cima($sm-fundo-cor, 5px, 5px);
+
+                // Conteúdo
+                content: '';
+
+                // Posicionamento
+                position: absolute;
+                top: 0;
+                right: 1.5rem;
+
+                // Transformar
+                @include _transform(translateY(-100%));
+            }
+
+            > .item {
+                > .link {
+                    // Texto
+                    color: #FFF;
+
+                    &::before {
+                        // Visual
+                        background: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+        > .item {
+            > .sub-menu {
+                // Tamanho
+                width: 60vw;
+            }
+        }
+    }
+}
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+        > .item {
+            > .sub-menu {
+                // Tamanho
+                width: 30vw;
+            }
+        }
+    }
+}
+
+// Desktops --------------------------------------------------------------------------------------------------------- //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        > .item {
+            > .sub-menu {
+                // Tamanho
+                width: 15vw;
+            }
+        }
+    }
+}

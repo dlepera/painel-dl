@@ -1,0 +1,16 @@
+// Rotação 360 ------------------------------------------------------------------------------------------------------ //
+@mixin rotacao {
+    from {
+        @include _transform(rotate(0deg));
+    }
+
+    to {
+        @include _transform(rotate(360deg));
+    }
+}
+
+@-webkit-keyframes rotacao { @include rotacao; }
+@-moz-keyframes rotacao { @include rotacao; }
+@-o-keyframes rotacao { @include rotacao; }
+@-ms-keyframes rotacao { @include rotacao; }
+@keyframes rotacao { @include rotacao; }

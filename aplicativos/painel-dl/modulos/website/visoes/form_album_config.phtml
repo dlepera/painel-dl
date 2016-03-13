@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 07/01/2015 18:34:49
+ */
+
+if (!isset($params)) {
+    $params = $this->obterParams();
+} // Fim if
+
+$mod = $params['modelo'];
+
+?>
+
+[DL3-CONTEUDO]
+<form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
+    <input type="hidden" name="id" value="<?php echo $mod->id; ?>"/>
+
+    <p class="form-paragr">
+        <?php echo $this->aux_form->campoGeral('texto', 'album_tema', 'album-tema', $mod->album_tema, TXT_ROTULO_TEMA, null, [
+            'maxlength' => 100, 'required' => 'required'
+        ]); ?>
+    </p>
+
+    <p class="form-paragr">
+        <span class="form-rotulo"><?php echo TXT_ROTULO_TAMANHO_FOTOS; ?>:</span><br/>
+        <span class="form-dica"><?php echo TXT_DICA_TAMANHO_FOTOS; ?></span><br/>
+        <?php echo $this->aux_form->campoGeral('numero', 'album_fotow', 'album-fotow', $mod->album_fotow, null, null, [
+            'min' => 100, 'max' => 800, 'required' => 'required'
+        ]), ' x ',
+        $this->aux_form->campoGeral('numero', 'album_fotoh', 'album-fotoh', $mod->album_fotoh, null, null, [
+            'min' => 100, 'max' => 800, 'required' => 'required'
+        ]);
+        ?>
+    </p>
+
+    <p class="form-paragr">
+        <span class="form-rotulo"><?php echo TXT_ROTULO_TAMANHO_MINI; ?>:</span><br/>
+        <span class="form-dica"><?php echo TXT_DICA_TAMANHO_MINI; ?></span><br/>
+        <?php echo $this->aux_form->campoGeral('numero', 'album_miniw', 'album-miniw', $mod->album_miniw, null, null, [
+            'min' => 20, 'max' => 400, 'required' => 'required'
+        ]), ' x ',
+        $this->aux_form->campoGeral('numero', 'album_minih', 'album-minih', $mod->album_minih, null, null, [
+            'min' => 20, 'max' => 400, 'required' => 'required'
+        ]);
+        ?>
+    </p>
+
+    <p class="form-botoes">
+        <?php
+        echo $this->aux_form->botao('salvar', TXT_BOTAO_SALVAR);
+        echo $this->aux_form->botao('cancelar', TXT_BOTAO_CANCELAR);
+        ?>
+    </p>
+</form>
+[/DL3-CONTEUDO]

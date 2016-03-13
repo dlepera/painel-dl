@@ -1,0 +1,156 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'menu-principal';
+
+// Menu principal --------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    > .item {
+        > .link {
+            // Texto
+            color: #FFF;
+            line-height: 4rem;
+
+            // Visual
+            display: inline-block;
+
+            // Tamanho
+            width: 100%;
+            height: 100%;
+        }
+
+        > .sub-menu {
+            // Visual
+            background: #FFF;
+
+            > .item {
+                > .link {
+                    // Texto
+                    color: orange;
+                    font-size: 1.4rem;
+                    line-height: 3.5rem;
+
+                    // Visual
+                    display: block;
+                }
+
+                > .descr {
+                    // Texto
+                    color: #999;
+                }
+            }
+        }
+    }
+}
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+        // Visual
+        background: $mnnv-cor-fundo;
+        box-shadow: 0 0 10px rgba(black, .3);
+        overflow-y: auto;
+
+        // Tamanho
+        height: 100vh;
+
+        // Posicionamento
+        position: fixed;
+        top: 0;
+        left: -100%;
+
+        // Transições
+        @include _transition(left .5s);
+
+        > .item {
+            > .link {
+                // Margens
+                padding-left: .5rem;
+            }
+
+            > .sub-menu {
+                // Margens
+                padding: 1rem;
+            }
+        }
+    }
+}
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+        // Tamanho
+        width: 80vw;
+    }
+}
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+        // Tamanho
+        width: 40vw;
+    }
+}
+
+// Desktops --------------------------------------------------------------------------------------------------------- //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        // Flex
+        @include flexBox;
+
+        > .item {
+            @include _flex(auto);
+
+            > .link {
+                // Texto
+                text-align: center;
+            }
+
+            &:hover {
+                // Visual
+                background: #FFF;
+
+                > .link {
+                    // Texto
+                    color: orange;
+                }
+
+                > .sub-menu {
+                    // Flex
+                    @include flexBox;
+                }
+            }
+
+            > .sub-menu {
+                // Flex
+                @include flexFlow(row wrap);
+
+                // Posicionamento
+                position: absolute;
+                top: 100%;
+                left: 0;
+
+                // Tamanho
+                width: 100%;
+
+                // Visual
+                display: none;
+                border-bottom: $layout-borda-padrao;
+
+                // Margens
+                padding: 1rem 3rem;
+
+                > .item {
+                    $tm: 33.33%;
+
+                    // Flex
+                    @include _flex($tm);
+
+                    // Tamanho
+                    max-width: $tm;
+
+                    // Margens
+                    padding: 0 1rem;
+                }
+            }
+        }
+    }
+}

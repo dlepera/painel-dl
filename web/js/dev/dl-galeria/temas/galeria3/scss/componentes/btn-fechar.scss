@@ -1,0 +1,49 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$plugin-nome: '__jQuery-galeriaFotos';
+$plugin-tema: 'galeria3';
+$comp-nome: 'btn-fechar';
+
+
+// Componente ------------------------------------------------------------------------------------------------------- //
+.#{$plugin-nome}.#{$plugin-tema} {
+    .#{$comp-nome} {
+        // Posicionamento
+        position: fixed;
+        top: 0;
+        right: 0;
+        
+        // Visual
+        background: rgba(black, .5);
+        border: none;
+        opacity: .5;
+
+        // Texto
+        text-transform: uppercase;
+        color: #FFF;
+
+        // Margens
+        padding: 1rem 2rem;
+
+        // Transições
+        @include _transition(opacity .3s);
+
+        &::after {
+            // Conteúdo
+            content: 'X';
+
+            // Margens
+            margin-left: .35rem;
+        }
+
+        &:hover {
+            // Visual
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        &:focus {
+            // Visual
+            outline: none;
+        }
+    }
+}

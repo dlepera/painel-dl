@@ -1,0 +1,303 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$plugin-nome: '__jQuery-galeriaFotos';
+$plugin-tema: 'galeria3';
+$comp-nome: 'grade-fotos';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$plugin-nome}.#{$plugin-tema} {
+    .#{$comp-nome} {
+        // Tamanho
+        width: 100%;
+
+        // Posicionamento
+        position: relative;
+
+        > .foto {
+            // Tamanho
+            width: 100%;
+            height: 70vh;
+
+            // Visual
+            display: block;
+
+            // Posicionamento
+            position: relative;
+
+            &:not(:first-child) {
+                // Visual
+                display: none;
+            }
+
+            > .imagem {
+                // Visual
+                border: .5rem solid #FFF;
+            }
+
+            > .infos {
+                // Tamanho
+                width: 100%;
+
+                // Margens
+                padding: 0 2vw;
+
+                > .titulo {
+                    // Texto
+                    color: #AAA;
+                    font-size: large;
+
+                    // Margens
+                    margin-bottom: 1rem;
+                    padding-bottom: .35rem;
+
+                    // Visual
+                    border-bottom: 1px solid #444;
+                }
+
+                > .descr {
+                    // Texto
+                    color: #FFF;
+                }
+            }
+        }
+
+        > .naveg {
+            // Texto
+            text-align: center;
+
+            > .link {
+                $tm: 4rem;
+
+                // Visual
+                display: inline-block;
+
+                // Texto
+                color: transparent;
+
+                // Visual
+                opacity: .5;
+
+                // Posicionamento
+                position: fixed;
+                top: 35%;
+                z-index: 2;
+
+                // Tamanho
+                width: $tm;
+                height: $tm;
+
+                // Transformações
+                @include _transform(translateY(-50%));
+
+                // Transições
+                @include _transition(opacity .5s);
+
+                &::before {
+                    // Texto
+                    font: 2rem 'icones';
+                    color: #FFF;
+                    line-height: $tm;
+
+                    // Visual
+                    display: inline-block;
+                    border-radius: 50%;
+                    background: rgba(black, .2);
+
+                    // Tamanho
+                    width: $tm;
+                    height: $tm;
+                }
+
+                &:hover {
+                    // Visual
+                    opacity: 1;
+                }
+
+                // Variantes
+                &.-primeira {
+                    // Visual
+                    display: none;
+
+                    &::before {
+                        // Conteúdo
+                        content: '\ea21';
+                    }
+                }
+
+                &.-anterior {
+                    &::before {
+                        // Conteúdo
+                        content: '\ea23';
+                    }
+                }
+
+                &.-proxima {
+                    &::before {
+                        // Conteúdo
+                        content: '\ea24';
+                    }
+                }
+
+                &.-ultima {
+                    // Visual
+                    display: none;
+
+                    &::before {
+                        // Conteúdo
+                        content: '\ea22';
+                    }
+                }
+            }
+        }
+
+        > .indic {
+            // Texto
+            text-align: center;
+
+            > .link {
+                $tm: 1rem;
+                $cor-fundo: #3C90A1;
+                $cor-borda: #FFF;
+
+                // Visual
+                display: inline-block;
+                border-radius: 50%;
+                border: 2px solid $cor-borda;
+                background: $cor-fundo;
+
+                // Tamanho
+                width: $tm;
+                height: $tm;
+
+                // Texto
+                color: transparent;
+
+                // Transições
+                @include _transition();
+
+                &:not(:first-child) {
+                    // Margens
+                    margin-left: 1rem;
+                }
+
+                // Variantes
+                &.-atual {
+                    // Visual
+                    background: $cor-borda;
+
+                    // Transformações
+                    @include _transform(scale(1.2));
+                }
+            }
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$plugin-nome}.#{$plugin-tema} {
+        .#{$comp-nome} {
+
+        }
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$plugin-nome}.#{$plugin-tema} {
+        .#{$comp-nome} {
+            > .foto {
+                > .imagem {
+                    // Tamanho
+                    max-width: 100%;
+
+                    // Visual
+                    display: block;
+
+                    // Margens
+                    margin: auto;
+                }
+
+                > .infos {
+                    // Visual
+                    display: block;
+
+                    // Margens
+                    margin-top: 1rem;
+                }
+            }
+
+            > .naveg {
+                > .link {
+                    // Variantes
+                    &.-anterior {
+                        // Posicionamento
+                        left: 2vw;
+                    }
+
+                    &.-proxima {
+                        // Posicionamento
+                        right: 2vw;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$plugin-nome}.#{$plugin-tema} {
+        .#{$comp-nome} {
+
+        }
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$plugin-nome}.#{$plugin-tema} {
+        .#{$comp-nome} {
+            > .foto {
+                > .imagem {
+                    // Tamanho
+                    max-width: 50%;
+
+                    // Visual
+                    display: inline-block;
+
+                    // Alinhamento
+                    vertical-align: top;
+                }
+
+                > .infos {
+                    // Tamanho
+                    max-width: 50%;
+                    height: 100%;
+
+                    // Visual
+                    display: inline-block;
+                }
+            }
+
+            > .naveg {
+                > .link {
+                    // Variantes
+                    &.-anterior {
+                        // Posicionamento
+                        left: 5vw;
+                    }
+
+                    &.-proxima {
+                        // Posicionamento
+                        right: 5vw;
+                    }
+                }
+            }
+        }
+    }
+}

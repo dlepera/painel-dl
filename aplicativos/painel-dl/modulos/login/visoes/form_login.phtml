@@ -1,34 +1,64 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 07/01/2015 18:34:49
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 07/01/2015 18:34:49
  */
 
-if( !isset($params) ){
-	$params = $this->obterParams();
+if (!isset($params)) {
+    $params = $this->obterParams();
 } // Fim if
 
 ?>
 
 [DL3-CONTEUDO]
-    <form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
-        <p class="form-paragr">
-	        <?php echo $this->aux_form->campoGeral('texto', 'login', 'login', '', TXT_ROTULO_LOGIN, null, ['required' => 'required']); ?>
-        </p>
+<form id="form-<?php echo $params['form-id']; ?>" method="post" action="<?php echo $params['form-action']; ?>">
+    <p class="form-paragr">
+        <?php echo $this->aux_form->campoGeral('texto', 'login', 'login', '', TXT_ROTULO_LOGIN, null, ['required' => 'required']); ?>
+    </p>
 
-        <p class="form-paragr">
-	        <?php echo $this->aux_form->campoGeral('senha', 'senha', 'senha', '', TXT_ROTULO_SENHA, null, ['required' => 'required']); ?>
-        </p>
+    <p class="form-paragr">
+        <?php echo $this->aux_form->campoGeral('senha', 'senha', 'senha', '', TXT_ROTULO_SENHA, null, ['required' => 'required']); ?>
+    </p>
 
-        <p class="form-botoes">
-            <?php echo $this->aux_form->botao('entrar', TXT_BOTAO_ENTRAR); ?>
+    <p class="form-botoes">
+        <?php echo $this->aux_form->botao('entrar', TXT_BOTAO_ENTRAR); ?>
 
-            <a href="login/esqueci-minha-senha" class="com-icone ico-duvida ico-esqueci-senha">
-                <?php echo TXT_LINK_ESQUECI_MINHA_SENHA; ?>
-            </a>
-        </p>
-    </form>
+        <a href="login/esqueci-minha-senha" class="com-icone -duvida">
+            <?php echo TXT_LINK_ESQUECI_MINHA_SENHA; ?>
+        </a>
+    </p>
+</form>
 [/DL3-CONTEUDO]
+
+[DL3-SCRIPTS]
+<script>
+    //<![CDATA[
+    (function ($) {
+        $('#form-<?php echo $params['form-id']; ?>').formulario({
+            botoes_msg: {
+                '-sucesso': [
+                    {
+                        texto: 'Atualizar a página',
+                        classe: '-com-destaque',
+                        funcao: function () { window.location.reload(); },
+                        padrao: true
+                    }
+                ],
+
+                '-erro': [
+                    {
+                        texto: 'Fechar',
+                        classe: '-com-destaque',
+                        padrao: true
+                    }
+                ]
+            },
+            aparencia: { tema: '<?php echo \DL3::$plugin_formulario_tema; ?>', estilo: null }
+        }, false);
+    })(jQuery);
+    //]]>
+</script>
+[/DL3-SCRIPTS]

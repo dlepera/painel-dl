@@ -1,0 +1,41 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: dlepera
+ * Date: 11/02/16
+ * Time: 17:53
+ */
+
+if (!isset($params)) {
+    $params = $this->obterParams();
+} // Fim if
+
+?>
+
+[DL3-MENU]
+<ul class="menu-principal">
+    <li class="item">
+        <a href="" class="link com-icone -home">
+            <?php echo TXT_LINK_HOME; ?>
+        </a>
+    </li>
+
+    <li class="item">
+        <a href="sobre" class="link com-icone -sobre">
+            <?php echo TXT_LINK_SOBRE; ?>
+        </a>
+    </li>
+
+    <li class="item">
+        <a href="albuns-de-fotos" class="link com-icone -fotos">
+            <?php echo TXT_LINK_ALBUNS_FOTOS; ?>
+        </a>
+    </li>
+
+    <li class="item">
+        <a href="contato" class="link com-icone -contato">
+            <?php echo TXT_LINK_CONTATO; ?>
+        </a>
+    </li>
+</ul>
+[/DL3-MENU]

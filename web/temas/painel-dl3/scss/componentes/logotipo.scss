@@ -1,0 +1,30 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'logotipo';
+
+
+// Topo ------------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Texto
+    font-family: 'logotipo';
+    color: #6a8397;
+
+    // Visual
+    display: inline-block;
+    background: url('imagens/logotipo.png') no-repeat left center;
+    background-size: contain;
+
+    // Margens
+    padding: .75rem 0 .75rem 5rem;
+
+    &::after {
+        // Conteúdo
+        content: 'Gerenciador de Conteúdo';
+
+        // Texto
+        font: 1.2rem sans-serif;
+        color: #BBB;
+
+        // Visual
+        display: block;
+    }
+}

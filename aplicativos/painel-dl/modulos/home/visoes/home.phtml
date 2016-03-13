@@ -1,118 +1,119 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 05/01/2015 15:34:08
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 05/01/2015 15:34:08
  */
 
-if( !isset($params) ){
-	$params = $this->obterParams();
+if (!isset($params)) {
+    $params = $this->obterParams();
 } // Fim if
 
 ?>
 
 [DL3-CONTEUDO]
-    <div class="widgets flex-grade">
-        <div class="widget hm-usuario flex-item seis-col">
-            <h2 class="wg-titulo"><?php echo TXT_WIDGET_TITULO_MINHA_CONTA; ?></h2>
+<div class="grade-flexivel">
+    <div class="caixa-widget hm-usuario flexitem seis-col">
+        <h2 class="titulo"><?php echo TXT_WIDGET_TITULO_MINHA_CONTA; ?></h2>
 
-            <p class="wg-conteudo">
-                <?php echo TXT_ROTULO_NOME .": {$_SESSION['usuario_info_nome']}"; ?><br/>
-                <?php echo TXT_ROTULO_EMAIL .": {$_SESSION['usuario_info_email']}"; ?><br/>
-                <?php echo TXT_ROTULO_LOGIN .": {$_SESSION['usuario_info_login']}"; ?><br/>
-                <?php echo TXT_ROTULO_GRUPO .": {$_SESSION['grupo_usuario_descr']}"; ?><br/>
-                <?php echo TXT_ROTULO_ULTIMO_LOGIN .': '. \Funcoes::formatarDataHora($_SESSION['usuario_ultimo_login'], $_SESSION['formato_data_completo']); ?><br/>
+        <div class="conteudo">
+            <p>
+                <?php echo TXT_ROTULO_NOME . ": {$_SESSION['usuario_info_nome']}"; ?><br/>
+                <?php echo TXT_ROTULO_EMAIL . ": {$_SESSION['usuario_info_email']}"; ?><br/>
+                <?php echo TXT_ROTULO_LOGIN . ": {$_SESSION['usuario_info_login']}"; ?><br/>
+                <?php echo TXT_ROTULO_GRUPO . ": {$_SESSION['grupo_usuario_descr']}"; ?><br/>
+                <?php echo TXT_ROTULO_ULTIMO_LOGIN . ': ' . \Funcoes::formatarDataHora($_SESSION['usuario_ultimo_login'], $_SESSION['formato_data_completo']); ?>
             </p>
 
-            <p class="wg-conteudo">
-                <a href="admin/usuarios/minha-conta" class="wg-link com-icone ico-editar">
-                    <?php echo TXT_LINK_EDITAR_DADOS; ?>
-                </a>
-            </p>
-        </div>
-
-        <div class="widget hm-contatos flex-item seis-col">
-            <h2 class="wg-titulo"><?php echo TXT_RELATORIO_TITULO_CONTATOS; ?></h2>
-            <?php echo $params['rel-contatos']; ?>
-
-            <p class="wg-conteudo">
-                <a href="website/contatos-recebidos" class="wg-link com-icone ico-lista">
-                    <?php echo TXT_LINK_TODOS_CONTATOS; ?>
-                </a>
-            </p>
-        </div>
-
-        <div class="widget hm-analytics flex-item seis-col">
-            <h2 class="wg-titulo"><?php echo TXT_RELATORIO_TITULO_ACESSOS_MENSAIS; ?></h2>
-
-	        <?php if( $params['mostrar-acessos?'] ): 1; // Utilizado apenas para a IDE não acusar erro de sintaxe nesse IF ?>
-	            <!-- p class="msg-atencao wg-conteudo">As estatísticas do Google Analytics estão temporáriamente fora de funcionamento.</p -->
-	            <ul id="ga" class="wg-conteudo">
-	                <li class="ga-valor atras-2">
-	                    <h3><?php echo TXT_DIVERSOS_MES; ?></h3>
-	                    <div class="visitas"></div>
-	                </li>
-
-	                <li class="ga-valor atras-1">
-	                    <h3><?php echo TXT_DIVERSOS_MES; ?></h3>
-	                    <div class="visitas"></div>
-	                </li>
-
-	                <li class="ga-valor atual">
-	                    <h3><?php echo TXT_DIVERSOS_MES; ?></h3>
-	                    <div class="visitas"></div>
-	                </li>
-	            </ul>
-	        <?php else: ?>
-		        <p class="wg-conteudo"><?php echo TXT_DIVERSOS_NENHUMA_CONTA_GOOGLE_ANALYTICS; ?></p>
-	        <?php endif; ?>
-
-            <p class="wg-conteudo">
-                <a href="website/google-analytics" class="wg-link com-icone ico-lista">
-                    <?php echo TXT_LINK_CONFIGURACOES_GOOGLE_ANALYTICS; ?>
-                </a>
-            </p>
+            <a href="admin/usuarios/minha-conta" class="link com-icone -editar">
+                <?php echo TXT_LINK_EDITAR_DADOS; ?>
+            </a>
         </div>
     </div>
+
+    <div class="caixa-widget hm-contatos flexitem seis-col">
+        <h2 class="titulo"><?php echo TXT_RELATORIO_TITULO_CONTATOS; ?></h2>
+
+        <div class="conteudo">
+            <?php echo $params['rel-contatos']; ?>
+
+            <a href="website/contatos-recebidos" class="link com-icone -lista">
+                <?php echo TXT_LINK_TODOS_CONTATOS; ?>
+            </a>
+        </div>
+    </div>
+
+    <div class="caixa-widget hm-analytics flexitem seis-col">
+        <h2 class="titulo"><?php echo TXT_RELATORIO_TITULO_ACESSOS_MENSAIS; ?></h2>
+
+        <?php if ($params['mostrar-acessos?']): ?>
+            <!-- p class="mostrar-msg -atencao conteudo">As estatísticas do Google Analytics estão temporáriamente fora de funcionamento.</p -->
+            <ul id="ga" class="ga-result conteudo">
+                <li class="valor -atras-2">
+                    <h3 class="mes"><?php echo TXT_DIVERSOS_MES; ?></h3>
+                    <div class="visitas"></div>
+                </li>
+
+                <li class="valor -atras-1">
+                    <h3 class="mes"><?php echo TXT_DIVERSOS_MES; ?></h3>
+                    <div class="visitas"></div>
+                </li>
+
+                <li class="valor -atual">
+                    <h3 class="mes"><?php echo TXT_DIVERSOS_MES; ?></h3>
+                    <div class="visitas"></div>
+                </li>
+            </ul>
+        <?php else: ?>
+            <p class="conteudo"><?php echo TXT_DIVERSOS_NENHUMA_CONTA_GOOGLE_ANALYTICS; ?></p>
+        <?php endif; ?>
+
+        <p class="conteudo">
+            <a href="website/google-analytics" class="link com-icone -lista">
+                <?php echo TXT_LINK_CONFIGURACOES_GOOGLE_ANALYTICS; ?>
+            </a>
+        </p>
+    </div>
+</div>
 [/DL3-CONTEUDO]
 
 [DL3-SCRIPTS]
 <script>
     //<![CDATA[
-    function GoogleAnalytics(dt_inicio, dt_fim, dimensao, $objeto){
+    function GoogleAnalytics(dt_inicio, dt_fim, dimensao, $objeto) {
         $.ajax({
-            url     : 'home/google-analytics/acessos/' + dt_inicio + '/' + dt_fim + '/' + dimensao,
+            url: 'home/google-analytics/acessos/' + dt_inicio + '/' + dt_fim + '/' + dimensao,
             dataType: 'json',
-            success : function(json){
-                $objeto.find('h3').html($objeto.find('h3').html() +' '+ json[0].dimensao);
-                $objeto.find('.visitas').html(json[0].visitas);
+            success: function (json) {
+                $objeto.find('> .mes').html($objeto.find('> .mes').html() + ' ' + json[0].dimensao);
+                $objeto.find('> .visitas').html(json[0].visitas);
             },
-            beforeSend: function(){
+            beforeSend: function () {
                 $(document.createElement('img')).css({
                     /* Tamanho */
                     width: 'auto',
                     height: '20px'
-                }).attr({ src: '<?php echo \DL3::$dir_relativo . \DL3::$dir_temas . 'painel-dl3/css/imagens/loading-min.gif'; ?>' }).appendTo($objeto.find('> .visitas'));
+                }).attr({src: '<?php echo \DL3::$dir_relativo . \DL3::$dir_temas . 'painel-dl3/css/imagens/loading-min.gif'; ?>'}).appendTo($objeto.find('> .visitas'));
             }
         });
     }
 
     <?php if( $params['mostrar-acessos?'] ): ?>
-        (function($){
-	        var $ga = $('#ga');
+    (function ($) {
+        var $ga = $('#ga');
 
-	        // Acessos mensais
-	        // Mês atual
-	        GoogleAnalytics('<?php echo date('Y-m-01'); ?>', '<?php echo date('Y-m-t'); ?>', 'month', $ga.find('> .atual'));
+        // Acessos mensais
+        // Mês atual
+        GoogleAnalytics('<?php echo date('Y-m-01'); ?>', '<?php echo date('Y-m-t'); ?>', 'month', $ga.find('> .-atual'));
 
-	        // Mês passado
-	        GoogleAnalytics('<?php echo date('Y-m-01', strtotime('-1 month')); ?>', '<?php echo date('Y-m-t', strtotime('-1 month')); ?>', 'month', $ga.find('> .atras-1'));
+        // Mês passado
+        GoogleAnalytics('<?php echo date('Y-m-01', strtotime('-1 month')); ?>', '<?php echo date('Y-m-t', strtotime('-1 month')); ?>', 'month', $ga.find('> .-atras-1'));
 
-	        // 2 meses atrás
-	        GoogleAnalytics('<?php echo date('Y-m-01', strtotime('-2 month')); ?>', '<?php echo date('Y-m-t', strtotime('-2 month')); ?>', 'month', $ga.find('> .atras-2'));
-        })(jQuery);
+        // 2 meses atrás
+        GoogleAnalytics('<?php echo date('Y-m-01', strtotime('-2 month')); ?>', '<?php echo date('Y-m-t', strtotime('-2 month')); ?>', 'month', $ga.find('> .-atras-2'));
+    })(jQuery);
     <?php endif; ?>
     //]]>
 </script>

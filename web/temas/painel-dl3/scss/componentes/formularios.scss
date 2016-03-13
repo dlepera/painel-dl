@@ -1,0 +1,424 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$botoes: 'salvar' green '\ea10',
+    'cancelar' red '\ea0d',
+    'excluir' red '\e9ac',
+    'filtrar' #AAA '\e986',
+    'entrar' green '\ea13',
+    'enviar' #aabbff '\ea84',
+    'upload' #069 '\e9c3';
+
+// Mixins ----------------------------------------------------------------------------------------------------------- //
+@mixin camposAlfaNum($pseudo-classe: null) {
+    &.-texto#{$pseudo-classe},
+    &.-numero#{$pseudo-classe},
+    &.-data#{$pseudo-classe},
+    &.-cpf#{$pseudo-classe},
+    &.-cnpj#{$pseudo-classe},
+    &.-senha#{$pseudo-classe},
+    &.-busca#{$pseudo-classe},
+    &.-select#{$pseudo-classe},
+    &.-email#{$pseudo-classe},
+    &.-fone#{$pseudo-classe},
+    &.-textarea#{$pseudo-classe},
+    &.-arquivo#{$pseudo-classe},
+    &.-url#{$pseudo-classe} {
+        @content;
+    }
+}
+
+@mixin camposAlfa($pseudo-classe: null) {
+    &.-texto#{$pseudo-classe},
+    &.-senha#{$pseudo-classe},
+    &.-busca#{$pseudo-classe},
+    &.-select#{$pseudo-classe},
+    &.-email#{$pseudo-classe},
+    &.-textarea#{$pseudo-classe},
+    &.-arquivo#{$pseudo-classe},
+    &.-url#{$pseudo-classe} {
+        @content;
+    }
+}
+
+@mixin camposNum($pseudo-classe: null) {
+    &.-numero#{$pseudo-classe},
+    &.-data#{$pseudo-classe},
+    &.-cpf#{$pseudo-classe},
+    &.-cnpj#{$pseudo-classe},
+    &.-fone#{$pseudo-classe} {
+        @content;
+    }
+}
+
+// Formulário ------------------------------------------------------------------------------------------------------- //
+form {
+    .form {
+        // Parágrafo
+        &-paragr {
+            // Margens
+            margin: 1rem 0;
+        }
+
+        // Rótulos e dicas
+        &-rotulo, &-dica {
+            // Visual
+            display: block;
+
+            // Margens
+            padding: .35rem 0;
+        }
+
+        // Dicas
+        &-dica {
+            // Posicionamento
+            position: relative;
+
+            // Margens
+            padding-left: 1.65rem;
+
+            // Texto
+            color: #888;
+        }
+
+        &-dica::before {
+            // Texto
+            content: '\ea09';
+            font-family: 'icones';
+            color: #069;
+
+            // Posicionamento
+            position: absolute;
+            top: .5rem;
+            left: 0;
+        }
+
+        // Botões
+        &-botoes {
+            // Texto
+            text-align: center;
+
+            // Margens
+            margin-top: 2.6rem;
+
+            *:not(:first-child) {
+                // Margens
+                margin-left: 2.6rem;
+            }
+        }
+
+        // Grupo de campos (fieldset)
+        &-grupo {
+            // Visual
+            border: none;
+
+            // Margens
+            margin: 0;
+        }
+
+        &-grupo:not(:first-child) {
+            // Margens
+            margin-top: 2.6rem;
+        }
+
+        // Legendas
+        &-legenda {
+            // Texto
+            color: orange;
+            font-size: 1.56rem;
+
+            // Visual
+            border-bottom: 1px dashed #EEE;
+
+            // Tamanho
+            width: 100%;
+
+            // Margens
+            padding: .35rem 0;
+        }
+
+        // Controles personalizados
+        &-controle {
+            $tm: 4rem;
+
+            &:focus {
+                // Visual
+                outline: none;
+            }
+
+            // Controles alfanuméricos
+            @include camposAlfaNum {
+                // Visual
+                // -webkit-appearance: none;
+                // -moz-appearance: none;
+                border: $layout-borda-padrao;
+                border-radius: 12px;
+                background-color: #FFF;
+
+                // Margens
+                padding: 0 .35rem;
+
+                // Tamanho
+                height: $tm;
+
+                // Texto
+                font-size: 1.3rem;
+
+                // Transição
+                @include _transition(.5s);
+            }
+
+            @include camposAlfaNum(':focus') {
+                // Visual
+                border-color: orange;
+            }
+
+            // Cor
+            &.-cor {
+                // Visual
+                border-radius: 50%;
+
+                // Tamanho
+                width: $tm;
+                height: $tm;
+            }
+
+            // Caixa de texto
+            &.-textarea {
+                // Tamanho
+                height: 15rem;
+
+                // Margens
+                padding: .5rem;
+            }
+        }
+
+        // Caixa de seleção sim / não
+        &-chk-sim-nao {
+            // Tamanho
+            width: 0;
+            height: 0;
+
+            // Posicionamento
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+
+            // Visual
+            opacity: 0;
+        }
+
+        $cf: #EFEFEF;
+        $cb: darken($cf, 10%);
+
+        &-chk-sim-nao + label {
+            // Visual
+            display: inline-block;
+            border-radius: 30px;
+            border: 2px solid $cb;
+            background: $cf;
+
+            // Tamanho
+            width: 5em;
+            height: 3em;
+
+            // Posicionamento
+            position: relative;
+        }
+
+        &-chk-sim-nao + label:hover {
+            // Visual
+            cursor: pointer;
+        }
+
+        &-chk-sim-nao + label::before {
+            // Visual
+            background: #FFF;
+            border-radius: 50%;
+            display: block;
+
+            // Tamanho
+            width: 3em;
+            height: calc(3em - 2px);
+
+            // Texto
+            content: 'Não';
+            line-height: 3em;
+            text-align: center;
+            color: $cb;
+
+            // Posicionamento
+            position: relative;
+            top: -1px;
+            left: 0;
+
+            // Transições
+            @include _transition(left .5s);
+
+            // Visual
+            border-right: 1px solid darken($cb, 10%);
+            border-left: none;
+        }
+
+        $cf: #ebfee7;
+        $cb: darken($cf, 30%);
+
+        &-chk-sim-nao:checked + label {
+            // Visual
+            background: $cf;
+            border-color: $cb;
+        }
+
+        &-chk-sim-nao:checked + label::before {
+            // Texto
+            content: 'Sim';
+            color: darken($cb, 20%);
+
+            // Posicionamento
+            left: calc(50% - 9px);
+
+            // Visual
+            border-right: none;
+            border-left: 1px solid darken($cb, 10%);
+        }
+    }
+
+    // Botões personalizados
+    .botao {
+        // Visual
+        border: none;
+        background: none;
+        font-size: 1em;
+
+        // Margens
+        padding: .75rem 0;
+
+        &::before {
+            // Texto
+            font-family: 'icones';
+
+            // Visual
+            display: inline-block;
+
+            // Alinhamento
+            vertical-align: middle;
+
+            // Margens
+            margin-right: .5rem;
+        }
+
+        &:hover, &:active, &:focus {
+            // Visual
+            cursor: pointer;
+            outline: none;
+        }
+
+        // Variantes
+        @each $classe, $cor, $icone in $botoes {
+            &.-#{$classe} {
+                // Texto
+                color: $cor;
+            }
+
+            &.-#{$classe}::before {
+                // Texto
+                content: $icone;
+            }
+        }
+    }
+
+    // Controles alfanuméricos dentro de itens de grade flexível
+    .flexitem {
+        .form {
+            &-controle {
+                // Controles alfanuméricos
+                @include camposAlfa {
+                    // Tamanho
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+// Formulário de filtro de registros -------------------------------------------------------------------------------- //
+.form-filtro {
+    .flexitem:first-child {
+        // Margens
+        padding-left: 0;
+    }
+
+    .flexitem:last-child {
+        // Margens
+        padding-right: 0;
+    }
+
+    .form-botoes {
+        // Texto
+        text-align: left;
+
+        // Margens
+        padding-top: 1.1rem;
+
+        > *:not(:first-child) {
+            // Margens
+            margin-left: 2rem;
+        }
+
+        > .limpar {
+            // Texto
+            color: red;
+
+            // Transição
+            @include _transition();
+            
+            &:hover {
+                // Texto
+                color: #900;
+            }
+        }
+    }
+}
+
+/* Desktops --------------------------------------------------------------------------------------------------------- */
+@include _tela-desktops {
+    form {
+        .form {
+            &-controle {
+                // Controles alfanuméricos
+                @include camposAlfa {
+                    // Tamanho
+                    width: 30%;
+                }
+            }
+        }
+    }
+}
+
+/* Tablets ---------------------------------------------------------------------------------------------------------- */
+@include _tela-tablets {
+    form {
+        .form {
+            &-controle {
+                // Controles alfanuméricos
+                @include camposAlfa {
+                    // Tamanho
+                    width: 60%;
+                }
+            }
+        }
+    }
+}
+
+/* Smatphones ------------------------------------------------------------------------------------------------------- */
+@include _tela-smartphone {
+    form {
+        .form {
+            &-controle {
+                // Controles alfanuméricos
+                @include camposAlfa {
+                    // Tamanho
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,88 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'status-ajax';
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Posicionamento
+    position: fixed;
+    bottom: 2%;
+
+    // Margens
+    margin: auto;
+
+    > .msgstatus {
+        // Visual
+        background: rgba(black, .7);
+        border-radius: 1rem;
+
+        // Texto
+        color: #FFF;
+
+        // Margens
+        padding: 1rem 2rem;
+
+        &::before {
+            // Conteúdo
+            content: '\e982';
+
+            // Texto
+            font: 1.3rem 'icones';
+            color: #7FC448;
+
+            // Visual
+            display: inline-block;
+
+            // Alinhamento
+            vertical-align: middle;
+
+            // Margens
+            margin-right: .65rem;
+
+            // Animação
+            @include _animation(rotacao 1s infinite linear);
+
+            &:not(:first-child) {
+                // Margens
+                margin-top: 1rem;
+            }
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+        // Tamanho
+        width: 96%;
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+        // Tamanho
+        width: 50%;
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        // Tamanho
+        width: 25%;
+
+        // Posicionamento
+        left: 5%;
+    }
+}

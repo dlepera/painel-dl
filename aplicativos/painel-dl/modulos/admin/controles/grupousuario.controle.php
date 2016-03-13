@@ -13,27 +13,28 @@ use \Geral\Controle as GeralC;
 use \Admin\Modelo as AdminM;
 use \Desenvolvedor\Modelo as DevM;
 
-class GrupoUsuario extends GeralC\PainelDL{
-    public function __construct(){
+class GrupoUsuario extends GeralC\PainelDL {
+    public function __construct() {
         parent::__construct(new AdminM\GrupoUsuario(), 'admin', TXT_MODELO_GRUPOUSUARIO);
         $this->carregarPost([
-            'id' => FILTER_VALIDATE_INT,
-            'descr' => FILTER_SANITIZE_STRING,
-            'funcs' => ['filter' => FILTER_VALIDATE_INT, 'flags' => FILTER_REQUIRE_ARRAY],
+            'id'       => FILTER_VALIDATE_INT,
+            'descr'    => FILTER_SANITIZE_STRING,
+            'funcs'    => ['filter' => FILTER_VALIDATE_INT, 'flags' => FILTER_REQUIRE_ARRAY],
             'publicar' => FILTER_VALIDATE_BOOLEAN
         ]);
     } // Fim do método __construct
 
 
-
-
     /**
      * Mostrar a lista de registros
      */
-    protected function mostrarLista(){
-        $this->listaPadrao('grupo_usuario_id AS ' . TXT_LISTA_TITULO_ID . ', grupo_usuario_descr AS ' . TXT_LISTA_TITULO_DESCR . ',' .
-            " ( CASE grupo_usuario_publicar WHEN 0 THEN 'Não' WHEN 1 THEN 'Sim' END ) AS '" . TXT_LISTA_TITULO_PUBLICADO . "'",
-            'grupo_usuario_descr', null);
+    protected function mostrarLista() {
+        $this->listaPadrao(
+            sprintf(static::SQL_CAMPO_COM_ALIAS, 'grupo_usuario_id', TXT_LISTA_TITULO_ID) . ',' .
+            sprintf(static::SQL_CAMPO_COM_ALIAS, 'grupo_usuario_descr', TXT_LISTA_TITULO_DESCR) . ',' .
+            sprintf(static::SQL_CASE_SIM_NAO, 'grupo_usuario_publicar', TXT_LISTA_TITULO_PUBLICADO),
+            'grupo_usuario_descr', null
+        );
 
         # Visão
         $this->carregarHTML('comum/visoes/form_filtro');
@@ -49,15 +50,13 @@ class GrupoUsuario extends GeralC\PainelDL{
     } // Fim do método mostrarLista
 
 
-
-
     /**
      * Mostrar o formulário de inclusão e edição do registro
      *
      * @param int  $pk  ID do registro a ser selecionado
      * @param bool $mst Nome da página mestra a ser carregada
      */
-    protected function mostrarForm($pk = null, $mst = null){
+    protected function mostrarForm($pk = null, $mst = null) {
         $inc = $this->formPadrao('grupo', 'grupos-de-usuarios/salvar', 'grupos-de-usuarios/salvar', 'admin/grupos-de-usuarios', $pk);
 
         # Visão
@@ -79,7 +78,7 @@ class GrupoUsuario extends GeralC\PainelDL{
         # Usuário que está logado não pode alterar as permissões do seu próprio grupo, exceção apenas para o root
         $this->visao->adParam('mostrar-perms?', $inc || ($this->modelo->id != $_SESSION['usuario_info_grupo'] || $_SESSION['usuario_id'] == -1));
 
-        if( !$inc ){
+        if (!$inc) {
             # Membros do grupo
             $mu = new AdminM\Usuario();
             $lu = $mu->listar("usuario_info_grupo = {$this->modelo->id}", 'usuario_info_nome', 'usuario_info_nome');

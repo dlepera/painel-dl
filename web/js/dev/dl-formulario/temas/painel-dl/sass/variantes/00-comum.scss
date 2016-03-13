@@ -1,0 +1,40 @@
+// Guardar estilos comuns para todas as variantes ------------------------------------------------------------------- //
+@mixin todasVariantes {
+    &.-alerta,
+    &.-confirmacao {
+        @content;
+    }
+}
+
+.__jQuery-mostrarMsg.painel-dl {
+    @include todasVariantes {
+        > .paragr {
+            // Tamanho
+            max-height: 90%;
+
+            // Posicionamento
+            position: absolute;
+            top: 50%;
+
+            // Visual
+            display: block;
+            background: #FFF;
+
+            > .texto {
+                // Visual
+                display: inline-block;
+            }
+
+            > .botoes {
+                // Visual
+                margin-top: 2rem;
+
+                > .botao {
+                    // Visual
+                    display: inline-block;
+                    border: none;
+                }
+            }
+        }
+    }
+}

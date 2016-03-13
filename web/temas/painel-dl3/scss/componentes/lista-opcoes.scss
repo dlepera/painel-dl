@@ -1,0 +1,156 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'lista-opcoes';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Posicionamento
+    position: relative;
+    z-index: 1;
+
+    // Texto
+    text-align: left;
+
+    // Margens
+    padding: .5rem;
+
+    &:hover {
+        > .opcoes {
+            // Visual
+            display: initial;
+        }
+    }
+
+    > .rotulo {
+        // Posicionamento
+        position: relative;
+
+        // Visual
+        display: block;
+
+        // Texto
+        line-height: 2rem;
+
+        // Margens
+        margin-bottom: .75rem;
+
+        &::after {
+            // Forma geométrica
+            @include _triangulo-baixo(black, .5rem, .5rem);
+
+            // Conteúdo
+            content: '';
+
+            // Posicionamento
+            position: absolute;
+            top: 50%;
+
+            // Visual
+            display: inline-block;
+
+            // Margens
+            margin-left: .75rem;
+
+            // Transformar
+            @include _transform(translateY(-50%));
+        }
+
+        &:hover {
+            // Visual
+            cursor: pointer;
+        }
+    }
+
+    > .opcoes {
+        // Tamanho
+        width: 100%;
+
+        // Visual
+        display: none;
+        border-radius: .75rem;
+        border: 1px solid #EEE;
+        box-shadow: 0 0 .35rem rgba(black, .25);
+        background: #FFF;
+
+        // Posicionamento
+        position: absolute;
+
+        > .item {
+            // Margens
+            padding: .5rem 0;
+
+            &:not(:last-child) {
+                // Visual
+                border-bottom: $layout-borda-padrao;
+            }
+
+            > .opcao {
+                visibility: hidden;
+
+                & + label {
+                    &::before {
+                        // Conteúdo
+                        content: '\ea53';
+
+                        // Visual
+                        display: inline-block;
+
+                        // Texto
+                        font: 1rem 'icones';
+                        color: #AAA;
+
+                        // Margens
+                        margin-right: .35rem;
+                        
+                        // Alinhamento
+                        vertical-align: middle;
+                    }
+                }
+
+                &:checked {
+                    & + label {
+                        &::before {
+                            // Conteúdo
+                            content: '\ea52';
+
+                            // Texto
+                            color: orange;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        
+    }
+}

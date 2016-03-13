@@ -1,0 +1,20 @@
+@import '../../../../../../temas/painel-dl3/_ajuda/config';
+@import '../../../../../../temas/_ajuda/compatibilidade';
+@import '../_ajuda/*';
+
+.__jQuery-mostrarMsg.painel-dl {
+    // Posicionamento
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    // Tamanho
+    width: 100vw;
+    height: 100vh;
+
+    // Visual
+    background: rgba(black, .6);
+}
+
+@import 'variantes/*';

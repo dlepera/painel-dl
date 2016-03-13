@@ -1,0 +1,198 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: '-alerta';
+$tema: 'painel-dl';
+$msgs: 'sucesso' green '\ea10',
+    'erro' red '\ea0f',
+    'info' #069 '\ea08',
+    'atencao' #FFA500 '\ea07';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.__jQuery-mostrarMsg {
+    &.#{$tema}.#{$comp-nome} {
+        > .paragr {
+            // Tamanho
+            width: 100%;
+
+            // Texto
+            font-size: x-large;
+            text-align: center;
+
+            // Posicionamento
+            left: 0;
+
+            // Transformar
+            @include _transform(translateY(-60%));
+
+            // Animação
+            @include _animation(para-direita-passando .7s);
+
+            // Margens
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+
+            > .texto {
+                // Posicionamento
+                position: relative;
+
+                // Margens
+                padding: 0 1.5rem;
+
+                &::before {
+                    // Visual
+                    display: inline-block;
+                    opacity: .3;
+
+                    // Texto
+                    font: 5rem 'icones';
+                }
+            }
+
+            > .botoes {
+                > .botao {
+                    // Texto
+                    font-size: 1.3rem;
+
+                    // Margens
+                    padding: .75rem 1rem;
+
+                    &:focus {
+                        // Visual
+                        outline: none;
+                    }
+
+                    // Variantes
+                    &.-com-destaque {
+                        // Texto
+                        color: #FFF;
+
+                        // Visual
+                        border-radius: .5rem;
+                    }
+
+                    &.-sem-destaque {
+                        // Texto
+                        color: #999;
+
+                        // Visual
+                        background: none;
+                    }
+                }
+            }
+        }
+
+        > .tempo {
+            // Texto
+            color: #FFF;
+
+            text-align: center;
+
+            // Visual
+            display: block;
+
+            // Margens
+            padding: .75rem 0;
+        }
+
+        @each $nome, $cor, $texto in $msgs {
+            &.-#{$nome} {
+                > .paragr {
+                    // Texto
+                    color: $cor;
+
+                    > .texto {
+                        &::before {
+                            // Conteúdo
+                            content: $texto;
+                        }
+                    }
+
+                    > .botoes {
+                        > .botao.-com-destaque {
+                            // Visual
+                            background: $cor;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .__jQuery-mostrarMsg {
+        &.#{$tema}.#{$comp-nome} {
+            > .paragr {
+                > .texto {
+                    &::before {
+                        // Visual
+                        display: block;
+
+                        // Margens
+                        margin-bottom: 2rem;
+                    }
+                }
+
+                > .botoes {
+                    > .botao {
+                        &:not(:first-child) {
+                            // Margens
+                            margin-left: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .__jQuery-mostrarMsg {
+        &.#{$tema}.#{$comp-nome} {
+        }
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .__jQuery-mostrarMsg {
+        &.#{$tema}.#{$comp-nome} {
+        }
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .__jQuery-mostrarMsg{
+        &.#{$tema}.#{$comp-nome} {
+            > .paragr {
+                > .texto {
+                    &::before {
+                        // Posicionamento
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+
+                        // Transformar
+                        @include _transform(translate(-100%, -50%));
+                    }
+                }
+
+                > .botoes {
+                    > .botao {
+                        &:not(:first-child) {
+                            // Margens
+                            margin-left: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

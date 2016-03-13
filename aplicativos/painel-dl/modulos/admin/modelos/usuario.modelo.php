@@ -11,27 +11,27 @@ namespace Admin\Modelo;
 
 use \Geral\Modelo as GeralM;
 
-class Usuario extends GeralM\EdicaoRegistro{
+class Usuario extends GeralM\EdicaoRegistro {
     protected $id;
-	protected $info_grupo;
-	protected $info_nome;
-	protected $info_email;
-	protected $info_telefone;
-	protected $info_sexo = 'M';
-	protected $info_login;
-	protected $info_senha;
-	protected $info_senha_conf;
-	protected $pref_idioma = 1;
-	protected $pref_tema = 1;
-	protected $pref_formato_data = 1;
-	protected $pref_num_registros = 20;
-	protected $pref_exibir_id = true;
-	protected $pref_filtro_menu = false;
-	protected $conf_bloq = false;
-	protected $conf_reset = true;
-	protected $perfil_foto = '/web/imgs/usuario-sem-foto.png';
-	protected $ultimo_login;
-	protected $delete = false;
+    protected $info_grupo;
+    protected $info_nome;
+    protected $info_email;
+    protected $info_telefone;
+    protected $info_sexo = 'M';
+    protected $info_login;
+    protected $info_senha;
+    protected $info_senha_conf;
+    protected $pref_idioma = 1;
+    protected $pref_tema = 1;
+    protected $pref_formato_data = 1;
+    protected $pref_num_registros = 20;
+    protected $pref_exibir_id = true;
+    protected $pref_filtro_menu = false;
+    protected $conf_bloq = false;
+    protected $conf_reset = true;
+    protected $perfil_foto = 'web/imgs/usuario-sem-foto.png';
+    protected $ultimo_login;
+    protected $delete = false;
 
     /**
      * Vetor com todas as extensões aceitas para upload da foto de perfil
@@ -47,82 +47,66 @@ class Usuario extends GeralM\EdicaoRegistro{
     public $conf_camadas_md5 = 2;
 
 
-
-
     /**
      * @return mixed
      */
-    public function getInfoGrupo(){
+    public function getInfoGrupo() {
         return $this->info_grupo;
     }
-
-
 
 
     /**
      * @param mixed $info_grupo
      */
-    public function setInfoGrupo($info_grupo){
+    public function setInfoGrupo($info_grupo) {
         $this->info_grupo = filter_var($info_grupo, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
     }
-
-
 
 
     /**
      * @return mixed
      */
-    public function getInfoNome(){
+    public function getInfoNome() {
         return $this->info_nome;
     }
-
-
 
 
     /**
      * @param mixed $info_nome
      */
-    public function setInfoNome($info_nome){
+    public function setInfoNome($info_nome) {
         $this->info_nome = filter_var($info_nome, FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
     }
-
-
 
 
     /**
      * @return mixed
      */
-    public function getInfoEmail(){
+    public function getInfoEmail() {
         return $this->info_email;
     }
-
-
 
 
     /**
      * @param mixed $info_email
      */
-    public function setInfoEmail($info_email){
+    public function setInfoEmail($info_email) {
         $this->info_email = filter_var($info_email, FILTER_VALIDATE_EMAIL, FILTER_NULL_ON_FAILURE);
     }
-
-
 
 
     /**
      * @return mixed
      */
-    public function getInfoTelefone(){
+    public function getInfoTelefone() {
         return $this->info_telefone;
     }
-
-
 
 
     /**
      * @param mixed $info_telefone
      */
-    public function setInfoTelefone($info_telefone){
+    public function setInfoTelefone($info_telefone) {
         $this->info_telefone = filter_var($info_telefone, FILTER_VALIDATE_REGEXP, [
             'options' => ['regexp' => EXPREG_TELEFONE_GERAL],
             'flags'   => FILTER_NULL_ON_FAILURE
@@ -130,22 +114,18 @@ class Usuario extends GeralM\EdicaoRegistro{
     }
 
 
-
-
     /**
      * @return string
      */
-    public function getInfoSexo(){
+    public function getInfoSexo() {
         return $this->info_sexo;
     }
-
-
 
 
     /**
      * @param string $info_sexo
      */
-    public function setInfoSexo($info_sexo){
+    public function setInfoSexo($info_sexo) {
         $this->info_sexo = filter_var($info_sexo, FILTER_VALIDATE_REGEXP, [
             'options' => [
                 'regexp'  => '~^(F|M){1}$~',
@@ -155,270 +135,215 @@ class Usuario extends GeralM\EdicaoRegistro{
     }
 
 
-
-
     /**
      * @return mixed
      */
-    public function getInfoLogin(){
+    public function getInfoLogin() {
         return $this->info_login;
     }
-
-
 
 
     /**
      * @param mixed $info_login
      */
-    public function setInfoLogin($info_login){
+    public function setInfoLogin($info_login) {
         $this->info_login = filter_var($info_login, FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
     }
-
-
 
 
     /**
      * @return string
      */
-    public function getInfoSenha(){
+    public function getInfoSenha() {
         return $this->info_senha;
     }
-
-
 
 
     /**
      * @param string $info_senha
      */
-    public function setInfoSenha($info_senha){
+    public function setInfoSenha($info_senha) {
         $this->info_senha = $this->criptoMD5(filter_var($info_senha));
     }
-
-
 
 
     /**
      * @return mixed
      */
-    public function getInfoSenhaConf(){
+    public function getInfoSenhaConf() {
         return $this->info_senha_conf;
     }
-
-
 
 
     /**
      * @param mixed $info_senha_conf
      */
-    public function setInfoSenhaConf($info_senha_conf){
+    public function setInfoSenhaConf($info_senha_conf) {
         $this->info_senha_conf = $this->criptoMD5(filter_var($info_senha_conf));
     }
-
-
 
 
     /**
      * @return int
      */
-    public function getPrefIdioma(){
+    public function getPrefIdioma() {
         return $this->pref_idioma;
     }
-
-
 
 
     /**
      * @param int $pref_idioma
      */
-    public function setPrefIdioma($pref_idioma){
+    public function setPrefIdioma($pref_idioma) {
         $this->pref_idioma = filter_var($pref_idioma, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
     }
-
-
 
 
     /**
      * @return int
      */
-    public function getPrefTema(){
+    public function getPrefTema() {
         return $this->pref_tema;
     }
-
-
 
 
     /**
      * @param int $pref_tema
      */
-    public function setPrefTema($pref_tema){
+    public function setPrefTema($pref_tema) {
         $this->pref_tema = filter_var($pref_tema, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
     }
-
-
 
 
     /**
      * @return int
      */
-    public function getPrefFormatoData(){
+    public function getPrefFormatoData() {
         return $this->pref_formato_data;
     }
-
-
 
 
     /**
      * @param int $pref_formato_data
      */
-    public function setPrefFormatoData($pref_formato_data){
+    public function setPrefFormatoData($pref_formato_data) {
         $this->pref_formato_data = filter_var($pref_formato_data, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
     }
-
-
 
 
     /**
      * @return int
      */
-    public function getPrefNumRegistros(){
+    public function getPrefNumRegistros() {
         return $this->pref_num_registros;
     }
-
-
 
 
     /**
      * @param int $pref_num_registros
      */
-    public function setPrefNumRegistros($pref_num_registros){
+    public function setPrefNumRegistros($pref_num_registros) {
         $this->pref_num_registros = filter_var($pref_num_registros, FILTER_VALIDATE_INT, ['options' => ['default' => 20]]);
     }
-
-
 
 
     /**
      * @return int
      */
-    public function getPrefExibirId(){
+    public function getPrefExibirId() {
         return $this->pref_exibir_id;
     }
-
-
 
 
     /**
      * @param int $pref_exibir_id
      */
-    public function setPrefExibirId($pref_exibir_id){
+    public function setPrefExibirId($pref_exibir_id) {
         $this->pref_exibir_id = filter_var($pref_exibir_id, FILTER_VALIDATE_BOOLEAN, ['options' => ['default' => false]]);
     }
-
-
 
 
     /**
      * @return int
      */
-    public function getPrefFiltroMenu(){
+    public function getPrefFiltroMenu() {
         return $this->pref_filtro_menu;
     }
-
-
 
 
     /**
      * @param int $pref_filtro_menu
      */
-    public function setPrefFiltroMenu($pref_filtro_menu){
+    public function setPrefFiltroMenu($pref_filtro_menu) {
         $this->pref_filtro_menu = filter_var($pref_filtro_menu, FILTER_VALIDATE_BOOLEAN, ['options' => ['default' => false]]);
     }
-
-
 
 
     /**
      * @return int
      */
-    public function getConfBloq(){
+    public function getConfBloq() {
         return $this->conf_bloq;
     }
-
-
 
 
     /**
      * @param int $conf_bloq
      */
-    public function setConfBloq($conf_bloq){
+    public function setConfBloq($conf_bloq) {
         $this->conf_bloq = filter_var($conf_bloq, FILTER_VALIDATE_BOOLEAN, ['options' => ['default' => false]]);
     }
-
-
 
 
     /**
      * @return int
      */
-    public function getConfReset(){
+    public function getConfReset() {
         return $this->conf_reset;
     }
-
-
 
 
     /**
      * @param int $conf_reset
      */
-    public function setConfReset($conf_reset){
+    public function setConfReset($conf_reset) {
         $this->conf_reset = filter_var($conf_reset, FILTER_VALIDATE_BOOLEAN, ['options' => ['default' => false]]);
     }
-
-
 
 
     /**
      * @return string
      */
-    public function getPerfilFoto(){
+    public function getPerfilFoto() {
         return $this->perfil_foto;
     }
-
-
 
 
     /**
      * @param string $perfil_foto
      */
-    public function setPerfilFoto($perfil_foto){
+    public function setPerfilFoto($perfil_foto) {
         $this->perfil_foto = filter_var($perfil_foto, FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
     }
-
-
 
 
     /**
      * @return mixed
      */
-    public function getUltimoLogin(){
+    public function getUltimoLogin() {
         return \Funcoes::formatarDataHora($this->ultimo_login, $_SESSION['formato_data_completo']);
     }
-
-
 
 
     /**
      * @param mixed $ultimo_login
      */
-    public function setUltimoLogin($ultimo_login){
+    public function setUltimoLogin($ultimo_login) {
         $this->ultimo_login = \Funcoes::formatarDataHora($ultimo_login, \DL3::$bd_dh_formato_completo);
     }
 
 
-
-
-
-    public function __construct($pk = null){
+    public function __construct($pk = null) {
         parent::__construct('dl_painel_usuarios', 'usuario_');
 
         $this->bd_select = 'SELECT %s' .
@@ -433,8 +358,6 @@ class Usuario extends GeralM\EdicaoRegistro{
     } // Fim do método __construct
 
 
-
-
     /**
      * Salvar determinado registro
      *
@@ -446,7 +369,7 @@ class Usuario extends GeralM\EdicaoRegistro{
      * @return mixed
      * @throws \DL3Exception
      */
-    protected function salvar($s = true, array $ci = null, array $ce = null, $ipk = false){
+    protected function salvar($s = true, array $ci = null, array $ce = null, $ipk = false) {
         # Aplicar validações
         if ($s) {
             $and_id = $this->reg_vazio ? '' : " AND {$this->bd_prefixo}id <> {$this->id}";
@@ -471,7 +394,11 @@ class Usuario extends GeralM\EdicaoRegistro{
             } // Fim if
         } // Fim if
 
-        $r = parent::salvar($s, $ci, $this->reg_vazio ? $ce : ['usuario_info_login', 'usuario_info_senha'], $ipk);
+        $r = parent::salvar($s, $ci, $this->reg_vazio
+            ? array_unique(array_merge(['usuario_ultiumo_login'], $ce))
+            : array_unique(array_merge(['usuario_info_login', 'usuario_info_senha'], $ce)),
+            $ipk
+        );
 
         if ($this->id == $_SESSION['usuario_id'] && $r && $s) {
             \DL3::$autent->carregarSessao($this->listar("usuario_id = {$this->id}", null,
@@ -480,8 +407,6 @@ class Usuario extends GeralM\EdicaoRegistro{
 
         return $r;
     } // Fim do método salvar
-
-
 
 
     /**
@@ -495,7 +420,7 @@ class Usuario extends GeralM\EdicaoRegistro{
      *
      * @throws \DL3Exception
      */
-    public function alterarSenha($sn, $sc, $sa = null, $rt = false){
+    public function alterarSenha($sn, $sc, $sa = null, $rt = false) {
         if (!$rt) {
             # Verificar se a sessão foi iniciada
             if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -533,8 +458,6 @@ class Usuario extends GeralM\EdicaoRegistro{
     } // Fim do método alterarSenha
 
 
-
-
     /**
      * Validar a senha
      *
@@ -544,7 +467,7 @@ class Usuario extends GeralM\EdicaoRegistro{
      * @return bool
      * @throws \DL3Exception
      */
-    public function validarSenha($sn, $md5 = false){
+    public function validarSenha($sn, $md5 = false) {
         $lg = $md5 ? $this->criptoMD5($this->info_login) : $this->info_login;
 
         if ($sn === $lg) {
@@ -555,8 +478,6 @@ class Usuario extends GeralM\EdicaoRegistro{
     } // Fim do método validarSenha
 
 
-
-
     /**
      * Criptografar em MD5 na quantidade de vezes definida por $qt
      *
@@ -565,11 +486,11 @@ class Usuario extends GeralM\EdicaoRegistro{
      *
      * @return string
      */
-    public function criptoMD5($st, $qt = null){
+    public function criptoMD5($st, $qt = null) {
         $md5 = $st;
         $qt = !isset($qt) || $qt < 0 ? $this->conf_camadas_md5 : $qt;
 
-        for($i = $qt; $i > 0; $i--){
+        for ($i = $qt; $i > 0; $i--) {
             $md5 = md5($md5);
         } // Fim foreach
 
@@ -577,19 +498,15 @@ class Usuario extends GeralM\EdicaoRegistro{
     } // Fim do método criptoMD5
 
 
-
-
     /**
      * Bloquear ou desbloquear o acesso ao sistema desse usuário
      *
      * @param int $vlr Valor que define se o usuário será bloqueado ou desbloquado
      */
-    protected function bloquear($vlr){
+    protected function bloquear($vlr) {
         $this->setConfBloq($vlr);
         $this->salvar();
     } // Fim do método bloquear
-
-
 
 
     /**
@@ -603,32 +520,30 @@ class Usuario extends GeralM\EdicaoRegistro{
      * @return array Vetor associativo com as informações do usuário
      * @throws \DL3Exception
      */
-    public function fazerLogin($u, $s, $c = '*', $m = true){
+    public function fazerLogin($u, $s, $c = '*', $m = true) {
         $this->setInfoLogin($u);
         $this->setInfoEmail($u);
         $m ? $this->setInfoSenha($s) : $this->info_senha = $s;
 
         $d = $this->listar("(usuario_info_login = '{$this->info_login}' OR usuario_info_email = '{$this->info_email}') AND usuario_info_senha = '{$this->info_senha}'", null, $c, 0, 1, 0);
 
-        if( (bool)$d === false ){
+        if ((bool)$d === false) {
             throw new \DL3Exception(ERRO_USUARIO_FAZERLOGIN_USUARIO_OU_SENHA_INVALIDOS, 1403);
         } // Fim if
 
-        if( (bool)$d['usuario_conf_bloq'] ){
+        if ((bool)$d['usuario_conf_bloq']) {
             throw new \DL3Exception(ERRO_USUARIO_FAZERLOGIN_USUARIO_BLOQUEADO, 1403);
         } // Fim if
 
-        if( $m ){
+        if ($m) {
             # Registrar a data desse login
             $this->selecionarPK($d['usuario_id']);
             $this->ultimo_login = date(\DL3::$bd_dh_formato_completo);
-            $this->salvar();
+            $this->salvar(true, ['usuario_id', 'usuario_ultimo_login']);
         } // Fim if
 
         return $d;
     } // Fim do método fazerLogin
-
-
 
 
     /**
@@ -639,42 +554,38 @@ class Usuario extends GeralM\EdicaoRegistro{
      *
      * @return string Trecho HTML para exibir a foto de perfil
      */
-    public function mostrarFoto($dr = '.', $tm = 'm'){
+    public function mostrarFoto($dr = '.', $tm = 'm') {
         $pf = "{$dr}{$this->perfil_foto}";
 
-        return '<span class="usr-perfil-foto tam-' . $tm . '">' .
-            "    <img src='{$pf}' class='foto' alt='{$this->info_nome}'/>" .
-            '</span>';
+        return '<span class="foto-perfil -tam-' . $tm . '">' .
+        "    <img src='{$pf}' class='foto' alt='{$this->info_nome}'/>" .
+        '</span>';
     } // Fim do método mostrarFoto
 
 
-
-
-    public function _resumo(){
+    public function resumo() {
         return '<table class="usr-resumo">' .
-            '<tbody class="tbl-conteudo">' .
-            '<tr>' .
-            '  <td class="usr-resumo-rotulo">' . TXT_ROTULO_NOME . '</td>' .
-            '  <td class="usr-resumo-info">' . $this->info_nome . '</td>' .
-            '</tr>' .
-            '<tr>' .
-            '  <td class="usr-resumo-rotulo">' . TXT_ROTULO_EMAIL . '</td>' .
-            '  <td class="usr-resumo-info">' . $this->info_email . '</td>' .
-            '</tr>' .
-            '<tr>' .
-            '  <td class="usr-resumo-rotulo">' . TXT_ROTULO_GRUPO . '</td>' .
-            '  <td class="usr-resumo-info">' . $this->info_grupo . '</td>' .
-            '</tr>' .
-            '</tbody>' .
-            '</table>';
+        '<tbody class="bloco-registros">' .
+        '<tr>' .
+        '  <td class="usr-resumo-rotulo">' . TXT_ROTULO_NOME . '</td>' .
+        '  <td class="usr-resumo-info">' . $this->info_nome . '</td>' .
+        '</tr>' .
+        '<tr>' .
+        '  <td class="usr-resumo-rotulo">' . TXT_ROTULO_EMAIL . '</td>' .
+        '  <td class="usr-resumo-info">' . $this->info_email . '</td>' .
+        '</tr>' .
+        '<tr>' .
+        '  <td class="usr-resumo-rotulo">' . TXT_ROTULO_GRUPO . '</td>' .
+        '  <td class="usr-resumo-info">' . $this->info_grupo . '</td>' .
+        '</tr>' .
+        '</tbody>' .
+        '</table>';
     } // Fim do método _resumo
 
 
-
-
-    public function salvarFoto(){
+    public function salvarFoto() {
         # Salvar a foto do usuário
-        if( $this->id != $_SESSION['usuario_id'] ){
+        if ($this->id != $_SESSION['usuario_id']) {
             throw new \DL3Exception(ERRO_USUARIO_SALVAR_FOTO_OUTRO_USUARIO, 1403);
         } // Fim if
 
@@ -682,15 +593,24 @@ class Usuario extends GeralM\EdicaoRegistro{
         $oup->setExtensoes($this->conf_extensoes_foto_perfil);
         $oup->conf_bloq_extensao = true;
 
-        if( $oup->salvar($this->info_nome, true) ){
-            $this->perfil_foto = preg_replace('~^.~', '', $oup->salvos[0]);
+        # Remover a foto atual
+        if (!empty($this->perfil_foto)) {
+            unlink($this->perfil_foto);
+        } // Fim if
+
+        if ($oup->salvar($this->info_nome)) {
+            $this->perfil_foto = preg_replace('~^./~', '', $oup->salvos[0]);
 
             # Recortar a foto
             $tim = 200;
             $oim = new \Imagem($oup->salvos[0]);
-            $oim->redimensionar($tim);
-            $oim->redimensionar(null, $tim);
-            $oim->recortar($tim, $tim);
+
+            if ($oim->getAltura() > $oim->getLargura()) {
+                $oim->redimensionar(null, $tim);
+            } else {
+                $oim->redimensionar($tim);
+            } // Fim if
+
             $oim->salvar($oup->salvos[0]);
 
             $this->salvar();

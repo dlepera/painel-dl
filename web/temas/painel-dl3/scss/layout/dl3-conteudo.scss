@@ -1,0 +1,60 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'dl3-conteudo';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Posicionamento
+    position: relative;
+    
+    // Visual
+    background: #FFF;
+    border: $layout-borda-padrao;
+    border-radius: .5rem;
+
+    > .titulo-h1 {
+        // Margens
+        margin-bottom: 1.3rem;
+    }
+
+    .caixa-widget {
+        // Margens
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+        // Margens
+        padding: .5rem;
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+        // Margens
+        padding: .75rem;
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        // Margens
+        padding: 1rem;
+    }
+}

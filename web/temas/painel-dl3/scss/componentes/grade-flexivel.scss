@@ -1,0 +1,35 @@
+@import '../../../_ajuda/compatibilidade';
+@import '../../_ajuda/flexivel';
+
+// Grade Flexível --------------------------------------------------------------------------------------------------- //
+.grade-flexivel {
+    // Flex
+    @include flexBox();
+    @include flexFlow(row wrap);
+
+    > .flexitem {
+        // Variantes
+        &.-livre {
+            // Tamanho
+            max-width: 100% !important;
+        }
+    }
+}
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@import '../../_ajuda/smartphones/config';
+@include _tela-smartphone {
+    @include gerarColunas($flex-qtde-cols, $flex-padding, $flex-espaco);
+}
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@import '../../_ajuda/tablets/config';
+@include _tela_tablets {
+    @include gerarColunas($flex-qtde-cols, $flex-padding, $flex-espaco);
+}
+
+// Desktops --------------------------------------------------------------------------------------------------------- //
+@import '../../_ajuda/desktops/config';
+@include _tela-desktops {
+    @include gerarColunas($flex-qtde-cols, $flex-padding, $flex-espaco);
+}

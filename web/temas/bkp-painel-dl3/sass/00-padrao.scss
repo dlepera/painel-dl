@@ -1,0 +1,125 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: dlepera88@gmail.com
+ * @Projeto	: FrameworkDL
+ * @Data   	: 12/05/2015 17:20:21
+ */
+
+
+
+@import '../../_ajuda/compatibilidade';
+@import '../../_ajuda/css_reset';
+@import '../_ajuda/flexivel';
+
+
+
+// CSS Reset -------------------------------------------------------------------------------------------------------- //
+@include cssResetYahoo;
+
+
+
+// Fontes ----------------------------------------------------------------------------------------------------------- //
+@font-face {
+    font-family: 'icones';
+    src: url('../css/fontes/icomoon.ttf');
+}
+
+@font-face {
+    font-family: 'logotipo';
+    src: url('../css/fontes/neuropol.ttf');
+}
+
+
+// TAGs ------------------------------------------------------------------------------------------------------------- //
+body {
+    // Visual
+    background-color: $layout-html-fundo;
+    
+    // Texto
+    font: 1.3rem 'geral', sans-serif;
+    
+    // Margens
+    padding-top: 4rem;
+}
+
+img, video, audio, embed, object {
+    // Tamanho
+    max-width: 100%;
+    max-height: 100%;
+}
+
+b {
+    // Texto
+    font-size: inherit;
+    font-weight: bold;
+}
+
+
+
+// Grid do layout --------------------------------------------------------------------------------------------------- //
+#dl3-grid {
+    // Tamanho
+    width: $grid-tamanho-x;
+    max-width: $grid-tamanho-max;
+    
+    // Margens
+    margin: auto;
+}
+
+
+
+// Controle de visualização ----------------------------------------------------------------------------------------- //
+// Desktops --------------------------------------------------------------------------------------------------------- //
+@import '../_ajuda/desktops/config';
+
+@include _tela-desktops {
+    #dl3-grid {
+        // Tamanho
+        width: $grid-tamanho-x;
+        max-width: $grid-tamanho-max;
+    }
+
+    .v-tablet:not(.v-desk), .v-tablet:not(.v-desk)::before, .v-tablet:not(.v-desk)::after,
+    .v-smart:not(.v-desk), .v-smart:not(.v-desk)::before, .v-smart:not(.v-desk)::after {
+        // Visual
+        display: none;
+    }
+}
+
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@import '../_ajuda/tablets/config';
+
+@include _tela-tablets {
+	#dl3-grid {
+		// Tamanho
+		width: $grid-tamanho-x;
+		max-width: $grid-tamanho-max;
+	}
+
+    .v-desk:not(.v-tablet), .v-desk:not(.v-tablet)::before, .v-desk:not(.v-tablet)::after,
+    .v-smart:not(.v-tablet), .v-smart:not(.v-tablet)::before, .v-smart:not(.v-tablet)::after {
+        // Visual
+        display: none;
+    }
+}
+
+
+
+// Smartphone ------------------------------------------------------------------------------------------------------- //
+@import '../_ajuda/smartphones/config';
+
+@include _tela-smartphone {
+	#dl3-grid {
+		// Tamanho
+		width: $grid-tamanho-x;
+		max-width: $grid-tamanho-max;
+	}
+
+    .v-tablet:not(.v-tablet), .v-tablet:not(.v-tablet)::before, .v-tablet:not(.v-tablet)::after,
+    .v-desk:not(.v-tablet), .v-desk:not(.v-tablet)::before, .v-desk:not(.v-tablet)::after {
+        // Visual
+        display: none;
+    }
+}

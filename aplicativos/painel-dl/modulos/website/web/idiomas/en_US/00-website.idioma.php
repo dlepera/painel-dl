@@ -37,12 +37,15 @@ define('TXT_PAGINA_TITULO_VALORES', 'Values');
 define('TXT_PAGINA_TITULO_INFOS_INSTITUCIONAIS', 'Business information');
 define('TXT_PAGINA_TITULO_EDITAR_INSTITUCIONAL', 'Edit business information');
 define('TXT_PAGINA_TITULO_CONFIGURACAOSITE', 'Website configuration');
+define('TXT_PAGINA_TITULO_CONFIGURACOES_ALBUNS_DE_FOTOS', 'Photo albums configuration');
 
 
 // Links ------------------------------------------------------------------------------------------------------------ //
 define('TXT_LINK_EDITAR_INFOS_INSTITUCIONAIS', 'Edit business information');
 define('TXT_LINK_TIPOS_DADOS', 'Info types');
 define('TXT_LINK_DOWNLOAD_ARQUIVO_ATUAL', 'Current file download');
+define('TXT_LINK_CONFIGURACOES', 'Configurations');
+define('TXT_LINK_DADOS_PARA_CONTATO', 'Contact details');
 
 
 // Listas ----------------------------------------------------------------------------------------------------------- //
@@ -74,6 +77,8 @@ define('TXT_LEGENDA_HISTORIA', 'History');
 define('TXT_LEGENDA_MISSAO', 'Mission');
 define('TXT_LEGENDA_VISAO', 'Vision');
 define('TXT_LEGENDA_VALORES', 'Values');
+define('TXT_LEGENDA_GERAL', 'General');
+define('TXT_LEGENDA_ALBUNS_DE_FOTOS', 'Photo albums');
 
 # -> Rótulos
 define('TXT_ROTULO_NOME', 'Name');
@@ -105,6 +110,9 @@ define('TXT_ROTULO_FORMATO_DATA', 'Date format');
 define('TXT_ROTULO_P12', 'OAuth file');
 define('TXT_ROTULO_CONFIGURACAO_EMAIL', 'E-mail configuration');
 define('TXT_ROTULO_EXEMPLO_PREENCHIMENTO', 'Fill example');
+define('TXT_ROTULO_EXIBICAO_SITE', 'Show on site');
+define('TXT_ROTULO_TAMANHO_FOTOS', 'Photo size');
+define('TXT_ROTULO_TAMANHO_MINI', 'Thumbs size');
 
 # -> Dicas
 define('MSG_DICA_ALBUMFOTO_CAPA', 'Set this photo as the album cover.');
@@ -116,6 +124,9 @@ define('TXT_DICA_P12', '<b>OAuth 2.0</b> authentication file in <b>.p12</b> form
 define('TXT_DICA_WEBSITE_CONFIGURACAO_EMAIL', 'E-mail configuration used by the website for sending emails.');
 define('TXT_DICA_WEBSITE_FORMATO_DATA', 'The website will show all dates in the format specified below.');
 define('TXT_DICA_TIPODADO_EXEMPLO_PREENCHIMENTO', 'Fill example to this data type. Will be shown on field <b>"Description"</b> of the data to contact.');
+define('TXT_DICA_TIPODADO_EXIBICAO_SITE', 'Nome para exibição no site');
+define('TXT_DICA_TAMANHO_FOTOS', 'Representa o tamanho máximo das fotos, em pixels (width x height).');
+define('TXT_DICA_TAMANHO_MINI', 'Representa o tamanho máximo das miniaturas, em pixels (width x height).');
 
 # -> Exemplos
 
@@ -123,6 +134,7 @@ define('TXT_DICA_TIPODADO_EXEMPLO_PREENCHIMENTO', 'Fill example to this data typ
 
 # -> Botões
 define('TXT_BOTAO_SALVAR_FOTOS', 'Save photos');
+define('TXT_BOTAO_EXCLUIR_FOTO', 'Delete this photo');
 
 
 // Detalhes --------------------------------------------------------------------------------------------------------- //
@@ -139,11 +151,12 @@ define('TXT_DIVERSOS_EMAIL_FALHOU', 'Send e-mail failed');
 define('TXT_DIVERSOS_EMAIL_ERRO_STATUS', 'Error on send status.');
 define('TXT_DIVERSOS_CAPA', 'Cover');
 define('TXT_DIVERSOS_GA_ALERTA_UTILIZACAO_MUITOS', "<b>Attention!</b> The use of many Analytics accounts can hurt your site's performance.");
-define('TXT_DIVERSOS_NENHUMA_FOTO', 'None photo');
-define('TXT_DIVERSOS_UMA_FOTO', '1 photo');
-define('TXT_DIVERSOS_QTDE_FOTOS', '%d photo');
+define('TXT_DIVERSOS_QTDE_FOTOS', ' photos');
 define('TXT_DIVERSOS_CONFIGURACAO_WEBSITE', 'These settings are applied <b>only</b> to website.');
-
+define('TXT_DIVERSOS_FOTO_SEM_TITULO', 'No title');
+define('TXT_DIVERSOS_FOTO_SEM_DESCR', 'No description');
+define('TXT_DIVERSOS_MAIS_OPCOES', 'More options');
+define('TXT_DIVERSOS_NENHUMA_FOTO', 'None photo');
 
 // Classes ---------------------------------------------------------------------------------------------------------- //
 # -> WebC\ContatoSite

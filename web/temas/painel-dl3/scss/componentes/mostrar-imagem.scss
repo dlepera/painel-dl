@@ -1,0 +1,80 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'mostrar-imagem';
+$tamanhos: 'mini' 7.5rem .4rem,
+    'pequena' 15rem .6rem,
+    'media' 25rem .8rem,
+    'grande' 50rem 1rem;
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Texto
+    text-align: center;
+
+    // Visual
+    display: block;
+
+    > .imagem {
+        // Visual
+        border: $layout-borda-padrao;
+        background: #FFF;
+    }
+
+    // Variantes de tamanho
+    @each $classe, $tamanho, $padding in $tamanhos {
+        &.-#{$classe} {
+            // Tamanho
+            max-width: $tamanho;
+            max-height: $tamanho;
+
+            // Margens
+            margin: auto;
+
+            > .imagem {
+                // Margens
+                padding: $padding;
+            }
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+        > .imagem {
+            // Margens
+            padding: .7%;
+        }
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+        > .imagem {
+            // Margens
+            padding: 1%;
+        }
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        > .imagem {
+            // Margens
+            padding: 1.3%;
+        }
+    }
+}

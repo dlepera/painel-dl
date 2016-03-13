@@ -1,0 +1,28 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'dl3-topo';
+
+
+// Topo ------------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Posicionamento
+    position: relative;
+
+    // Margens
+    padding: 3rem 0;
+
+    > .logotipo {
+        // Texto
+        font-size: 2.5rem;
+    }
+
+    > .menu-usuario {
+        // Posicionamento
+        position: absolute;
+        right: 0;
+        top: 50%;
+        z-index: 1;
+
+        // Transformar
+        @include _transform(translateY(-50%));
+    }
+}

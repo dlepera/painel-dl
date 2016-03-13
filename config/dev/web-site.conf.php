@@ -16,3 +16,6 @@ $recaptcha_chave_secreta = '6LdnHxYTAAAAAMmsIgp88fctJjFMOdeq5V9Ns6qu';
 $conf_bd = true;
 $senha = '$d5Ro0t';
 $base = 'frameworkdl3';
+
+# SEO
+$conf_meta_og = true;

@@ -1,0 +1,61 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: dlepera
+ * Date: 11/02/16
+ * Time: 17:53
+ */
+
+if (!isset($params)) {
+    $params = $this->obterParams();
+} // Fim if
+
+if (!isset($mod)) {
+    $mod = $params['modelo'];
+} // Fim if
+
+?>
+
+[DL3-CONTEUDO]
+<form id="form-fotos" method="post" action="website/albuns-de-fotos/incluir-fotos" enctype="multipart/form-data"
+      class="form-upload-simples">
+    <input type="hidden" name="foto_album" value="<?php echo $mod->id; ?>"/>
+
+    <fieldset class="form-grupo">
+        <legend class="form-legenda">
+            <?php echo TXT_LEGENDA_FOTOS; ?>
+
+            <span class="log-registro">
+                (<?php echo $params['qtde-fotos'], ' ', TXT_DIVERSOS_QTDE_FOTOS; ?>)
+            </span>
+        </legend>
+
+
+        <span class="form-paragr">
+            <?php echo $this->aux_form->arquivoUpload('fotos[]', 'arq-fotos', TXT_ROTULO_FOTOS, ['multiple' => 'multiple', 'required' => 'required'], $params['extensoes']); ?>
+        </span>
+
+        <span class="form-botoes" style="margin-left: .5em;">
+            <?php echo $this->aux_form->botao('upload', TXT_BOTAO_SALVAR_FOTOS); ?>
+        </span>
+    </fieldset>
+</form>
+[/DL3-CONTEUDO]
+
+[DL3-SCRIPTS]
+<script>
+    //<![CDATA[
+    $ff = $('#form-fotos').formulario({
+        botoes_msg: {
+            '-sucesso': [
+                {
+                    texto: 'Atualizar a lista de fotos',
+                    funcao: function () { window.location.reload(); }
+                }
+            ]
+        },
+        aparencia: {tema: '<?php echo \DL3::$plugin_formulario_tema; ?>', estilo: 'formulario'}
+    }, true);
+    //]]>
+</script>
+[/DL3-SCRIPTS]

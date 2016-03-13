@@ -14,24 +14,32 @@ if (!isset($params)) {
 ?>
 
 [DL3-SCRIPTS]
+<script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>dl-paginacao/dl-paginacao-2.2.plugin-min.js"></script>
+
 <script>
     //<![CDATA[
     $el = $('#form-editar-lista').formulario({
         cktodos: [true, 'thead :checkbox', 'tbody :checkbox'],
-        depois: function(){
-            var $tbody = $el.find('tbody');
+        botoes_msg: {
+            '-sucesso': [
+                {
+                    funcao: function () {
+                        var $tbody = $el.find('tbody');
 
-            // Remover o item da lista
-            $tbody.find(':checked').parents('tr').remove();
+                        // Remover o item da lista
+                        $tbody.find(':checked').parents('tr').remove();
 
-            if ($tbody.find('tr').length === 0) {
-                $(document.createElement('tr')).addClass('tbl-linha sem-registros')
-                    .html('<td><?php echo MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO; ?></td>')
-                    .appendTo($tbody);
-            } // Fim if
+                        if ($tbody.find('tr').length === 0) {
+                            $(document.createElement('tr')).addClass('tbl-linha sem-registros')
+                                .html('<td><?php echo MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO; ?></td>')
+                                .appendTo($tbody);
+                        } // Fim if
+                    }
+                }
+            ]
         },
-        aparencia: { tema: '<?php echo DL3::$plugin_formulario_tema; ?>', estilo: null }
-    });
+        aparencia: {tema: '<?php echo DL3::$plugin_formulario_tema; ?>', estilo: null}
+    }, true);
 
     $pg = $('#paginacao').paginacao({
         pgtotal: <?php echo $params['total-pg']; ?>,
@@ -39,8 +47,8 @@ if (!isset($params)) {
         tema: '<?php echo \DL3::$plugin_paginacao_tema; ?>'
     });
 
-    $('.com-marcados > *:first-child,.sem-registros > *:first-child')
-        .attr({ 'colspan': $('.tbl-titulos > .tbl-linha:first-child > *').length });
+    $('.lista-registros .registro.-acoes > *:first-child,.sem-registros > *:first-child')
+        .attr({'colspan': $('.lista-registros > .bloco-titulos > .registro:first-child > *').length});
     //]]>
 </script>
 [/DL3-SCRIPTS]

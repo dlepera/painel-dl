@@ -13,32 +13,76 @@
  * @param {String} titulo Título a ser exibido na tela de confirmação
  * @returns {*}
  */
-function executarConfirm(msg, acao, titulo){
-	$('body').msgConfirmacao({
-		titulo: titulo || 'Confirmação',
-		mensagem: msg,
-		botao_sim: { texto: 'Sim', classe: 'btn-sim', funcao: function(){ return acao(); } },
-		botao_nao: { texto: 'Não', classe: 'btn-nao btn-principal', funcao: function(){ return false; } }
-	});
+function executarConfirm(msg, acao, titulo) {
+    $('body').msgConfirmacao({
+        titulo: titulo || 'Confirmação',
+        mensagem: msg,
+        botao_sim: {
+            texto: 'Sim', classe: '-sim', funcao: function () {
+                return acao();
+            }
+        },
+        botao_nao: {
+            texto: 'Não', classe: '-nao', funcao: function () {
+                return false;
+            }, padrao: true
+        }
+    });
 
-	return true;
+    return true;
 } // Fim executarComfirm
 
 
-function verificarAlteracao(campo){
-	var $th = $(campo);
-	var vlr_original = $th.attr('value');
-	var vlr_atual = $th.val();
+function verificarAlteracao(campo) {
+    var $th = $(campo);
+    var vlr_original = $th.attr('value');
+    var vlr_atual = $th.val();
 
-	$th.attr('data-alterado', (vlr_original !== vlr_atual) + 0);
+    $th.attr('data-alterado', (vlr_original !== vlr_atual) + 0);
 } // Fim verificarAlteracao
 
 
-// Encerrar a sessão do sistema ------------------------------------------------------------------------------------- //
-$('#dl3-logout').on('click', function(){
-	$logout === undefined ? console.warn('Formulário de logout não localizado!')
-	 	: $logout.trigger('submit');
-});
+function fazerLogout () {
+    $.ajax({
+        url: 'login/fazer-logout',
+        dataType: 'json',
+        success: function (retorno) {
+            var qtde_msgs = retorno.length;
+            var botoes = {
+                '-sucesso': [
+                    {
+                        texto: 'Atualizar a página',
+                        classe: '-com-destaque',
+                        funcao: function () { window.location = $('base').attr('href'); },
+                        padrao: true
+                    }
+                ]
+            };
+
+            retorno = qtde_msgs > 0 ? retorno[retorno.length - 1] : retorno;
+
+            $('body').mostrarMsg({
+                mensagem: retorno.mensagem,
+                tipo: ['-alerta', retorno.tipo],
+                botoes: botoes[retorno.tipo]
+            }, false);
+        }
+    });
+}
+
+
+function albumModal(album, pg_mestra) {
+    $.ajax({
+        url: album + '/' + (pg_mestra || 'conteudo'),
+        dataType: 'html',
+        async: false, // Essa requisição precisa ser SÍNCRONA para impedir que a função retorne o jQuery sem o
+                      // conteúdo HTML
+        success: function (html) {
+            // Carregar o conteúdo HTML
+            $('body').append(html);
+        }
+    });
+} // Fim function albumModal()
 
 
 // Publicar ou ocultar um registro ---------------------------------------------------------------------------------- //
@@ -52,13 +96,29 @@ $('[data-acao="publicar-registro"], [data-acao="ocultar-registro"]').on('click._
 
 
 // Excluir um registro ---------------------------------------------------------------------------------------------- //
-$('[data-acao="excluir-registro"]').on('click.__acao', function(){
+$('[data-acao="excluir-registro"]').on('click.__acao', function () {
 	var obj = this;
+    var $this = $(this);
+	var form = $this.data('acao-param-form');
+	var executar = $this.data('acao-param-executar');
+    var $form = typeof $el === 'undefined' ? $(form) : $el;
 
-	return executarConfirm('Deseja realmente excluir esse(s) registro(s)?', function(){
+	return executarConfirm('Deseja realmente excluir esse(s) registro(s)?', function () {
 		// Selecionar a linha atual
 		selecionarLinha(obj, true);
-		$el.submit();
+		executar === undefined ? $form.submit()
+            : $form.executar(
+				executar, null, {
+					'-sucesso': [
+                        {
+                            texto: 'Fechar',
+                            classe: '-com-destaque',
+                            funcao: function () { window.location.reload(); },
+                            padrao: true
+                        }
+                    ]
+				}
+			);
 	}, 'Confirmar exclusão');
 });
 
@@ -84,7 +144,8 @@ $('[data-acao="bloquear-usuarios"], [data-acao="desbloquear-usuarios"]').on('cli
 // Carregar conteúdo HTML ------------------------------------------------------------------------------------------- //
 $('[data-acao="carregar-html"]').on('click.__acao', function(){
 	var $th = $(this);
-	carregarHTML($th.data('acao-param-html'), 'html');
+
+	carregarHTML($th.data('acao-param-html'), 'html', $th.data('acao-param-pgmestra'));
 });
 
 $('[data-acao="carregar-form"]').on('click.__acao', function(){
@@ -104,10 +165,10 @@ $('[data-verificar-alteracao="1"]').on('change.__acao', function(){
 
 
 // Solicitar confirmação para submeter um formulário ---------------------------------------------------------------- //
-function confirmarSubmit(dom, evt){
+function confirmarSubmit(dom, evt, mensagem){
 	var $th = $(dom);
 	var $form = $th.parents('form');
-	var msg = $th.data('acao-param-msg');
+	var msg = $th.data('acao-param-msg') || mensagem;
 
 	if( $form[0].checkValidity() ){
 		evt.stopPropagation();
@@ -117,7 +178,7 @@ function confirmarSubmit(dom, evt){
 			$form.find(':submit').off('.__acao').trigger('click')
 				.on('click.__acao', function(evt){ confirmarSubmit(this, evt); });
 		}, 'Confirmar ação');
-	} // Fim if( $form[0].checkValidity() )
+	} // Fim if
 } // Fim function confirmarSubmit
 
 $('[data-acao="confirmar-submit"]').on('click.__acao', function(evt){ confirmarSubmit(this, evt); });
@@ -143,9 +204,20 @@ $('[data-acao="criar-funcionalidades"]').on('click.__acao', function(){
 
 			$('body').mostrarMsg({
 				mensagem: retorno.mensagem,
-				tipo: ['__msg-alerta', retorno.tipo],
-				botoes: [ { texto: 'x', classe: 'btn-principal', funcao: function(){ window.location.reload(); } } ]
-			});
+				tipo: ['-alerta', retorno.tipo],
+				botoes: [ { funcao: function(){ window.location.reload(); } } ]
+			}, true);
 		}
 	});
+});
+
+
+// Fazer logout ----------------------------------------------------------------------------------------------------- //
+$('[data-acao="fazer-logout"]').on('click.__acao', fazerLogout);
+
+
+// Álbum de fotos 'modal' ------------------------------------------------------------------------------------------- //
+$('[data-acao="album-modal"]').on('click.__acao', function () {
+    var $this = $(this);
+    albumModal($this.data('acao-param-html'), $this.data('acao-param-pgmestra'));
 });

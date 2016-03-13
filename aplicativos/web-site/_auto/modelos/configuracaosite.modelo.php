@@ -1,84 +1,70 @@
 <?php
 
 /**
- * @Autor	: Diego Lepera
- * @E-mail	: d_lepera@hotmail.com
- * @Projeto	: FrameworkDL
- * @Data	: 12/01/2015 10:27:37
+ * @Autor      : Diego Lepera
+ * @E-mail     : d_lepera@hotmail.com
+ * @Projeto    : FrameworkDL
+ * @Data       : 12/01/2015 10:27:37
  */
 
 namespace Geral\Modelo;
 
-class ConfiguracaoSite extends Registro{
+class ConfiguracaoSite extends Registro {
     protected $id;
-	protected $tema = 1;
-	protected $formato_data = 1;
+    protected $tema = 1;
+    protected $formato_data = 1;
     protected $email;
-
-
 
 
     /**
      * @return int
      */
-    public function getTema(){
+    public function getTema() {
         return $this->tema;
     }
-
-
 
 
     /**
      * @param int $tema
      */
-    public function setTema($tema){
+    public function setTema($tema) {
         $this->tema = filter_var($tema, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
     }
-
-
 
 
     /**
      * @return int
      */
-    public function getFormatoData(){
+    public function getFormatoData() {
         return $this->formato_data;
     }
-
-
 
 
     /**
      * @param int $formato_data
      */
-    public function setFormatoData($formato_data){
+    public function setFormatoData($formato_data) {
         $this->formato_data = filter_var($formato_data, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
     }
-
-
 
 
     /**
      * @return int
      */
-    public function getEmail(){
+    public function getEmail() {
         return $this->email;
     }
-
-
 
 
     /**
      * @param int $email
      */
-    public function setEmail($email){
+    public function setEmail($email) {
         $this->email = filter_var($email, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
     }
 
 
-
-
-    public function __construct(){
+    public function __construct() {
         parent::__construct('dl_site_configuracoes', 'configuracao_');
 
         $this->bd_select = 'SELECT %s' .

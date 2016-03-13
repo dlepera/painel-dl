@@ -1,0 +1,12 @@
+<?php
+
+# Parâmetros passados para a página
+$params = $this->obterParams();
+
+?>
+
+[DL3-HEAD/]
+
+[DL3-CONTEUDO/]
+
+[DL3-SCRIPTS/]

@@ -1,0 +1,73 @@
+// Configurações ---------------------------------------------------------------------------------------------------- //
+$comp-nome: 'mostrar-detalhes';
+
+
+// Conteúdo --------------------------------------------------------------------------------------------------------- //
+.#{$comp-nome} {
+    // Margens
+    margin-top: 2rem;
+
+    .det {
+        &-grupo{
+
+        }
+
+        &-titulo{
+            // Texto
+            color       : $mnnv-cor-fundo;
+            line-height : 2.5rem;
+
+            // Visual
+            border-bottom: 1px solid $mnnv-cor-fundo;
+
+            // Margens
+            margin-bottom: 1rem;
+        }
+
+        &-paragr{
+            // Margens
+            padding: .5rem 0;
+
+            .det-rotulo{
+                // Texto
+                color       : #AAA;
+                line-height : 1.5rem;
+
+                // Visual
+                display: block;
+            }
+        }
+    }
+}
+
+
+// Dispositivos móveis ---------------------------------------------------------------------------------------------- //
+@include _tela-disp-moveis {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Smartphones ------------------------------------------------------------------------------------------------------ //
+@include _tela-smartphone {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Tablets ---------------------------------------------------------------------------------------------------------- //
+@include _tela-tablets {
+    .#{$comp-nome} {
+
+    }
+}
+
+
+// Desktops ------------------------------------------------------------------------------------------------------ //
+@include _tela-desktops {
+    .#{$comp-nome} {
+        
+    }
+}

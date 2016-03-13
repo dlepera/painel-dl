@@ -59,10 +59,12 @@ define('TXT_ROTULO_MENU', 'Incluir no menu?');
 define('TXT_ROTULO_GRUPOS', 'Grupos');
 define('TXT_ROTULO_METODOS', 'Métodos');
 define('TXT_ROTULO_CRIAR_FUNCIONALIDADES_PADRAO', 'Criar funcionalidades padrão na inclusão desse módulo');
+define('TXT_ROTULO_PAGINA_MESTRA', 'Página mestra');
 
 # -> Dicas
 define('TXT_DICA_MODULO_MENU', 'Incluir esse módulo no menu principal do sistema.');
 define('TXT_DICA_TEMA_PADRAO', 'Definir como o tema padrão do sistema.<br/>Será utilizado sempre que o usuário não definir outro tema.');
+define('TXT_DICA_TEMA_PAGINA_MESTRA', 'Nome da página mestra utilizada para aplicar esse tema.');
 
 # -> Exemplos
 define('TXT_EXEMPLO_SIGLA', 'Ex.: pt_BR');
@@ -72,6 +74,7 @@ define('TXT_EXEMPLO_SIGLA', 'Ex.: pt_BR');
 
 // Diversos --------------------------------------------------------------------------------------------------------- //
 define('TXT_DIVERSOS_INFORMAR_GRUPOS', 'Você pode informar quais grupos terão permissão para executar essa funcionalidade. Se preferir, pode configurar depois pelo módulo de <b>Admin > Grupos de usuários</b>.');
+define('TXT_DIVERSOS_DIRETORIO_TEMA_INVALIDO', '<b>Atenção!</b> O diretório desse tema é inválido. Por favor, verifique se:<br/><br/><ul><li>- o diretório <b>%s</b> existe</li><li>- o diretório <b>css/</b> está presente no diretório principal do tema</li><li>- o diretório <b>css/</b> não está vazio</li></ul>');
 
 
 // Classes ---------------------------------------------------------------------------------------------------------- //
@@ -83,5 +86,5 @@ define('ERRO_IDIOMA_SALVAR_REGISTRO_JA_EXISTE', 'Esse idioma já existe!<br/>Por
 # --> Sucessos
 define('SUCESSO_MODULO_CRIARFUNCIONALIDADESPADRAO', 'Funcionalidades criadas com sucesso!');
 
-# ->-> Erroa
+# ->-> Erros
 define('ERRO_MODULO_CRIARFUNCIONALIDADESPADRAO', 'Erro desconhecido!<br/>Ocorreu um erro e não foi possível criar as funcionalidades padrão.');

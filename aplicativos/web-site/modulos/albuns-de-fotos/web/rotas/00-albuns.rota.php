@@ -7,9 +7,7 @@
  * @Data	: 03/02/2015 11:00:17
  */
 
-/*
- * Mostrar todos os álbuns de fotos
- */
+// Mostrar todos os álbuns de fotos --------------------------------------------------------------------------------- //
 $this->rotas['^(home|index|)$'] = [
     'controle'  =>  'Album',
     'acao'      =>  'mostrarLista'
@@ -17,11 +15,9 @@ $this->rotas['^(home|index|)$'] = [
 
 
 
-/*
- * Mostrar as fotos de um determinado álbum
- */
-$this->rotas['^fotos/\d+$'] = [
+// Mostrar as fotos de um determinado álbum ------------------------------------------------------------------------- //
+$this->rotas['^fotos/\d+(/[a-z]+)?$'] = [
     'controle'  =>  'Foto',
     'acao'      =>  'mostrarFotos',
-    'params'    =>  '/-/:a'
+    'params'    =>  '/-/:album/:pg_mestra'
 ];
