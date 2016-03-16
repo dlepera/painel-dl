@@ -8,22 +8,22 @@ $params = $this->obterParams();
 <!DOCTYPE html>
 <html lang="<?php echo $params['seo:idioma']; ?>">
 <head>
-    <title><?php echo "{$params['titulo']} :: " . \DL3::$titulo; ?></title>
-    <meta charset="<?php echo \DL3::$charset; ?>">
-
     <!-- Setar a base do HTML -->
     <base href="<?php echo \DL3::$base_html; ?>"/>
 
+    <!-- Meta TAGS -->
+    <meta charset="<?php echo \DL3::$charset; ?>">
+
     <!-- Tamanho do dispositivo -->
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <?php echo \DL3::metaTagsOG($params['titulo'], $params['og:descr']); ?>
 
     <!-- Compatibilidade IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?php echo \DL3::$dir_relativo . \DL3::$dir_imgs . \DL3::$favicon; ?>"/>
-
-    <?php echo \DL3::metaTagsOG($params['titulo'], $params['og:descr']); ?>
 
     <!-- Aplicar o tema da página -->
     <?php echo \DL3::carregarTema($params['conf-site']['tema_pagina_mestra']); ?>
@@ -33,6 +33,8 @@ $params = $this->obterParams();
 
     <!-- <head> Conteúdo personalizado </head> -->
     [DL3-HEAD/]
+
+    <title><?php echo "{$params['titulo']} :: " . \DL3::$titulo; ?></title>
 </head>
 <body>
 <!-- Carregando Conteúdo -->
@@ -64,7 +66,7 @@ $params = $this->obterParams();
 
 <div id="dl3-grid">
     <nav class="dl3-menu">
-        <a href="javascript:" class="mostrar-menu com-icone -menu -so-icone v-smart v-tablet"></a>
+        <a href="javascript:" rel="nofollow" class="mostrar-menu com-icone -menu -so-icone v-smart v-tablet"></a>
 
         [DL3-MENU/]
 
@@ -109,9 +111,9 @@ $params = $this->obterParams();
 
         <ul class="menu-usuario">
             <li class="item">
-                <a href="javascript:" class="link">
+                <span class="link">
                     <?php echo $_SESSION['usuario_info_nome'], $params['usr-foto']; ?>
-                </a>
+                </span>
 
                 <ul class="sub-menu">
                     <?php if ($params['perm-usr-conta?']): ?>
@@ -131,7 +133,7 @@ $params = $this->obterParams();
                     <?php endif; ?>
 
                     <li class="item">
-                        <a href="javascript:" data-ajax="1" data-ajax-msg="<?php echo TXT_AJAX_ENCERRANDO_SESSAO; ?>" data-acao="fazer-logout" class="link com-icone -logout">
+                        <a href="javascript:" rel="nofollow" data-ajax="1" data-ajax-msg="<?php echo TXT_AJAX_ENCERRANDO_SESSAO; ?>" data-acao="fazer-logout" class="link com-icone -logout">
                             <?php echo TXT_LINK_LOGOUT; ?>
                         </a>
                     </li>
