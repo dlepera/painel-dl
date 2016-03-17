@@ -8,7 +8,7 @@ $nome = 'painel-dl';
 $home = 'painel-dl';
 $titulo = 'Painel-DL';
 $favicon = 'ico-lepera.png';
-$versao = '3.16.02.08';
+$versao = '3.16.03.13';
 
 # Configurações do banco de dados
 $conf_bd = true;
