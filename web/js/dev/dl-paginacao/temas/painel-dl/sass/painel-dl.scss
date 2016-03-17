@@ -4,131 +4,126 @@
  * @Projeto	: FrameworkDL
  * @Data   	: 27/07/2015 10:48:21
  */
-
 @import '../../../../../../temas/_ajuda/compatibilidade';
 @import '../../../../../../temas/_ajuda/geometricas';
 
-
 /* Fontes ----------------------------------------------------------------------------------------------------------- */
 @font-face {
-	font-family : 'setas';
-	src         : url('fontes/arrows.ttf');
+    font-family: 'setas';
+    src: url('fontes/arrows.ttf') format('truetype'),
+        url('fontes/arrows.otf') format('opentype');
 }
-
 
 /* Tema ------------------------------------------------------------------------------------------------------------- */
 $tema: 'painel-dl';
 $tm_lk: 2em;
 $setas: 'prim' 'RR',
-		'ant' 'R',
-		'prox' 'Q',
-		'ult' 'QQ';
+    'ant' 'R',
+    'prox' 'Q',
+    'ult' 'QQ';
 
 .__pg-plugin {
-	&.#{$tema}{
-		/* Tamanho */
-		width: 100%;
+    &.#{$tema} {
+        // Tamanho
+        width: 100%;
 
-		/* Margens */
-		margin: 1em 0;
+        // Margens
+        margin: 1em 0;
 
-		/* Texto */
-		text-align: center;
+        // Texto
+        text-align: center;
 
-		[class*="-btn-"]{
-			/* Visual */
-			display: inline-block;
-			border-radius: 50%;
+        .btn {
+            // Visual
+            display: inline-block;
+            border-radius: 50%;
 
-			/* Margens */
-			margin: 0 .5em;
+            // Margens
+            margin: 0 .5em;
 
-			/* Tamanho */
-			width: $tm_lk;
-			height: $tm_lk;
+            // Tamanho
+            width: $tm_lk;
+            height: $tm_lk;
 
-			/* Texto */
-			line-height: $tm_lk;
-			color: #069;
+            // Texto
+            line-height: $tm_lk;
+            color: #069;
 
-			/* Posicionamento */
-			position: relative;
+            // Posicionamento
+            position: relative;
 
-			/* Transição */
-			@include _transition(background 1s);
-		}
+            // Transição
+            @include _transition(background 1s);
 
-		[class*="-btn-"]:hover{
-			/* Texto */
-			color: #FFF !important;
+            &:hover {
+                // Texto
+                color: #FFF !important;
 
-			/* Visual */
-			background: #069;
-		}
+                // Visual
+                background: #069;
+            }
 
-		.#{$tema}-pg-atual{
-			/* Texto */
-			color: #FFF !important;
+            &:not(.-num) {
+                // Texto
+                color: transparent !important;
 
-			/* Visual */
-			background: #AAA !important;
-		}
+                &::before {
+                    // Texto
+                    font: x-large 'setas';
+                    line-height: $tm_lk - .6em;
+                    color: #069;
 
-		.#{$tema}-pg-atual::after{
-			/* Texto */
-			content: '';
+                    // Posicionamento
+                    position: absolute;
+                    top: 0;
+                    left: 0;
 
-			/* Triângulo */
-			@include _triangulo-cima(#AAA, 6px, 6px);
+                    // Visual
+                    display: inline-block;
 
-			/* Posicionamento */
-			position: absolute;
-			left: 50%;
+                    // Tamanho
+                    width: 100%;
+                    height: 100%;
+                }
 
-			/* Transformar */
-			@include _transform(translateY(-75%) translateX(-50%));
-		}
+                &:hover::before {
+                    // Texto
+                    color: #FFF;
+                }
+            }
 
-		[class*="-btn-"]:not(.#{$tema}-btn-num){
-			/* Texto */
-			color: transparent !important;
-		}
+            @each $s in $setas {
+                $cl: nth($s, 1);
+                $tx: nth($s, 2);
 
-		[class*="-btn-"]:not(.#{$tema}-btn-num):before{
-			/* Texto */
-			font-family: 'setas';
-			font-size: x-large;
-			line-height: $tm_lk - .6em;
-			color: #069;
+                &.-#{$cl}::before {
+                    // Texto
+                    content: $tx;
+                }
+            }
 
-			/* Posicionamento */
-			position: absolute;
-			top: 0;
-			left: 0;
+            &.-pg-atual {
+                // Texto
+                color: #FFF !important;
 
-			/* Visual */
-			display: inline-block;
+                // Visual
+                background: #AAA !important;
 
-			/* Tamanho */
-			width: 100%;
-			height: 100%;
-		}
+                &::after {
+                    // Texto
+                    content: '';
 
-		[class*="-btn-"]:not(.#{$tema}-btn-num):hover::before{
-			/* Texto */
-			color: #FFF;
-		}
+                    // Triângulo
+                    @include _triangulo-cima(#AAA, 6px, 6px);
 
-		.#{$tema}-btn{
-			@each $s in $setas {
-				$cl: nth($s, 1);
-				$tx: nth($s, 2);
+                    // Posicionamento
+                    position: absolute;
+                    left: 50%;
 
-				&-#{$cl}:before{
-					/* Texto */
-					content: $tx;
-				}
-			}
-		}
-	}
+                    // Transformar
+                    @include _transform(translateY(-75%) translateX(-50%));
+                }
+            }
+        }
+    }
 }

@@ -1,4 +1,5 @@
 /*jshint scripturl:true*/
+/* global carregarCSS */
 
 (function($){
 	// Funçoes ------------------------------------------------------------------------------------------------------ //
@@ -75,19 +76,13 @@
         } // if
 
 
-		/**
-		 * Prefixo das classes utilizadas para aplicar o tema
-		 * @type {string}
-		 */
-		var c_pfx = opcoes.tema.replace('.', '-');
-
 		var classes = {
-			primeiro: c_pfx +'-btn-prim',
-			anterior: c_pfx +'-btn-ant',
-			proximo	: c_pfx +'-btn-prox',
-			ultimo	: c_pfx +'-btn-ult',
-			numerico: c_pfx +'-btn-num',
-			atual	: c_pfx +'-pg-atual'
+			primeiro: 'btn -prim',
+			anterior: 'btn -ant',
+			proximo	: 'btn -prox',
+			ultimo	: 'btn -ult',
+			numerico: 'btn -num',
+			atual	: '-pg-atual'
 		};
 
 
@@ -99,67 +94,82 @@
 
 
         // Não é necessário exibir paginação de a quantidade de páginas é menor que 2
-        if( opcoes.pgtotal < 2 ){ return false; }
+        if (opcoes.pgtotal < 2) {
+            return false;
+        } // Fim if
         
         /* --------------------------------------------------------------------------------------------------------------------
          * Criar e configurar os botões de navegação
          * 
          * Obs.: Os itens são inseridos na mesma ordem que devem aparecer por padrão
          * ----------------------------------------------------------------------------------------------------------------- */
-        if( opcoes.btn_primeira ){
+		if (opcoes.btn_primeira) {
 			$(document.createElement('a')).attr('href', 'javascript:').addClass(classes.primeiro)
-				.on('click.' + evt_ns, function(){ $_IRPARA(1); }).text("|<<").appendTo($th);
-		} // Fim if( opcoes.btn_primeira )
+				.on('click.' + evt_ns, function () {
+					$_IRPARA(1);
+				}).text("|<<").appendTo($th);
+		} // Fim if
 
 
-        if( opcoes.btn_anterior ){
-			$(document.createElement('a')).attr('href', 'javascript:').addClass(classes.anterior).on('click.' + evt_ns, function(){
-				if( opcoes.pgatual === 1 ){
-					if( opcoes.loop ){ $_IRPARA(opcoes.pgtotal); }
-					else { return false; }
-				} else { $_IRPARA(opcoes.pgatual - 1); }
+		if (opcoes.btn_anterior) {
+			$(document.createElement('a')).attr('href', 'javascript:').addClass(classes.anterior).on('click.' + evt_ns, function () {
+				if (opcoes.pgatual === 1) {
+					if (opcoes.loop) {
+						$_IRPARA(opcoes.pgtotal);
+					} else {
+						return false;
+					} // Fim if .. else
+				} else {
+					$_IRPARA(opcoes.pgatual - 1);
+				} // Fim if ... else
 			}).text("<<").appendTo($th);
-		} // Fim if( opcoes.btn_anterior )
+		} // Fim if
 
 
         /* --------------------------------------------------------------------------------------------------------------------
          * Criar e configurar os botões numéricos
          * ----------------------------------------------------------------------------------------------------------------- */
-        if( opcoes.btn_numeros ){
+        if (opcoes.btn_numeros) {
             // Definir quantos botões numéricos serão mostrados
-			var mm = Math.floor(opcoes.mostrar / 2);
-			var mi = opcoes.pgatual - mm;
-				mi = mi < 1 ? 1 : mi;
-			var mf = opcoes.pgatual + ((opcoes.mostrar - mm) - 1);
-				mf = (mf - mi) < opcoes.mostrar ? ((opcoes.mostrar - (mf - mi)) + mf) - 1 : mf;
-				mf = mf > opcoes.pgtotal ? opcoes.pgtotal : mf;
-				mf = mf < mi ? opcoes.pgtotal : mf;
-				mi = mi === mf ? 1 : mi;
-                
-            while( mi <= mf ){
-                $(document.createElement('a')).addClass(classes.numerico +' '+ (mi === opcoes.pgatual ? classes.atual : '')).attr({
-                    href: 'javascript:'
-				}).text(mi++).on('click.' + evt_ns, function(){
-                    var ir = parseInt($(this).text());
-					return opcoes.pgatual !== ir ? $_IRPARA(ir) : false;
-                }).appendTo($th);
-            } // Fim while( mi < mf )
-        } // Fim if( opcoes.btn_numeros )
+            var mm = Math.floor(opcoes.mostrar / 2);
+            var mi = opcoes.pgatual - mm;
+                mi = mi < 1 ? 1 : mi;
+            var mf = opcoes.pgatual + ((opcoes.mostrar - mm) - 1);
+                mf = (mf - mi) < opcoes.mostrar ? ((opcoes.mostrar - (mf - mi)) + mf) - 1 : mf;
+                mf = mf > opcoes.pgtotal ? opcoes.pgtotal : mf;
+                mf = mf < mi ? opcoes.pgtotal : mf;
+                mi = mi === mf ? 1 : mi;
 
+            while (mi <= mf) {
+                $(document.createElement('a')).attr('href', 'javascript:')
+                    .addClass(classes.numerico + ' ' + (mi === opcoes.pgatual ? classes.atual : ''))
+                    .text(mi++).on('click.' + evt_ns, function () {
+                        var ir = parseInt($(this).text());
+                        return opcoes.pgatual !== ir ? $_IRPARA(ir) : false;
+                    }).appendTo($th);
+            } // Fim while
+        } // Fim if
 
-        if( opcoes.btn_proxima ){
-			$(document.createElement('a')).attr('href', 'javascript:').addClass(classes.proximo).on('click.' + evt_ns, function(){
-				if( opcoes.pgatual === opcoes.pgtotal ){
-					if( opcoes.loop ){ $_IRPARA(1); }
-					else { return false; }
-				} else{ $_IRPARA(opcoes.pgatual + 1); }
-			}).text(">>").appendTo($th);
-		} // Fim if( opcoes.btn_proxima )
+        if (opcoes.btn_proxima) {
+            $(document.createElement('a')).attr('href', 'javascript:').addClass(classes.proximo).on('click.' + evt_ns, function () {
+                if (opcoes.pgatual === opcoes.pgtotal) {
+                    if (opcoes.loop) {
+                        $_IRPARA(1);
+                    } else {
+                        return false;
+                    } // Fim if ... else
+                } else {
+                    $_IRPARA(opcoes.pgatual + 1);
+                } // Fim if ... else
+            }).text(">>").appendTo($th);
+        } // Fim if
 
-        if( opcoes.btn_ultima ){
-			$(document.createElement('a')).attr('href', 'javascript:').addClass(classes.ultimo)
-				.on('click.' + evt_ns, function(){ $_IRPARA(opcoes.pgtotal); }).text(">>|").appendTo($th);
-		} // Fim if( opcoes.btn_ultima )
+        if (opcoes.btn_ultima) {
+            $(document.createElement('a')).attr('href', 'javascript:').addClass(classes.ultimo)
+                .on('click.' + evt_ns, function () {
+                    $_IRPARA(opcoes.pgtotal);
+                }).text(">>|").appendTo($th);
+        } // Fim if
 
         // Retornar o objeto
         return $th;
