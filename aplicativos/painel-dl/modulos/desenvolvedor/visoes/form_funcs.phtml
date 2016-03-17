@@ -79,7 +79,7 @@ $mod = $params['modelo'];
                 <?php endforeach; ?>
             </div>
 
-            <a href="javascript:" onclick="novoMetodo();" class="com-icone ico-inserir">
+            <a href="javascript:" onclick="novoMetodo();" class="com-icone -inserir">
                 <?php printf(TXT_LINK_NOVO, TXT_MODELO_METODO); ?>
             </a>
         </fieldset>
@@ -118,7 +118,7 @@ $mod = $params['modelo'];
 <script>
     //<![CDATA[
     // Remover um campo Método
-    $('#metodos .ico-remover').on('click', function () {
+    $('#metodos .-remover').on('click', function () {
         $(this).parents('.form-paragr').fadeOut('fast', function () {
             $(this).remove();
         });
@@ -134,7 +134,7 @@ $mod = $params['modelo'];
 
         // Criar botão para remover
         $(document.createElement('a')).html('x').attr('href', 'javascript:')
-            .addClass('so-icone ico-remover').on('click', function () {
+            .addClass('com-icone -so-icone -remover').on('click', function () {
             $(this).parents('.form-paragr').fadeOut('fast', function () {
                 $(this).remove();
             });

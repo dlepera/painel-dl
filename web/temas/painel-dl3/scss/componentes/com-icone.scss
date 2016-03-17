@@ -37,10 +37,9 @@ $icones: 'inserir' #65bb0e '\ea0a',
         border-radius: 50%;
 
         // Texto
-        font-family: 'icones';
+        font: 1em 'icones';
         text-align: center;
         line-height: $_ln + .15em;
-        font-size: 1em;
 
         // Alinhamento
         vertical-align: middle;
@@ -94,6 +93,9 @@ $icones: 'inserir' #65bb0e '\ea0a',
 
         // Visual
         display: inline-block;
+
+        // Alinhamento
+        vertical-align: middle;
 
         &::before {
             @extend .com-icone::before;
