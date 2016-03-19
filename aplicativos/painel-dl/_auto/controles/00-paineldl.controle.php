@@ -66,7 +66,7 @@ class PainelDL extends Principal {
         ]);
         $this->visao->aux_links->novoLink('voltar', ['class' => 'com-icone -voltar']);
         $this->visao->aux_links->novoLink('incluir-funcionalidades-padrao',
-            ['class' => 'com-icone ico-nova-pasta', 'data-acao' => 'criar-funcionalidades']
+            ['class' => 'com-icone -nova-pasta', 'data-acao' => 'criar-funcionalidades']
         );
         $this->visao->aux_links->novoLink('configuracoes', ['class' => 'com-icone -configuracoes']);
 
