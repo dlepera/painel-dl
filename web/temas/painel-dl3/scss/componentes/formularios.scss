@@ -11,6 +11,7 @@ $botoes: 'salvar' green '\ea10',
 @mixin camposAlfaNum($pseudo-classe: null) {
     &.-texto#{$pseudo-classe},
     &.-numero#{$pseudo-classe},
+    &.-moeda#{$pseudo-classe},
     &.-data#{$pseudo-classe},
     &.-cpf#{$pseudo-classe},
     &.-cnpj#{$pseudo-classe},
@@ -41,6 +42,7 @@ $botoes: 'salvar' green '\ea10',
 
 @mixin camposNum($pseudo-classe: null) {
     &.-numero#{$pseudo-classe},
+    &.-moeda#{$pseudo-classe},
     &.-data#{$pseudo-classe},
     &.-cpf#{$pseudo-classe},
     &.-cnpj#{$pseudo-classe},
