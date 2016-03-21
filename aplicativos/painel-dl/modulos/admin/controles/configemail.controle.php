@@ -98,14 +98,13 @@ class ConfigEmail extends GeralC\PainelDL {
 
         $this->modelo->selecionarPK($pk);
 
-        $oe = new \Email();
-        $te = $oe->enviar(
-            session_status() === PHP_SESSION_ACTIVE ? $_SESSION['usuario_info_email'] : $this->modelo->responder_para,
-            TXT_EMAIL_ASSUNTO_TESTE, sprintf(TXT_EMAIL_CONTEUDO_TESTE, $this->modelo->titulo, $this->modelo->host, $this->modelo->porta,
-            filter_input(INPUT_SERVER, 'HTTP_HOST')), $pk
-        );
+        $corpo = sprintf(TXT_EMAIL_CONTEUDO_TESTE, $this->modelo->titulo, $this->modelo->host, $this->modelo->porta, filter_input(INPUT_SERVER, 'HTTP_HOST'));
+        $para = session_status() === PHP_SESSION_ACTIVE ? $_SESSION['usuario_info_email'] : $this->modelo->responder_para;
 
-        $oe->gravarLog(__CLASS__, $this->modelo->bd_tabela, $this->modelo->id);
+        $oe = new \Email();
+        $te = $oe->enviar($para, TXT_EMAIL_ASSUNTO_TESTE, $corpo, $pk);
+
+        $oe->gravarLog(__CLASS__, $this->modelo->bd_tabela, $this->modelo->id, TXT_EMAIL_ASSUNTO_TESTE, $corpo, $para);
 
         if (!$te) {
             throw new \DL3Exception(sprintf(ERRO_CONFIGEMAIL_TESTAR, $oe->exibirLog()), 1500);
