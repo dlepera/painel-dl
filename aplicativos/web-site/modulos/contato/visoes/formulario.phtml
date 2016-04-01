@@ -43,7 +43,6 @@ if ($params['usar-recaptcha?']): ?>
         <?php echo $this->aux_form->caixaTexto('mensagem', 'mensagem', '', TXT_ROTULO_MENSAGEM, null, ['required' => 'required']); ?>
     </p>
 
-
     <?php if ($params['usar-recaptcha?']): ?>
         <div class="g-recaptcha" data-sitekey="<?php echo \DL3::$recaptcha_chave_site; ?>"></div>
     <?php endif; ?>

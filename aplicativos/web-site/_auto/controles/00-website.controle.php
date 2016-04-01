@@ -24,12 +24,6 @@ class WebSite extends Principal {
         # Informações para contato
         $mdc = new ContatoM\DadoContato();
 
-        # Listar as redes sociais
-        $lrs = $mdc->listar('dado_contato_publicar = 1 AND tipo_dado_rede_social = 1', 'tipo_dado_exibicao', 'tipo_dado_exibicao, tipo_dado_icone, dado_contato_descr');
-
-        # Listar dados para contato
-        $ldc = $mdc->listar('dado_contato_publicar = 1 AND tipo_dado_rede_social = 0', 'tipo_dado_exibicao', 'tipo_dado_exibicao, tipo_dado_icone, dado_contato_descr');
-
         # Selecionar as configurações para o website
         $mcf = new GeralM\ConfiguracaoSite();
         $lcf = $mcf->listar(null, null, 'tema_diretorio, tema_pagina_mestra, formato_data_data, formato_data_hora, formato_data_completo', 0, 1, -1);
@@ -42,8 +36,8 @@ class WebSite extends Principal {
 
         # Parâmetros
         $this->visao->adParam('ga-configs', $lga);
-        $this->visao->adParam('dados-contato', $ldc);
-        $this->visao->adParam('redes-sociais', $lrs);
+        $this->visao->adParam('dados-contato', $mdc->contatosHTML());
+        $this->visao->adParam('redes-sociais', $mdc->contatosHTML(true));
         $this->visao->adParam('conf-site', $lcf);
     } // Fim do método __construct
 } // Fim do Controle WebSite
