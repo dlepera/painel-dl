@@ -94,7 +94,20 @@ class DadoContato extends GeralM\Registro {
         );
 
         $html = "<ul class=\"{$classes}\">";
-        $html .= implode('', array_column($contatos, 'HTML'));
+        $html .= implode('',
+            array_map(
+                function ($v) {
+                    preg_match('~link\s+\-([a-z\_\/\@]+)~', $v, $classe);
+                    $classe = end($classe);
+
+                    return preg_replace(
+                        "~link\s+\-({$classe})~",
+                        'link -' . preg_replace('~[\W_]~', '', $classe),
+                        $v
+                    );
+                },
+                array_column($contatos, 'HTML')
+            ));
         $html .= '</ul>';
 
         return $html;
