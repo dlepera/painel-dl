@@ -81,16 +81,27 @@ class DadoContato extends GeralM\Registro {
 
         $classes = implode(' ', array_merge($classes, $classes_adicionais));
 
-        $contatos = $this->listar(
-            "dado_contato_publicar = 1 AND tipo_dado_rede_social = {$rede_social}", 'tipo_dado_exibicao',
-            'CONCAT(' .
+        $trecho_html = [
+            // Contatos
             "'<li class=\"item\">" .
             "  <span class=\"link -', LOWER(REPLACE(tipo_dado_exibicao, ' ', '')), '\">" .
             "    <span class=\"exibicao\">', tipo_dado_exibicao, '</span>" .
             "    <span class=\"descr\">', dado_contato_descr, '</span>" .
             " </span>" .
-            "</li>'" .
-            ") AS HTML"
+            "</li>'",
+
+            // Redes Sociais
+            "'<li class=\"item\">" .
+            "  <a href=\"', dado_contato_descr, '\" target=\"_blank\" class=\"link -', LOWER(REPLACE(tipo_dado_exibicao, ' ', '')), '\">" .
+            "    <span class=\"exibicao\">', tipo_dado_exibicao, '</span>" .
+            "    <span class=\"descr\">', dado_contato_descr, '</span>" .
+            " </a>" .
+            "</li>'"
+        ];
+
+        $contatos = $this->listar(
+            "dado_contato_publicar = 1 AND tipo_dado_rede_social = {$rede_social}", 'tipo_dado_exibicao',
+            "CONCAT({$trecho_html[$rede_social]}) AS HTML"
         );
 
         $html = "<ul class=\"{$classes}\">";
