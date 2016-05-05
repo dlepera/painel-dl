@@ -38,3 +38,6 @@ ALTER TABLE dl_painel_registros_logs ADD COLUMN log_registro_agente VARCHAR(200)
 
 -- Inclusão de CONSTRAINT no campo _status da tabela dl_painel_usuarios_recuperacoes
 ALTER  TABLE dl_painel_usuarios_recuperacoes ADD CONSTRAINT CK_recuperacao_status CHECK (recuperacao_status IN('S', 'E', 'R'));
+
+-- Aumentar tamanho do campo '_descr' na tabela 'dl_painel_funcs_metodos'
+ALTER TABLE dl_painel_funcs_metodos MODIFY metodo_func_descr VARCHAR(30) NOT NULL;

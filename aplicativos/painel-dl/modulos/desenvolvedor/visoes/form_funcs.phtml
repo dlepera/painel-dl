@@ -70,11 +70,11 @@ $mod = $params['modelo'];
                             'list'         => 'lista-metodos',
                             'autocomplete' => 'off',
                             'placeholder'  => TXT_ROTULO_METODO,
+                            'maxlength'    => 30,
                             'required'     => 'required'
-                        ]);
+                        ]),
 
-                        // CORRIGIR: Corrigir esse link para remover métodos
-                        echo $this->aux_links->linkHTML('remover', 'javascript:', TXT_LINK_REMOVER, TXT_LINK_TITLE_REMOVER, false); ?>
+                        $this->aux_links->linkHTML('remover', 'javascript:', TXT_LINK_REMOVER, TXT_LINK_TITLE_REMOVER, false); ?>
                     </p>
                 <?php endforeach; ?>
             </div>

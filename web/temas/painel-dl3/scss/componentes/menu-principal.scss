@@ -22,14 +22,22 @@ $comp-nome: 'menu-principal';
             background: #FFF;
 
             > .item {
+                $mg: 1.25rem;
+
+                // Margens
+                margin-top: $mg;
+                margin-bottom: $mg;
+
                 > .link {
                     // Texto
                     color: orange;
                     font-size: 1.4rem;
-                    line-height: 3.5rem;
 
                     // Visual
                     display: block;
+
+                    // Margens
+                    margin-bottom: .75rem;
                 }
 
                 > .descr {
