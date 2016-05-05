@@ -222,6 +222,16 @@ $comp-nome: 'lista-registros';
 // Desktops ------------------------------------------------------------------------------------------------------ //
 @include _tela-desktops {
     .#{$comp-nome} {
-        
+        // Tabela
+        table-layout: fixed;
+
+        > .bloco-registros {
+            > .registro {
+                > .dado {
+                    // Tamanho
+                    max-width: 40%;
+                }
+            }
+        }
     }
 }

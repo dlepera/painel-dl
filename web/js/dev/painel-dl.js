@@ -2,7 +2,7 @@
  * Created by dlepera on 16/09/15.
  */
 
-/*global console, selecionarLinha, alternarPublicacao, $logout, $el, carregarForm, carregarHTML*/
+/* global console, selecionarLinha, alternarPublicacao, $logout, $el, carregarForm, carregarHTML, navegador */
 
 // Funções ---------------------------------------------------------------------------------------------------------- //
 /**
@@ -106,19 +106,25 @@ $('[data-acao="excluir-registro"]').on('click.__acao', function () {
 	return executarConfirm('Deseja realmente excluir esse(s) registro(s)?', function () {
 		// Selecionar a linha atual
 		selecionarLinha(obj, true);
-		executar === undefined ? $form.submit()
-            : $form.executar(
-				executar, null, {
-					'-sucesso': [
+
+        if (executar === undefined) {
+            $form.submit();
+        } else {
+            $form.executar(
+                executar, null, {
+                    '-sucesso': [
                         {
                             texto: 'Fechar',
                             classe: '-com-destaque',
-                            funcao: function () { window.location.reload(); },
+                            funcao: function () {
+                                window.location.reload();
+                            },
                             padrao: true
                         }
                     ]
-				}
-			);
+                }
+            );
+        }
 	}, 'Confirmar exclusão');
 });
 
@@ -220,4 +226,28 @@ $('[data-acao="fazer-logout"]').on('click.__acao', fazerLogout);
 $('[data-acao="album-modal"]').on('click.__acao', function () {
     var $this = $(this);
     albumModal($this.data('acao-param-html'), $this.data('acao-param-pgmestra'));
+});
+
+
+// OnLoad da página ------------------------------------------------------------------------------------------------- //
+$(window).on('load', function () {
+    // Remover a mensagem 'Carregando...' --------------------------------------------------------------------------- //
+    var $cont = $('#dl3-carregando-conteudo');
+    var $paragr = $cont.find('> div');
+
+    // Pra cima
+    $paragr.animate({top: '+=10%'}, 500, function () {
+        $paragr.animate({top: '-100%'}, 650, function () {
+            $cont.fadeOut(100, function () {
+                $(this).remove();
+            });
+        });
+    });
+
+    // Identificar qual é a versão do navegador --------------------------------------------------------------------- //
+    var nav = navegador();
+
+    if (nav.nome === 'Internet Explorer' && parseInt(nav.versao) < 11) {
+        $('#ie-incompativel').removeAttr('style');
+    } // Fim if
 });

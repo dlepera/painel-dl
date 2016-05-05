@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @Autor      : Diego Lepera
  * @E-mail     : d_lepera@hotmail.com
@@ -10,9 +9,6 @@
 if (!isset($params)) {
     $params = $this->obterParams();
 } // Fim if
-
-$mod = $params['modelo'];
-
 ?>
 
 [DL3-CONTEUDO]
@@ -31,3 +27,7 @@ $mod = $params['modelo'];
     </p>
 </form>
 [/DL3-CONTEUDO]
+
+[DL3-SCRIPTS]
+<script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>dl-formulario/dl-formulario-2.2.plugin-min.js"></script>
+[/DL3-SCRIPTS]

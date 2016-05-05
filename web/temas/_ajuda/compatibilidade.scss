@@ -84,3 +84,15 @@
     -o-animation: $v;
     animation: $v;
 }
+
+
+/**
+ * Aplicar filtros
+ */
+@mixin _filter($v) {
+    -webkit-filter: $v;
+    -moz-filter: $v;
+    -o-filter: $v;
+    -ms-filter: $v;
+    filter: $v;
+}

@@ -115,7 +115,7 @@ $campos = \Funcoes::removerColuna($lista, [TXT_LISTA_TITULO_ID, 'linha']);
                     <?php
                     # Publicar e ocultar registros
                     if ($opcoes['publicar?']) {
-                        echo $this->aux_links->linkHTML('publicar', 'javascript:', TsXT_LINK_PUBLICAR, TXT_LINK_TITLE_PUBLICAR_SELECIONADOS, false, [
+                        echo $this->aux_links->linkHTML('publicar', 'javascript:', TXT_LINK_PUBLICAR, TXT_LINK_TITLE_PUBLICAR_SELECIONADOS, false, [
                             'data-acao-param-dir' => "{$dir_lista}alternar-publicacao/publicar"
                         ]);
 

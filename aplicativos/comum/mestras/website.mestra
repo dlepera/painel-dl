@@ -1,5 +1,4 @@
 <?php
-
 /*
  *  @autor: Diego Lepera
  *  @email: dlepera88@gmail.com
@@ -7,16 +6,9 @@
  *  @data: 27/05/2015 16:01:32
  */
 
-/*
- * TAREFA #1: incluir link nas redes sociais
- * TAREFA #2: incluir mídias sociais
- */
-
 # Parâmetros passados para a página
 $params = $this->obterParams();
-
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,7 +53,7 @@ $params = $this->obterParams();
 		<nav class="dl3-menu">
 			<a href="javascript:" class="a-mostrar-menu v-smart v-tablet"></a>
 
-
+			[DL3-MENU/]
 		</nav>
 
 		<section class="dl3-conteudo">
@@ -73,12 +65,12 @@ $params = $this->obterParams();
 		<footer class="dl3-rodape">
 			<p class="copyright"><?php echo \DL3::$titulo .' &copy; '. date('Y'); ?></p>
 
-
+			[DL3-RODAPE/]
 		</footer>
 
 		<a href="http://diegolepera.xyz/" target="_blank" class="dl3-link-dev">
 			<img src="http://diegolepera.xyz/aplicacao/imgs/logotipo.png" alt="diegolepera.xyz"/>
-			<span><?php echo TXT_DIVERSOS_SITE_DESENVOLVIDO_POR; ?></span>
+			<span><?php echo TXT_LINK_SITE_DESENVOLVIDO_POR; ?></span>
 		</a>
 	</div>
 
@@ -89,25 +81,9 @@ $params = $this->obterParams();
 
 
 <!-- Javascripts -->
-<script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>jquery-<?php echo \DL3::$versao_jquery; ?>-min.js"></script>
-<script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>dl-formulario/dl-formulario-2.2.plugin-min.js"></script>
-<script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>dl-galeria/dl-galeria-2.2.plugin-min.js"></script>
 <script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>dl-framework-min.js"></script>
 
 <!-- Google Analytics -->
 <?php include_once 'aplicativos/' . DL3_APLICATIVO . '/comum/visoes/google_analytics.phtml'; ?>
-
-<script>
-	//<![CDATA[
-	(function($){
-		// Identificar navegador e versão
-		var nav = navegador();
-
-		if (nav.nome === 'Internet Explorer' && parseInt(nav.versao) < 11) {
-            $('#ie-incompativel').removeAttr('style');
-        } // Fim if
-	})(jQuery);
-	//]]>
-</script>
 
 [DL3-SCRIPTS/]

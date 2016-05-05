@@ -1,8 +1,6 @@
 <?php
-
 # Parâmetros passados para a página
 $params = $this->obterParams();
-
 ?>
 
 <!DOCTYPE html>
@@ -160,58 +158,35 @@ $params = $this->obterParams();
 <div id="status-ajax" class="status-ajax"></div>
 
 <!-- Javascripts -->
-<script
-    src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>jquery-<?php echo \DL3::$versao_jquery; ?>-min.js"></script>
-<script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>dl-formulario/dl-formulario-2.2.plugin-min.js"></script>
 <script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>dl-framework-min.js"></script>
 <script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>painel-dl-min.js"></script>
+<script src="<?php echo \DL3::$dir_relativo . \DL3::$dir_js; ?>dl-formulario/dl-formulario-2.2.plugin-min.js"></script>
 
-<script>
-    //<![CDATA[
-    (function ($) {
-        // Identificar navegador e versão
-        var nav = navegador();
+<?php if ($params['mostrar-filtro-menu?']): ?>
+    <script>
+        //<![CDATA[
+        (function ($) {
+            $('#form-filtro-modulos #bus-bm').on('input', function () {
+                var $th = $(this);
+                var $mf = $('#menu-filtro');
+                var vlr = $th.val();
 
-        if (nav.nome === 'Internet Explorer' && parseInt(nav.versao) < 11) {
-            $('#ie-incompativel').removeAttr('style');
-        } // Fim if
+                if (!(vlr === '' || vlr === false)) {
+                    $mf.slideDown('fast');
+                } else {
+                    $mf.slideUp('fast');
+                } // Fim if
 
-        <?php if ($params['mostrar-filtro-menu?']): ?>
-        $('#form-filtro-modulos #bus-bm').on('input', function () {
-            var $th = $(this);
-            var $mf = $('#menu-filtro');
-            var vlr = $th.val();
-
-            if (!(vlr === '' || vlr === false)) {
-                $mf.slideDown('fast');
-            } else {
-                $mf.slideUp('fast');
-            } // Fim if
-
-            $mf.find('> *, .item').css({display: 'none'});
-            $mf.find('.item:contains(' + vlr + ')').css({display: 'block'}).parents('.item').css({display: 'block'});
-        }).on('blur', function () {
-            var $mf = $('#menu-filtro');
-            $mf.slideUp('slow');
-        });
-        <?php endif; ?>
-    })(jQuery);
-
-    $(window).on('load', function () {
-        var $cont = $('#dl3-carregando-conteudo');
-        var $paragr = $cont.find('> div');
-
-        // Pra cima
-        $paragr.animate({top: '+=10%'}, 500, function () {
-            $paragr.animate({top: '-100%'}, 650, function () {
-                $cont.fadeOut(100, function () {
-                    $(this).remove();
-                });
+                $mf.find('> *, .item').css({display: 'none'});
+                $mf.find('.item:contains(' + vlr + ')').css({display: 'block'}).parents('.item').css({display: 'block'});
+            }).on('blur', function () {
+                var $mf = $('#menu-filtro');
+                $mf.slideUp('slow');
             });
-        });
-    });
-    //]]>
-</script>
+        })(jQuery);
+        //]]>
+    </script>
+<?php endif; ?>
 
 [DL3-SCRIPTS/]
 </body>

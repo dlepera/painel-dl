@@ -61,7 +61,7 @@
 			//  funcao: Função a ser executada pelo clique do botão
 			// }
             botoes: [{
-                texto: 'Ok', classe: 'btn-principal', funcao: function () {
+                texto: 'Ok', classe: '-com-destaque', funcao: function () {
                     return true;
                 },
                 padrao: false

@@ -33,7 +33,7 @@ class DadoContato extends GeralC\PainelDL {
             sprintf(static::SQL_CAMPO_COM_ALIAS, 'dado_contato_descr', TXT_LISTA_TITULO_DESCR) . ',' .
             sprintf(static::SQL_CAMPO_COM_ALIAS, 'tipo_dado_nome', TXT_LISTA_TITULO_TIPO) . ',' .
             sprintf(static::SQL_CASE_SIM_NAO, 'dado_contato_publicar', TXT_LISTA_TITULO_PUBLICADO),
-            'tipo_dado_nome, dado_contato_descr', null
+            'tipo_dado_rede_social, tipo_dado_nome, dado_contato_descr', null
         );
 
         # Visão
