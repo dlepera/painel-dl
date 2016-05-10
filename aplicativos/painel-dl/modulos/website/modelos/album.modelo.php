@@ -130,14 +130,26 @@ class Album extends GeralM\EdicaoRegistro {
     } // Fim metódo qtdeFotos
 
 
+    /**
+     * Listar álbuns considerando as fotos contidas em cada um
+     *
+     * @param string $flt  Filtro a ser aplicado na listagem
+     * @param string $ord  Ordenação a ser aplicada na listagem
+     * @param string $cpos Campos a serem mostrados na listagem
+     * @param int    $pgn  Número da página, para casos de paginação
+     * @param int    $qtde Quantidade de registros a serem exibidos durante a paginação
+     * @param int    $pos  Posição do registro a ser retornado. Quando null, retorna todos os registros encontrados
+     *
+     * @return array
+     */
     public function listarComFotos($flt = null, $ord = null, $cpos = '*', $pgn = 0, $qtde = 20, $pos = null) {
         $bd_select = $this->bd_select;
 
         $this->bd_select = 'SELECT %s'
             . ' FROM %s AS A'
-            . " LEFT JOIN {$this->bd_tabela}_fotos AS FC ON ( FC.foto_album = A.album_id AND FC.foto_album_capa = 1 )"
-            . " LEFT JOIN {$this->bd_tabela}_fotos AS FT ON ( FT.foto_album = A.album_id )"
-            . ' WHERE A.%sdelete = 0 AND FT.foto_album_delete = 0';
+            . " LEFT JOIN {$this->bd_tabela}_fotos AS FC ON (FC.foto_album = A.album_id AND FC.foto_album_capa = 1 AND FC.foto_album_delete = 0)"
+            . " LEFT JOIN {$this->bd_tabela}_fotos AS FT ON (FT.foto_album = A.album_id AND FT.foto_album_delete = 0)"
+            . ' WHERE A.%sdelete = 0';
 
         $lista = $this->listar($flt, $ord, $cpos, $pgn, $qtde, $pos);
 

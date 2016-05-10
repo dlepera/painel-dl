@@ -36,3 +36,5 @@ define('TXT_PAGINA_TITULO_ALBUNS_FOTOS', 'Álbuns de fotos');
 
 // Diversos --------------------------------------------------------------------------------------------------------- //
 define('TXT_DIVERSOS_NENHUM_ALBUM_ENCONTRADO', 'Nenhum <b>álbum de fotos</b> encontrado!');
+define('TXT_DIVERSOS_UMA_FOTO', '1 foto');
+define('TXT_DIVERSOS_X_FOTOS', '%d fotos');

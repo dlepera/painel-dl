@@ -9,13 +9,15 @@
  *  Flex
  *  -------
  *  Transformar uma caixa em uma caixa flexivel
+
+ *  @var bool $important: se true, inclui a diretiva !important no valor do display
  */
-@mixin flexBox(){
-    display: -webkit-flex;
+@mixin flexBox($important: false) {
+    display: -webkit-flex if($important, !important, null);
     /* display: -o-flex;
     display: -moz-flex;
     display: -ms-flex; */
-    display: flex;
+    display: flex if($important, !important, null);
 }
 
 /**

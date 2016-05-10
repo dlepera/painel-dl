@@ -22,7 +22,12 @@ class Album extends GeralC\WebSite {
      * Mostrar a lista de registros
      */
     public function mostrarLista() {
-        $this->listaPadrao('album_id, album_nome, log_registro_data, foto_album_mini', 'log_registro_data DESC', 20, 'listar', false, 'album_publicar = 1');
+        # Mostrar apenas álbuns que contenham fotos
+        $this->listaPadrao(
+            'album_id, album_nome, FC.foto_album_mini, COUNT(FT.foto_album_id) AS QTDE_FOTOS', 'album_id DESC',
+            20, 'listarComFotos', false,
+            'album_publicar = 1 GROUP BY album_id HAVING QTDE_FOTOS > 0'
+        );
 
         # Visão
         $this->carregarHTML('lista_albuns');

@@ -35,8 +35,8 @@ $lista = $params['lista'];
 
                 <figcaption class="infos">
                     <span class="titulo"><?php echo $f['album_nome']; ?></span><br/>
-                    <span class="data">
-                        <?php echo \Funcoes::formatarDataHora($f['log_registro_data'], $params['conf-site']['formato_data_completo']); ?>
+                    <span class="qtdefotos">
+                        <?php echo $f['QTDE_FOTOS'] == 1 ? TXT_DIVERSOS_UMA_FOTO : sprintf(TXT_DIVERSOS_X_FOTOS, $f['QTDE_FOTOS']); ?>
                     </span>
                 </figcaption>
             </figure>
