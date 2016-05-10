@@ -26,7 +26,7 @@ $lista = $params['lista'];
         <a href="javascript:" data-acao="album-modal"
             data-acao-param-html="albuns-de-fotos/fotos/<?php echo $f['album_id']; ?>"
             data-acao-param-pgmestra="vazio">
-            <figure class="album">
+            <figure class="info-album">
                 <?php if (!empty($f['foto_album_mini'])): ?>
                     <img src="<?php echo \DL3::$dir_relativo . $f['foto_album_mini']; ?>"
                          alt="<?php echo $f['album_nome']; ?>"
