@@ -41,7 +41,7 @@ if (!isset($params)) {
         <p class="form-botoes flexitem tres-col">
             <?php if ($params['filtro?']): ?>
                 <a href="javascript:"
-                   onclick="self.location = '<?php echo filter_input(INPUT_SERVER, 'REDIRECT_URL'); ?>';"
+                   onclick="self.location = '<?php echo filter_input(INPUT_SERVER, 'REQUEST_URI'); ?>';"
                    class="limpar">
                     <?php echo TXT_LINK_LIMPAR_FILTRO; ?>
                 </a>
