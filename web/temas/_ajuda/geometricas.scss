@@ -14,7 +14,7 @@
     /* Tamanho */
     width   : 0;
     height  : 0;
-    
+
     /* Visual */
     border-left : $l solid transparent;
     border-top  : $a solid $c;
@@ -25,7 +25,7 @@
     /* Tamanho */
     width   : 0;
     height  : 0;
-    
+
     /* Visual */
     border-left     : $l solid transparent;
     border-bottom   : $a solid $c;
@@ -36,7 +36,7 @@
     /* Tamanho */
     width   : 0;
     height  : 0;
-    
+
     /* Visual */
     border-top  : $l solid transparent;
     border-left : $a solid $c;
@@ -47,7 +47,7 @@
     /* Tamanho */
     width   : 0;
     height  : 0;
-    
+
     /* Visual */
     border-top   : $l solid transparent;
     border-right : $a solid $c;
@@ -58,7 +58,7 @@
     /* Tamanho */
     width   : 0;
     height  : 0;
-    
+
     /* Visual */
     border-bottom   : $l solid $c;
     border-left     : $a solid transparent;
@@ -68,9 +68,33 @@
     /* Tamanho */
     width   : $t;
     height  : $t;
-    
+
     /* Visual */
     border-radius   : 50%;
     background-color: $c;
     display         : inline-block;
+}
+
+@mixin formaTrapezioV ($largura, $desvio, $cor: #000) {
+    // Visual
+    border-bottom: $largura solid $cor;
+    border-left: $desvio solid transparent;
+    border-right: $desvio solid transparent;
+    display: block;
+
+    // Tamanho
+    height: 0;
+    width: auto;
+}
+
+@mixin formaTrapezioH ($largura, $altura, $desvio, $cor: #000) {
+    // Visual
+    border-right: $largura solid $cor;
+    border-top: $desvio solid transparent;
+    border-bottom: $desvio solid transparent;
+    display: block;
+
+    // Tamanho
+    height: $altura;
+    width: auto;
 }
