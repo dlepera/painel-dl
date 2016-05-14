@@ -1,0 +1,94 @@
+/**
+ * Definir o que deve aparecer em cada dispositivo
+ */
+@mixin seletorResponsivo ($seletor) {
+    $seletores: (
+        '.v-mobile': '.v-tablet:not(&), .v-laptop:not(&), .v-desktop:not(&), .v-disp-grande:not(&)',
+        '.v-tablet': '.v-mobile:not(&), .v-laptop:not(&), .v-desktop:not(&), .v-disp-grande:not(&)',
+        '.v-disp-movel': '.v-laptop:not(&):not(.v-mobile):not(.v-tablet), .v-desktop:not(&):not(.v-mobile):not(.v-tablet), .v-disp-grande:not(&):not(.v-mobile):not(.v-tablet)',
+        '.v-laptop': '.v-mobile:not(&), .v-tablet:not(&), .v-desktop:not(&), .v-disp-movel:not(&)',
+        '.v-desktop': '.v-mobile:not(&), .v-tablet:not(&), .v-laptop:not(&), .v-disp-movel:not(&)',
+        '.v-computador': '.v-mobile:not(&):not(.v-laptop):not(.v-desktop), .v-tablet:not(&):not(.v-laptop):not(.v-desktop), .v-laptop:not(&):not(.v-laptop):not(.v-desktop), .v-disp-movel:not(&):not(.v-laptop):not(.v-desktop)',
+        '.v-disp-grande': '.v-mobile:not(&), .v-tablet:not(&), .v-disp-movel:not(&)'
+    );
+
+    #{$seletor} {
+        #{map-get($seletores, $seletor)} {
+            & , &::before, &::after {
+                display: none !important;
+            }
+        }
+    }
+}
+
+
+@mixin todosKeyFrames ($nome) {
+    @-webkit-keyframes #{$nome} {
+        @content;
+    }
+
+    @-khtml-keyframes #{$nome} {
+        @content;
+    }
+
+    @-moz-keyframes #{$nome} {
+        @content;
+    }
+
+    @-ms-keyframes #{$nome} {
+        @content;
+    }
+
+    @-o-keyframes #{$nome} {
+        @content;
+    }
+
+    @keyframes #{$nome} {
+        @content;
+    }
+}
+
+
+// Grupos de campos de formulários ---------------------------------------------------------------------------------- //
+@mixin camposAlfaNum($pseudo-classe: null) {
+    &.-texto#{$pseudo-classe},
+    &.-numero#{$pseudo-classe},
+    &.-moeda#{$pseudo-classe},
+    &.-data#{$pseudo-classe},
+    &.-cpf#{$pseudo-classe},
+    &.-cnpj#{$pseudo-classe},
+    &.-senha#{$pseudo-classe},
+    &.-busca#{$pseudo-classe},
+    &.-select#{$pseudo-classe},
+    &.-email#{$pseudo-classe},
+    &.-fone#{$pseudo-classe},
+    &.-textarea#{$pseudo-classe},
+    &.-arquivo#{$pseudo-classe},
+    &.-url#{$pseudo-classe} {
+        @content;
+    }
+}
+
+@mixin camposAlfa($pseudo-classe: null) {
+    &.-texto#{$pseudo-classe},
+    &.-senha#{$pseudo-classe},
+    &.-busca#{$pseudo-classe},
+    &.-select#{$pseudo-classe},
+    &.-email#{$pseudo-classe},
+    &.-textarea#{$pseudo-classe},
+    &.-arquivo#{$pseudo-classe},
+    &.-url#{$pseudo-classe} {
+        @content;
+    }
+}
+
+@mixin camposNum($pseudo-classe: null) {
+    &.-numero#{$pseudo-classe},
+    &.-moeda#{$pseudo-classe},
+    &.-data#{$pseudo-classe},
+    &.-cpf#{$pseudo-classe},
+    &.-cnpj#{$pseudo-classe},
+    &.-fone#{$pseudo-classe} {
+        @content;
+    }
+}

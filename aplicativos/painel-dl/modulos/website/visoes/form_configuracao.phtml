@@ -55,8 +55,8 @@ $mod = $params['modelo'];
             </p>
 
             <p class="form-paragr">
-                <span class="form-rotulo"><?php echo TXT_ROTULO_TAMANHO_FOTOS; ?>:</span><br/>
-                <span class="form-dica"><?php echo TXT_DICA_TAMANHO_FOTOS; ?></span><br/>
+                <span class="form-rotulo"><?php echo TXT_ROTULO_TAMANHO_FOTOS; ?>:</span>
+                <span class="form-dica"><?php echo TXT_DICA_TAMANHO_FOTOS; ?></span>
                 <?php echo $this->aux_form->campoGeral('numero', 'album_fotow', 'album-fotow', $mod->album_fotow, null, null, [
                     'min' => 100, 'max' => 800, 'required' => 'required'
                 ]), ' x ',
@@ -67,8 +67,8 @@ $mod = $params['modelo'];
             </p>
 
             <p class="form-paragr">
-                <span class="form-rotulo"><?php echo TXT_ROTULO_TAMANHO_MINI; ?>:</span><br/>
-                <span class="form-dica"><?php echo TXT_DICA_TAMANHO_MINI; ?></span><br/>
+                <span class="form-rotulo"><?php echo TXT_ROTULO_TAMANHO_MINI; ?>:</span>
+                <span class="form-dica"><?php echo TXT_DICA_TAMANHO_MINI; ?></span>
                 <?php echo $this->aux_form->campoGeral('numero', 'album_miniw', 'album-miniw', $mod->album_miniw, null, null, [
                     'min' => 20, 'max' => 400, 'required' => 'required'
                 ]), ' x ',
