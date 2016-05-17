@@ -1,0 +1,81 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: dlepera88@gmail.com
+ * @Projeto	: FrameworkDL
+ * @Data    	: 01/05/2015 11:15:07
+ */
+@import '../../_ajuda/compatibilidade';
+
+$numeros: 'uma' 1, 'duas' 2, 'tres' 3, 'quatro' 4, 'cinco' 5, 'seis' 6, 'sete' 7, 'oito' 8, 'nove' 9, 'dez' 10, 'onze' 11, 'doze' 12, 'treze' 13, 'catorze' 14, 'quinze' 15, 'dezesseis' 16;
+
+// Funções ---------------------------------------------------------------------------------------------------------- //
+@mixin _colunas($qtde, $padding, $espaco, $total) {
+    $uma_coluna: 100% / $total;
+    $qtde_espacos: ($total / $qtde) - 1;
+    $n_colunas: if($qtde_espacos % 2 == 0,
+                    (($uma_coluna * $qtde) - $espaco),
+                    (($uma_coluna * $qtde) - (($qtde_espacos * $espaco) / ($total / $qtde)))
+    );
+
+    // Flex
+    @include _flex($n_colunas);
+
+    // Tamanho
+    max-width: $n_colunas;
+
+    // Margens
+    padding-left: $padding;
+    padding-right: $padding;
+    margin-left: $espaco;
+
+    // Tamanho
+    @include boxSizing();
+}
+
+@mixin primeiraColuna() {
+    // Margens
+    margin-left: 0;
+}
+
+@mixin gerarColunasExcedentes ($max, $padding, $espaco) {
+    @each $extenso, $numero in $numeros {
+        @if $numero > $max {
+            // Criar as colunas
+            .#{$extenso}-col {
+                @include _colunas($max, $padding, $espaco, $max);
+            }
+        }
+    }
+}
+
+@mixin gerarColunas($qtde, $padding, $espaco) {
+    @for $i from 1 through $qtde {
+        $n: nth($numeros, $i);
+        $txt: nth($n, 1);
+        $num: nth($n, 2);
+        $smg: ceil($qtde / $i);
+
+        // Criar as colunas
+        .#{$txt}-col {
+            @include _colunas($num, $padding, $espaco, $qtde);
+        }
+
+        // Remover a margem esquerda das colunas que não precisam
+        .#{$txt}-col:nth-child(#{$smg}n + 1) {
+            @include primeiraColuna;
+        }
+    }
+
+    @include gerarColunasExcedentes($qtde, $padding, $espaco);
+}
+
+// Definir os tamanhos dos componentes da página: topo, menu, conteúdo e rodapé
+@mixin componentesPg($classe, $qtde-cols, $padding, $margem, $total-cols) {
+    .#{$classe} {
+        // Flex
+        @include _colunas($qtde-cols, $padding, $margem, $total-cols);
+        @include primeiraColuna;
+
+        @content;
+    }
+}
