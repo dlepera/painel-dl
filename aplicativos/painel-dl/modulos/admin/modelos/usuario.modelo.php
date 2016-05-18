@@ -605,13 +605,16 @@ class Usuario extends GeralM\EdicaoRegistro {
             $tim = 200;
             $oim = new \Imagem($oup->salvos[0]);
 
-            if ($oim->getAltura() > $oim->getLargura()) {
-                $oim->redimensionar(null, $tim);
-            } else {
-                $oim->redimensionar($tim);
-            } // Fim if
+            $oim->getAltura() > $oim->getLargura()
+                ? $oim->redimensionar(null, $tim)
+                : $oim->redimensionar($tim);
 
             $oim->salvar($oup->salvos[0]);
+
+            # Otimizar a foto
+            if (\DL3::$imageoptim_ativo) {
+                $oim->otimizarParaWeb(\DL3::$imageoptim_chave);
+            } // Fim if
 
             $this->salvar();
         } // Fim if

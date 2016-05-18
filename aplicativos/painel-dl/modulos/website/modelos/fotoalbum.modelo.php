@@ -211,6 +211,12 @@ class FotoAlbum extends GeralM\EdicaoRegistro {
                 $img_foto->salvar($this->foto);
                 $img_mini->salvar($this->mini);
 
+                # Otimizar as imagens
+                if (\DL3::$imageoptim_ativo) {
+                    $img_foto->otimizarParaWeb(\DL3::$imageoptim_chave);
+                    $img_mini->otimizarParaWeb(\DL3::$imageoptim_chave);
+                } // Fim if
+
                 /*
                  * Utilizar a seguinte chamada "$this->salvar();" para salvar a foto não funciona da maneira desejada,
                  * pois não passa pelo __call
